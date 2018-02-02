@@ -12,6 +12,7 @@
           return-object
           :hint="`1-${select.maxNum}`"
           persistent-hint
+          @change="clearDice()"
         ></v-select>
       </v-flex>
 
@@ -27,17 +28,38 @@
           step=1
         ></v-text-field>
       </v-flex>
-      <div>
-        <v-btn dark fab large color="black">
+      <v-flex xs2 sm1>
+        <v-btn dark fab large color="black" @click.native="rollDice()">
           <v-icon dark x-large color="teal darken-1">casino</v-icon>
         </v-btn>
-      </div>
-      <v-layout row wrap >
-        <v-flex v-for="i in 12" v-if="i <= numDice" >
-          <v-btn ref="btn-i" round dark large v-on:click.native="reRoll(this, select.maxNum)" >  {{randomNumber(select.maxNum)}}
-          </v-btn>
+      </v-flex>
+      <v-layout xs3 sm7 row wrap>
+        <v-flex v-for="die in dice" v-if="dice.indexOf(die) < numDice">
+          <v-badge left overlap color="blue-grey">
+            <span slot="badge">{{select.dieType}}</span>
+            <v-btn fab round large dark :color="die.color"
+                   @click.native="reRoll(die, select.maxNum)">
+              <h1>{{die.roll}}</h1>
+            </v-btn>
+          </v-badge>
         </v-flex>
       </v-layout>
+      <v-flex>
+        <v-btn large flat icon color="pink" @click.native.stop="dialog = true">
+          <v-icon x-large>format_list_numbered</v-icon>
+        </v-btn>
+      </v-flex>
+      <v-dialog v-model="dialog" max-width="200">
+        <v-card>
+          <v-card-title class="headline">D6 Dice Rolls</v-card-title>
+          <v-data-table :items="d6RollData" class="elevation-1" hide-headers hide-actions>
+            <template slot="items" slot-scope="props">
+              <td bgcolor="#6495ed">{{props.item.number}}</td>
+              <td>{{props.item.rolls}}</td>
+            </template>
+          </v-data-table>
+        </v-card>
+      </v-dialog>
     </v-layout>
   </v-container>
 </template>
@@ -46,23 +68,85 @@
 
   export default {
     methods: {
-      randomNumber: function(maxNum) {
-        return Math.floor(Math.random() * maxNum) + 1
+      clearDice: function () {
+        for (var i = 0; i < this.dice.length; i++) {
+          this.dice[i].roll = '-'
+          this.dice[i].color = 'black'
+          this.dice[i].dark = true
+        }
       },
-      reRoll: function(btn, maxNum) {
-        alert(Math.floor(Math.random() * maxNum) + 1)
+      rollDice: function () {
+        for (var i = 0; i < this.dice.length; i++) {
+          this.reRoll(this.dice[i], this.select.maxNum)
+        }
+      },
+      reRoll: function (btn, maxNum) {
+        btn.dark = !btn.dark
+        btn.roll = (Math.floor(Math.random() * maxNum) + 1)
+        btn.color = this.colorMap[btn.roll - 1].color
+        if (maxNum === 6) {
+          this.d6RollData[btn.roll - 1].rolls = this.d6RollData[btn.roll - 1].rolls + 1
+        }
       }
     },
     data() {
       return {
         select: {dieType: 'D6', maxNum: 6},
+        dice: [
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'},
+          {color: 'black', roll: '-', dark: false, sides: 'D6'}
+        ],
         diceTypes: [
+          {dieType: 'D2', maxNum: 2},
           {dieType: 'D3', maxNum: 3},
+          {dieType: 'D4', maxNum: 4},
           {dieType: 'D6', maxNum: 6},
           {dieType: 'D8', maxNum: 8},
-          {dieType: 'D10', maxNum: 10}
+          {dieType: 'D10', maxNum: 10},
+          {dieType: 'D20', maxNum: 20}
         ],
-        numDice: 2
+        colorMap: [
+          {number: 1, color: 'red darken-4'},
+          {number: 2, color: 'brown'},
+          {number: 3, color: 'amber darken-1'},
+          {number: 4, color: 'indigo'},
+          {number: 5, color: 'cyan darken-3'},
+          {number: 6, color: 'green accent-3'},
+          {number: 7, color: 'lime darken-4'},
+          {number: 8, color: 'teal darken-4'},
+          {number: 9, color: 'amber darken-4'},
+          {number: 10, color: 'deep-orange darken-4'},
+          {number: 11, color: 'brown darken-4'},
+          {number: 12, color: 'blue-grey darken-4'},
+          {number: 13, color: 'grey darken-4'},
+          {number: 14, color: 'light-green darken-4'},
+          {number: 15, color: 'cyan darken-4'},
+          {number: 16, color: 'yellow darken-4'},
+          {number: 17, color: 'light-blue darken-4'},
+          {number: 18, color: 'deep-purple darken-4'},
+          {number: 19, color: 'teal accent-3'},
+          {number: 20, color: 'orange accent-2'}
+        ],
+        d6RollData: [
+          {number: 1, rolls: 0},
+          {number: 2, rolls: 0},
+          {number: 3, rolls: 0},
+          {number: 4, rolls: 0},
+          {number: 5, rolls: 0},
+          {number: 6, rolls: 0}
+        ],
+        numDice: 2,
+        dialog: false
       }
     }
 

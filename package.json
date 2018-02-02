@@ -11,9 +11,10 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "vuetify": "^0.17.6",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-material-design-icons": "^1.0.0",
+    "vue-router": "^3.0.1",
+    "vuetify": "^0.17.6"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",
