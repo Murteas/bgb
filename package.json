@@ -11,8 +11,8 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "mdi": "^2.1.19",
     "vue": "^2.5.2",
-    "vue-material-design-icons": "^1.0.0",
     "vue-router": "^3.0.1",
     "vuetify": "^0.17.6"
   },

@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app dark>
     <v-navigation-drawer temporary v-model="sidebar">
       <v-list>
         <v-list-tile
@@ -30,7 +30,7 @@
           v-for="item in menuItems"
           :key="item.title"
           :to="item.path">
-          <v-icon left dark>{{ item.icon }}</v-icon>
+          <v-icon left>{{ item.icon }}</v-icon>
           {{ item.title }}
         </v-btn>
       </v-toolbar-items>
@@ -49,7 +49,7 @@
   export default {
     data () {
       return {
-        appTitle: 'Template App',
+        appTitle: 'BGB',
         sidebar: false,
         menuItems: [
           { title: 'Dice Roller', path: '/dice', icon: 'casino' },
