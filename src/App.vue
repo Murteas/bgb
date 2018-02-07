@@ -1,6 +1,10 @@
 <template>
   <v-app dark>
     <v-navigation-drawer temporary v-model="sidebar">
+      <v-btn flat icon color="white" @click.native.stop="sheet = !sheet">
+        <v-icon>mdi-dice-multiple</v-icon>
+      </v-btn>
+      <v-spacer/>
       <v-list>
         <v-list-tile
           v-for="item in menuItems"
@@ -25,6 +29,10 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
+        <v-btn flat icon color="white" @click.native.stop="sheet = !sheet">
+          <v-icon>mdi-dice-multiple</v-icon>
+        </v-btn>
+        <v-spacer/>
         <v-btn
           flat
           v-for="item in menuItems"
@@ -35,6 +43,9 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
+    <v-bottom-sheet full-width v-model="sheet">
+      <dice-roller/>
+    </v-bottom-sheet>
 
     <main>
       <v-container fluid>
@@ -46,15 +57,22 @@
 
 </template>
 <script>
+  import DiceRoller from './components/DiceRoller'
+
   export default {
+    components: {
+      DiceRoller,
+      'dice-roller': DiceRoller
+    },
     data () {
       return {
+        sheet: false,
         appTitle: 'BGB',
         sidebar: false,
         menuItems: [
-          { title: 'Dice Roller', path: '/dice', icon: 'casino' },
-          { title: 'Shadows of Brimstone', path: '/sob', icon: 'cloud' },
-          { title: 'Shadows of Malice', path: '/som', icon: 'mood_bad' }
+          // { title: 'Dice Roller', path: '/dice', icon: 'mdi-dice-multiple' },
+          {title: 'Shadows of Brimstone', path: '/sob', icon: 'mdi-star-circle'},
+          {title: 'Shadows of Malice', path: '/som', icon: 'mdi-emoticon-devil'}
         ]
       }
     }
