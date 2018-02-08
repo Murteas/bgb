@@ -29,10 +29,10 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items class="hidden-xs-only">
-        <v-btn flat icon color="white" @click.native.stop="sheet = !sheet">
-          <v-icon>mdi-dice-multiple</v-icon>
-        </v-btn>
-        <v-spacer/>
+        <!--<v-btn flat icon color="white" @click.native.stop="sheet = !sheet">-->
+          <!--<v-icon>mdi-dice-multiple</v-icon>-->
+        <!--</v-btn>-->
+        <!--<v-spacer/>-->
         <v-btn
           flat
           v-for="item in menuItems"
@@ -69,7 +69,7 @@
         sidebar: false,
         menuItems: [
           // { title: 'Dice Roller', path: '/dice', icon: 'mdi-dice-multiple' },
-          {title: 'Shadows of Brimstone', path: '/sob', icon: 'mdi-star-circle'}
+          {title: 'Shadows of Brimstone', path: '/', icon: 'mdi-star-circle'}
         ]
       }
     }
