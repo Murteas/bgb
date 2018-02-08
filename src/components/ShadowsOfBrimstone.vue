@@ -1,10 +1,17 @@
 <template>
-  <v-layout row>
-    <v-flex>
-      <h3>Shadows of Brimstone</h3>
-    </v-flex>
-  </v-layout>
+  <v-container fluid grid-list-sm secondary>
+    <v-layout justify-start align-center align-content-center row wrap>
+    </v-layout>
+  </v-container>
 </template>
 <script>
-  export default {}
+  /* eslint-disable space-before-function-paren */
+
+  export default {
+    methods: {
+    },
+    data() {
+      return {}
+    }
+  }
 </script>

@@ -1,22 +1,22 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer temporary v-model="sidebar">
-      <v-btn flat icon color="white" @click.native.stop="sheet = !sheet">
-        <v-icon>mdi-dice-multiple</v-icon>
-      </v-btn>
-      <v-spacer/>
-      <v-list>
-        <v-list-tile
-          v-for="item in menuItems"
-          :key="item.title"
-          :to="item.path">
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>{{ item.title }}</v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+    <!--<v-navigation-drawer temporary v-model="sidebar">-->
+      <!--<v-btn flat icon color="white" @click.native.stop="sheet = !sheet">-->
+        <!--<v-icon>mdi-dice-multiple</v-icon>-->
+      <!--</v-btn>-->
+      <!--<v-spacer/>-->
+      <!--<v-list>-->
+        <!--<v-list-tile-->
+          <!--v-for="item in menuItems"-->
+          <!--:key="item.title"-->
+          <!--:to="item.path">-->
+          <!--<v-list-tile-action>-->
+            <!--<v-icon>{{ item.icon }}</v-icon>-->
+          <!--</v-list-tile-action>-->
+          <!--<v-list-tile-content>{{ item.title }}</v-list-tile-content>-->
+        <!--</v-list-tile>-->
+      <!--</v-list>-->
+    <!--</v-navigation-drawer>-->
     <v-toolbar fixed>
       <span class="hidden-sm-and-up">
         <v-toolbar-side-icon @click.stop="sidebar = !sidebar">
@@ -43,16 +43,14 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <v-bottom-sheet full-width v-model="sheet">
-      <dice-roller/>
-    </v-bottom-sheet>
-
-    <main>
+    <main >
       <v-container fluid>
         <router-view/>
       </v-container>
     </main>
-
+    <v-footer>
+      <dice-roller/>
+    </v-footer>
   </v-app>
 
 </template>
@@ -67,12 +65,11 @@
     data () {
       return {
         sheet: false,
-        appTitle: 'BGB',
+        appTitle: 'Brimstone Buddy',
         sidebar: false,
         menuItems: [
           // { title: 'Dice Roller', path: '/dice', icon: 'mdi-dice-multiple' },
-          {title: 'Shadows of Brimstone', path: '/sob', icon: 'mdi-star-circle'},
-          {title: 'Shadows of Malice', path: '/som', icon: 'mdi-emoticon-devil'}
+          {title: 'Shadows of Brimstone', path: '/sob', icon: 'mdi-star-circle'}
         ]
       }
     }

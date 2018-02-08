@@ -1,39 +1,39 @@
 <template>
   <v-container fluid grid-list-sm secondary>
-    <v-layout justify-start  align-center align-content-center row wrap >
+    <v-layout justify-start align-center align-content-center row wrap>
+      <v-layout align-center align-content-center column>
         <v-btn xs2 sm1 round :color="select.color"
                @click.native="selectDieType()">
           <span>{{select.dieType}} </span>
           <v-icon large>{{select.icon}}</v-icon>
         </v-btn>
-        <v-layout align-center align-content-center column>
-          <v-btn xs1 flat icon @click.native="changeNumDice(1)">
-            <v-icon large>mdi-chevron-up</v-icon>
-          </v-btn>
-          <h2>{{numDice}}</h2>
-          <v-btn xs1 flat icon @click.native="changeNumDice(-1)">
-            <v-icon large >mdi-chevron-down</v-icon>
-          </v-btn>
-        </v-layout>
-        <v-btn xs2 sm1 large fab round @click.native="rollDice()">
-          <v-icon x-large color="white">mdi-dice-multiple</v-icon>
-        </v-btn>
-      <v-spacer/>
-        <v-layout row wrap justify-start v-for="die in dice" v-if="dice.indexOf(die) < numDice">
-          <v-badge overlap left :color="select.color">
-            <!--<v-icon slot="badge">{{select.icon}}</v-icon>-->
-            <span slot="badge">{{die.rerolls}}</span>
-            <v-btn large fab round :color="die.color"
-                   @click.native="reRoll(die, select.maxNum)">
-              <h1>{{die.roll}}</h1>
-            </v-btn>
-          </v-badge>
-        </v-layout>
-      <v-flex>
         <v-btn flat icon color="light-green" @click.native.stop="dialog = true">
           <v-icon>mdi-table</v-icon>
         </v-btn>
-      </v-flex>
+      </v-layout>
+      <v-layout align-center align-content-center column>
+        <v-btn xs1 flat icon @click.native="changeNumDice(1)">
+          <v-icon large>mdi-chevron-up</v-icon>
+        </v-btn>
+        <h2>{{numDice}}</h2>
+        <v-btn xs1 flat icon @click.native="changeNumDice(-1)">
+          <v-icon large>mdi-chevron-down</v-icon>
+        </v-btn>
+      </v-layout>
+      <v-btn xs2 sm1 large fab round @click.native="rollDice()">
+        <v-icon x-large color="white">mdi-dice-multiple</v-icon>
+      </v-btn>
+      <v-spacer/>
+      <v-layout row wrap justify-start v-for="die in dice" v-if="dice.indexOf(die) < numDice">
+        <v-badge overlap left :color="select.color">
+          <!--<v-icon slot="badge">{{select.icon}}</v-icon>-->
+          <span slot="badge">{{die.rerolls}}</span>
+          <v-btn large fab round :color="die.color"
+                 @click.native="reRoll(die, select.maxNum)">
+            <h1>{{die.roll}}</h1>
+          </v-btn>
+        </v-badge>
+      </v-layout>
       <v-dialog v-model="dialog" max-width="200">
         <v-card>
           <v-card-title class="headline">D6 Dice Rolls</v-card-title>
@@ -53,12 +53,12 @@
 
   export default {
     methods: {
-      changeNumDice: function(change) {
+      changeNumDice: function (change) {
         this.numDice += change
         if (this.numDice < 0) {
           this.numDice = 0
-        } else if (this.numDice > 12) {
-          this.numDice = 12
+        } else if (this.numDice > 20) {
+          this.numDice = 20
         }
       },
       selectDieType: function () {
@@ -95,8 +95,16 @@
     data() {
       return {
         currentDieIndex: 3,
-        select: {dieType: 'D6', maxNum: 6, icon: 'mdi-dice-d6', color: 'teal'},
+        select: {dieType: 'D6', maxNum: 6, icon: 'mdi-dice-d6', color: 'green darken-2'},
         dice: [
+          {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
+          {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
+          {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
+          {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
+          {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
+          {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
+          {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
+          {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
           {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
           {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
           {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0},
@@ -111,36 +119,36 @@
           {color: 'black', roll: '-', dark: false, sides: 'D6', rerolls: 0}
         ],
         diceTypes: [
-          {dieType: 'D2', maxNum: 2, icon: 'mdi-dice-2', color: 'red'},
-          {dieType: 'D3', maxNum: 3, icon: 'mdi-dice-3', color: 'deep-purple'},
-          {dieType: 'D4', maxNum: 4, icon: 'mdi-dice-d4', color: 'blue accent-3'},
-          {dieType: 'D6', maxNum: 6, icon: 'mdi-dice-d6', color: 'teal darken-3'},
-          {dieType: 'D8', maxNum: 8, icon: 'mdi-dice-d8', color: 'green accent-3'},
-          {dieType: 'D10', maxNum: 10, icon: 'mdi-dice-d10', color: 'amber darken-3'},
-          {dieType: 'D12', maxNum: 12, icon: 'mdi-dice_d12', color: 'deep-orange'},
-          {dieType: 'D20', maxNum: 20, icon: 'mdi-dice-d20', color: 'brown'}
+          {dieType: 'D2', maxNum: 2, icon: 'mdi-dice-2', color: 'red accent-3'},
+          {dieType: 'D3', maxNum: 3, icon: 'mdi-dice-3', color: 'amber darken-1'},
+          {dieType: 'D4', maxNum: 4, icon: 'mdi-dice-d4', color: 'indigo'},
+          {dieType: 'D6', maxNum: 6, icon: 'mdi-dice-d6', color: 'green darken-2'},
+          {dieType: 'D8', maxNum: 8, icon: 'mdi-dice-d8', color: 'lime darken-3'},
+          {dieType: 'D10', maxNum: 10, icon: 'mdi-dice-d10', color: 'grey darken-2'},
+          {dieType: 'D12', maxNum: 12, icon: 'mdi-dice_d12', color: 'brown'},
+          {dieType: 'D20', maxNum: 20, icon: 'mdi-dice-d20', color: 'blue-grey darken-3'}
         ],
         colorMap: [
           {number: 1, color: 'red darken-4'},
-          {number: 2, color: 'brown darken-3'},
-          {number: 3, color: 'deep-purple darken-3'},
-          {number: 4, color: 'amber accent-3'},
-          {number: 5, color: 'blue-grey darken-1'},
-          {number: 6, color: 'green darken-3'},
-          {number: 7, color: 'lime darken-4'},
-          {number: 8, color: 'teal darken-4'},
-          {number: 9, color: 'amber darken-4'},
-          {number: 10, color: 'deep-orange darken-4'},
-          {number: 11, color: 'brown darken-4'},
-          {number: 12, color: 'blue-grey darken-4'},
-          {number: 13, color: 'grey darken-4'},
-          {number: 14, color: 'light-green darken-4'},
-          {number: 15, color: 'cyan darken-4'},
-          {number: 16, color: 'yellow darken-4'},
-          {number: 17, color: 'light-blue darken-4'},
-          {number: 18, color: 'deep-purple darken-4'},
-          {number: 19, color: 'teal accent-3'},
-          {number: 20, color: 'orange accent-2'}
+          {number: 2, color: 'brown darken-2'},
+          {number: 3, color: 'lime darken-3'},
+          {number: 4, color: 'green darken-2'},
+          {number: 5, color: 'blue darken-3'},
+          {number: 6, color: 'yellow darken-3'},
+          {number: 7, color: 'teal darken-1'},
+          {number: 8, color: 'cyan darken-1'},
+          {number: 9, color: 'light-blue darken-1'},
+          {number: 10, color: 'blue darken-1'},
+          {number: 11, color: 'indigo darken-1'},
+          {number: 12, color: 'deep-purple lighten-1'},
+          {number: 13, color: 'purple accent-3'},
+          {number: 14, color: 'pink darken-2'},
+          {number: 15, color: 'red darken-3'},
+          {number: 16, color: 'blue-grey darken-2'},
+          {number: 17, color: 'brown lighten-1'},
+          {number: 18, color: 'orange lighten-1'},
+          {number: 19, color: 'yellow accent-3'},
+          {number: 20, color: 'green darken-1'}
         ],
         d6RollData: [
           {number: 1, rolls: 0},
@@ -150,7 +158,7 @@
           {number: 5, rolls: 0},
           {number: 6, rolls: 0}
         ],
-        numDice: 2,
+        numDice: 7,
         dialog: false
       }
     }
