@@ -85,7 +85,7 @@
       reRoll: function (btn, maxNum) {
         btn.dark = !btn.dark
         btn.roll = (Math.floor(Math.random() * maxNum) + 1)
-        btn.color = this.colorMap[btn.roll - 1].color
+        btn.color = this.colorMap[btn.roll].color
         btn.rerolls += 1
         if (maxNum === 6) {
           this.d6RollData[btn.roll - 1].rolls = this.d6RollData[btn.roll - 1].rolls + 1
@@ -129,6 +129,7 @@
           {dieType: 'D20', maxNum: 20, icon: 'mdi-dice-d20', color: 'blue-grey darken-3'}
         ],
         colorMap: [
+          {number: 0, color: 'black'},
           {number: 1, color: 'red darken-4'},
           {number: 2, color: 'brown darken-2'},
           {number: 3, color: 'lime darken-3'},
