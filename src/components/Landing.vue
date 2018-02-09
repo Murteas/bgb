@@ -119,6 +119,9 @@
   /* eslint-disable space-before-function-paren */
 
   export default {
+    created: function() {
+      // load the data
+    },
     methods: {
       reRoll: function (hero, maxNum, adj) {
         hero.roll = (Math.floor(Math.random() * maxNum) + 1) + adj
