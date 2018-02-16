@@ -55,7 +55,7 @@
 
 </template>
 <script>
-  import DiceRoller from './components/DiceRoller'
+  import DiceRoller from './components/sob/DiceRoller'
 
   export default {
     components: {
@@ -65,11 +65,11 @@
     data () {
       return {
         sheet: false,
-        appTitle: 'Brimstone Buddy',
+        appTitle: 'Board Game Buddy',
         sidebar: false,
         menuItems: [
-          // { title: 'Dice Roller', path: '/dice', icon: 'mdi-dice-multiple' },
-          {title: 'Shadows of Brimstone', path: '/', icon: 'mdi-star-circle'}
+          {title: 'Gloomhaven', path: '/gh', icon: 'mdi-hexagon'},
+          {title: 'Shadows of Brimstone', path: '/sob', icon: 'mdi-star-circle'}
         ]
       }
     }
