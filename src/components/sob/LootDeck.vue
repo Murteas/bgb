@@ -9,7 +9,7 @@
 
 <script>
   export default {
-    name: "loot-deck"
+    name: 'loot-deck'
   }
 </script>
 

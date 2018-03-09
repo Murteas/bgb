@@ -68,6 +68,8 @@
         appTitle: 'Board Game Buddy',
         sidebar: false,
         menuItems: [
+          {title: 'Aeons End', path: 'aeon', icon: 'mdi-star-circle'},
+          {title: 'Hexplore It!', path: 'hex', icon: 'mdi-hexagon'},
           {title: 'Gloomhaven', path: '/gh', icon: 'mdi-hexagon'},
           {title: 'Shadows of Brimstone', path: '/sob', icon: 'mdi-star-circle'}
         ]
