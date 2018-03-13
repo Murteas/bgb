@@ -1,18 +1,18 @@
 <template>
-  <v-container fluid grid-list-sm secondary>
-    <v-layout justify-start align-center align-content-center row wrap>
-      <h1>Board Game Buddy</h1>
-    </v-layout>
-  </v-container>
+  <v-layout column align-start align-content-start>
+    <hero-panel/>
+  </v-layout>
 </template>
+
 <script>
   /* eslint-disable space-before-function-paren */
+  import HeroPanel from './sob/HeroPanel'
 
   export default {
-    methods: {
-    },
-    data() {
-      return {}
+    components: {
+      HeroPanel,
+      'hero-panel': HeroPanel
     }
+
   }
 </script>

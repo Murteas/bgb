@@ -25,7 +25,7 @@
             </v-flex>
             <v-flex>
               <v-layout row align-center align-content-start>
-                <v-icon color="blue">mdi-ghost</v-icon>
+                <v-icon color="blue">mdi-thought-bubble</v-icon>
                 <h2> {{hero.sp}}/{{hero.maxSp}}</h2>
                 <v-btn flat icon @click.native.stop="hero.sp = adjAttr(hero.sp,1)">
                   <v-icon color="blue lighten-1">mdi-plus</v-icon>

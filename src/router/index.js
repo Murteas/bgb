@@ -3,10 +3,7 @@ import Router from 'vue-router'
 
 const routerOptions = [
   { path: '/', component: 'Landing' },
-  { path: '/sob', component: 'ShadowsOfBrimstone' },
-  { path: '/gh', component: 'Gloomhaven' },
-  { path: '/hex', component: 'HexploreIt' },
-  { path: '/aeon', component: 'AeonsEnd' }
+  { path: '/scavenge', component: 'Scavenge' }
 ]
 
 const routes = routerOptions.map(route => {
