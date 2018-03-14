@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "mdi": "^2.1.19",
+    "shuffle-array": "^1.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vuetify": "^0.17.6"
+    "vuetify": "^1.0.8"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.5",

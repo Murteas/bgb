@@ -1,42 +1,128 @@
 <template>
-  <v-layout>
+  <v-container fluid>
     <v-card>
-      <v-card-title>Loot Deck</v-card-title>
-      <v-btn flat icon color="light-green">
-        <v-icon>mdi-cards</v-icon>
-      </v-btn>
-      <v-carousel>
-        <v-carousel-item v-for="(item,i) in items" v-bind:src="item.src" :key="i"></v-carousel-item>
-      </v-carousel>
+      <v-toolbar card>
+        <v-toolbar-title>Loot</v-toolbar-title>
+        <v-spacer></v-spacer>
+        <v-btn icon @click.native="shuffleDeck()">
+          <v-icon>mdi-shuffle</v-icon>
+        </v-btn>
+        <v-btn icon @click.native="drawCard()">
+          <v-icon>mdi-cards</v-icon>
+        </v-btn>
+      </v-toolbar>
+      <v-container fluid grid-list-sm>
+        <v-layout row wrap>
+          <v-flex xs4 md4 lg3 v-for="(value, i) in numDrawn" :key="i">
+            <img class="image" :src="Deck[i].src" :alt="Deck[i].title"
+                 width="85%">
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-card>
-
-  </v-layout>
+  </v-container>
 </template>
-
 <script>
   export default {
     name: 'loot-deck',
-    data () {
+    created: function () {
+      this.shuffleDeck()
+    },
+    methods: {
+      shuffleDeck() {
+        this.numDrawn = 0
+        this.shuffle(this.Deck)
+      },
+      // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+      shuffle(array) {
+        var currentIndex = array.length
+        var temporaryValue, randomIndex
+        while (currentIndex !== 0) {
+          randomIndex = Math.floor(Math.random() * currentIndex)
+          currentIndex -= 1
+          temporaryValue = array[currentIndex]
+          array[currentIndex] = array[randomIndex]
+          array[randomIndex] = temporaryValue
+        }
+        return array
+      },
+      drawCard() {
+        this.numDrawn++
+        if (this.numDrawn >= this.Deck.length) {
+          this.numDrawn = this.Deck.length
+        }
+      }
+    },
+    data() {
       return {
-        items: [
+        numDrawn: 0,
+        Deck: [
           {
-            src: '/static/img/heroes/Bandido.png'
+            drawn: false,
+            title: 'Blood Money',
+            src: '/static/img/cards/loot/loot_bloodMoney.png'
           },
           {
-            src: '/static/img/heroes/Gunslinger.png'
+            drawn: false,
+            title: 'Cash',
+            src: '/static/img/cards/loot/loot_Cash.png'
           },
           {
-            src: '/static/img/heroes/Indian Scout.png'
+            drawn: false,
+            title: 'Coins',
+            src: '/static/img/cards/loot/loot_coins.png'
           },
           {
-            src: '/static/img/heroes/Preacher.png'
+            drawn: false,
+            title: 'Dark Stone Rock',
+            src: '/static/img/cards/loot/loot_DarkStoneRock.png'
+          },
+          {
+            drawn: false,
+            title: 'Dark Stone Shard',
+            src: '/static/img/cards/loot/loot_DarkStoneShard.png'
+          },
+          {
+            drawn: false,
+            title: 'Gold Bars',
+            src: '/static/img/cards/loot/loot_goldBars.png'
+          },
+          {
+            drawn: false,
+            title: 'Gold Dust',
+            src: '/static/img/cards/loot/loot_goldDust.png'
+          },
+          {
+            drawn: false,
+            title: 'Gold Nuggets',
+            src: '/static/img/cards/loot/loot_goldNuggets.png'
+          },
+          {
+            drawn: false,
+            title: 'Handy',
+            src: '/static/img/cards/loot/loot_handy.png'
+          },
+          {
+            drawn: false,
+            title: 'What\'s This',
+            src: '/static/img/cards/loot/loot_whatsThis.png'
+          },
+          {
+            drawn: false,
+            title: 'Handy',
+            src: '/static/img/cards/loot/loot_handy.png'
+          },
+          {
+            drawn: false,
+            title: 'Dark Stone Shard',
+            src: '/static/img/cards/loot/loot_DarkStoneShard.png'
           }
         ]
       }
+    },
+    beforeDestroy() {
+      // Save the State?
     }
   }
 </script>
 
-<style scoped>
-
-</style>

@@ -1,6 +1,6 @@
 <template>
   <v-app dark>
-    <v-toolbar fixed>
+    <v-toolbar>
       <span class="hidden-sm-and-up">
         <v-toolbar-side-icon @click.stop="sidebar = !sidebar">
         </v-toolbar-side-icon>
@@ -22,7 +22,7 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
-    <main >
+    <main>
       <v-container fluid>
         <router-view/>
       </v-container>
@@ -31,7 +31,6 @@
       <dice-roller/>
     </v-footer>
   </v-app>
-
 </template>
 <script>
   import DiceRoller from './components/sob/DiceRoller'
