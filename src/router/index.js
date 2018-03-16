@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 
 const routerOptions = [
-  { path: '/', component: 'Landing' },
-  { path: '/scavenge', component: 'Scavenge' }
+  { path: '/', component: 'About' },
+  { path: '/sob', component: 'SoB' }
 ]
 
 const routes = routerOptions.map(route => {

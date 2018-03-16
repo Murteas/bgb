@@ -1,16 +1,12 @@
 <template>
   <v-app dark>
     <v-toolbar>
-      <span class="hidden-sm-and-up">
-        <v-toolbar-side-icon @click.stop="sidebar = !sidebar">
-        </v-toolbar-side-icon>
-      </span>
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">
           {{ appTitle }}
         </router-link>
       </v-toolbar-title>
-      <v-spacer></v-spacer>
+      <v-spacer/>
       <v-toolbar-items class="hidden-xs-only">
         <v-btn
           flat
@@ -27,26 +23,26 @@
         <router-view/>
       </v-container>
     </main>
-    <v-footer>
+    <v-footer >
       <dice-roller/>
     </v-footer>
   </v-app>
 </template>
+
 <script>
-  import DiceRoller from './components/sob/DiceRoller'
+  import DiceRoller from './components/general/DiceRoller'
 
   export default {
     components: {
       DiceRoller,
       'dice-roller': DiceRoller
     },
-    data () {
+    data() {
       return {
         sheet: false,
-        appTitle: 'Shadows of Brimstone Assistant',
-        sidebar: false,
+        appTitle: 'Board Game Buddy',
         menuItems: [
-          {title: 'Scavenge', path: '/scavenge', icon: 'fa-search'}
+          {title: 'SoB', path: '/sob', icon: 'fa-search'}
         ]
       }
     }

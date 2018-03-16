@@ -1,6 +1,5 @@
 <template>
-  <v-container fluid grid-list-sm secondary>
-    <v-layout>
+  <v-container grid-list-sm secondary>
       <v-expansion-panel expand>
         <v-expansion-panel-content v-for="hero in heroes">
           <v-layout slot="header" align-center align-content-start row>
@@ -10,7 +9,7 @@
             <v-flex xs1>
               <v-text-field :value="hero.name"/>
             </v-flex>
-            <v-flex>
+            <v-flex xs2>
               <v-layout row align-center align-content-start>
                 <v-icon color="red">mdi-heart</v-icon>
                 <h2> {{hero.hp}}/{{hero.maxHp}}</h2>
@@ -23,7 +22,7 @@
               </v-layout>
               <h2> {{hero.defense}}</h2>
             </v-flex>
-            <v-flex>
+            <v-flex xs2>
               <v-layout row align-center align-content-start>
                 <v-icon color="blue">mdi-thought-bubble</v-icon>
                 <h2> {{hero.sp}}/{{hero.maxSp}}</h2>
@@ -36,17 +35,17 @@
               </v-layout>
               <h2> {{hero.willpower}}</h2>
             </v-flex>
-            <v-flex>
+            <v-flex xs2>
               <v-icon color="deep-orange darken-1">mdi-sword-cross</v-icon>
               <h2>{{hero.combat}}</h2>
               <h2> {{hero.melee}}</h2>
             </v-flex>
-            <v-flex>
+            <v-flex xs2>
               <v-icon color="blue-grey lighten-1">mdi-pistol</v-icon>
               <h2>2</h2>
               <h2>{{hero.range}}</h2>
             </v-flex>
-            <v-flex>
+            <v-flex xs2>
               <v-layout row align-center align-content-start>
                 <v-icon color="lime">mdi-dna</v-icon>
                 <h2> {{hero.corruption}}/{{hero.maxCorr}}</h2>
@@ -59,7 +58,7 @@
               </v-layout>
               <h2> {{hero.willpower}}</h2>
             </v-flex>
-            <v-flex>
+            <v-flex xs2>
               <v-layout row align-center align-content-start>
                 <v-icon color="green lighten-2">mdi-currency-usd</v-icon>
                 <h2>{{hero.money}}</h2>
@@ -87,7 +86,7 @@
                 </v-btn>
               </v-layout>
             </v-flex>
-            <v-flex>
+            <v-flex xs2>
               <v-layout row align-center align-content-start>
                 <v-icon color="amber">mdi-trophy-award</v-icon>
                 <h2> {{hero.xp}}/{{hero.xpGoal}}</h2>
@@ -100,17 +99,18 @@
               </v-layout>
               <h2>Lvl: {{hero.level}}</h2>
             </v-flex>
+            <v-flex xs2>
             <v-btn large fab round :color="colorMap[hero.roll].color" :value="hero.roll"
                    @click.native.stop="reRoll(hero, 6, hero.movementAdj)">
               <h1>{{hero.roll}}</h1>
             </v-btn>
+            </v-flex>
           </v-layout>
           <v-card>
             <v-card-text class="grey darken2">{{hero}}</v-card-text>
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
-    </v-layout>
   </v-container>
 </template>
 
