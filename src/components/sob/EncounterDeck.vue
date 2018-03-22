@@ -25,31 +25,45 @@
 <script>
   export default {
     name: 'encounter-deck',
-    created: function () {
-      this.shuffleDeck()
+    mounted() {
+      console.log('App mounted!');
+      if (localStorage.getItem('encounterDeck')) {
+        this.Deck = JSON.parse(localStorage.getItem('encounterDeck'));
+        this.numDrawn = parseInt(localStorage.getItem('encounterNumDrawn'));
+      } else {
+        this.shuffleDeck();
+      }
+    },
+    watch: {
+      numDrawn: {
+        handler() {
+          localStorage.setItem('encounterNumDrawn', this.numDrawn.toString());
+        }
+      }
     },
     methods: {
       shuffleDeck() {
-        this.numDrawn = 0
+        this.numDrawn = 0;
         this.shuffle(this.Deck)
+        localStorage.setItem('encounterDeck', JSON.stringify(this.Deck));
       },
       // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
       shuffle(array) {
-        var currentIndex = array.length
-        var temporaryValue, randomIndex
+        let currentIndex = array.length;
+        let temporaryValue, randomIndex;
         while (currentIndex !== 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex)
-          currentIndex -= 1
-          temporaryValue = array[currentIndex]
-          array[currentIndex] = array[randomIndex]
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
           array[randomIndex] = temporaryValue
         }
         return array
       },
       drawCard() {
-        this.numDrawn++
+        this.numDrawn++;
         if (this.numDrawn >= this.Deck.length) {
-          this.numDrawn = this.Deck.length
+          this.numDrawn = this.Deck.length;
         }
       }
     },
@@ -119,9 +133,6 @@
           }
         ]
       }
-    },
-    beforeDestroy() {
-      // Save the State?
     }
   }
 </script>

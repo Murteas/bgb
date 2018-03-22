@@ -25,31 +25,44 @@
 <script>
   export default {
     name: 'loot-deck',
-    created: function () {
-      this.shuffleDeck()
+    mounted() {
+      if (localStorage.getItem('lootDeck')) {
+        this.Deck = JSON.parse(localStorage.getItem('lootDeck'));
+        this.numDrawn = parseInt(localStorage.getItem('lootNumDrawn'));
+      } else {
+        this.shuffleDeck();
+      }
+    },
+    watch: {
+      numDrawn: {
+        handler() {
+          localStorage.setItem('lootNumDrawn', this.numDrawn.toString());
+        }
+      }
     },
     methods: {
       shuffleDeck() {
-        this.numDrawn = 0
-        this.shuffle(this.Deck)
+        this.numDrawn = 0;
+        this.shuffle(this.Deck);
+        localStorage.setItem('lootDeck', JSON.stringify(this.Deck));
       },
       // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
       shuffle(array) {
-        var currentIndex = array.length
-        var temporaryValue, randomIndex
+        let currentIndex = array.length;
+        let temporaryValue, randomIndex;
         while (currentIndex !== 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex)
-          currentIndex -= 1
-          temporaryValue = array[currentIndex]
-          array[currentIndex] = array[randomIndex]
-          array[randomIndex] = temporaryValue
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
         }
-        return array
+        return array;
       },
       drawCard() {
-        this.numDrawn++
+        this.numDrawn++;
         if (this.numDrawn >= this.Deck.length) {
-          this.numDrawn = this.Deck.length
+          this.numDrawn = this.Deck.length;
         }
       }
     },
@@ -119,9 +132,6 @@
           }
         ]
       }
-    },
-    beforeDestroy() {
-      // Save the State?
     }
   }
 </script>

@@ -3,7 +3,7 @@
     <v-card>
       <v-toolbar card>
         <v-toolbar-title>Scavenge</v-toolbar-title>
-        <v-spacer></v-spacer>
+        <v-spacer/>
         <v-btn icon @click.native="shuffleDeck()">
           <v-icon>mdi-shuffle</v-icon>
         </v-btn>
@@ -25,31 +25,44 @@
 <script>
   export default {
     name: 'scavenge-deck',
-    created: function () {
-      this.shuffleDeck()
+    mounted() {
+      if (localStorage.getItem('scavengeDeck')) {
+        this.Deck = JSON.parse(localStorage.getItem('scavengeDeck'));
+        this.numDrawn = parseInt(localStorage.getItem('scavengeNumDrawn'));
+      } else {
+        this.shuffleDeck();
+      }
+    },
+    watch: {
+      numDrawn: {
+        handler() {
+          localStorage.setItem('scavengeNumDrawn', this.numDrawn.toString());
+        }
+      }
     },
     methods: {
       shuffleDeck() {
-        this.numDrawn = 0
-        this.shuffle(this.Deck)
+        this.numDrawn = 0;
+        this.shuffle(this.Deck);
+        localStorage.setItem('scavengeDeck', JSON.stringify(this.Deck));
       },
       // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
       shuffle(array) {
-        var currentIndex = array.length
-        var temporaryValue, randomIndex
+        let currentIndex = array.length;
+        let temporaryValue, randomIndex;
         while (currentIndex !== 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex)
-          currentIndex -= 1
-          temporaryValue = array[currentIndex]
-          array[currentIndex] = array[randomIndex]
-          array[randomIndex] = temporaryValue
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex -= 1;
+          temporaryValue = array[currentIndex];
+          array[currentIndex] = array[randomIndex];
+          array[randomIndex] = temporaryValue;
         }
-        return array
+        return array;
       },
       drawCard() {
-        this.numDrawn++
+        this.numDrawn++;
         if (this.numDrawn >= this.Deck.length) {
-          this.numDrawn = this.Deck.length
+          this.numDrawn = this.Deck.length;
         }
       }
     },
@@ -119,9 +132,6 @@
           }
         ]
       }
-    },
-    beforeDestroy() {
-      // Save the State?
     }
   }
 </script>
