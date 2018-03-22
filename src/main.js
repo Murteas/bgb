@@ -10,6 +10,25 @@ Vue.use(Vuetify)
 
 Vue.config.productionTip = false
 
+Vue.mixin({
+  methods: {
+    // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+    shuffle(array) {
+      let currentIndex = array.length;
+      let temporaryValue, randomIndex;
+      while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        temporaryValue = array[currentIndex];
+        Vue.set(array, currentIndex, array[randomIndex]);
+        Vue.set(array, randomIndex, temporaryValue);
+        array[randomIndex] = temporaryValue
+      }
+      return array
+    }
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

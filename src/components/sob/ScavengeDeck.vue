@@ -46,19 +46,6 @@
         this.shuffle(this.Deck);
         localStorage.setItem('scavengeDeck', JSON.stringify(this.Deck));
       },
-      // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-      shuffle(array) {
-        let currentIndex = array.length;
-        let temporaryValue, randomIndex;
-        while (currentIndex !== 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
-        }
-        return array;
-      },
       drawCard() {
         this.numDrawn++;
         if (this.numDrawn >= this.Deck.length) {

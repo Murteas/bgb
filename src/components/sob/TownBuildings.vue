@@ -30,58 +30,49 @@
     },
     methods: {
       shuffleDeck() {
+        // This modifies the passed in deck, as well as returns it
         this.shuffle(this.Deck)
         localStorage.setItem('townBuildings', JSON.stringify(this.Deck));
-      },
-      // from https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-      shuffle(array) {
-        let currentIndex = array.length;
-        let temporaryValue, randomIndex;
-        while (currentIndex !== 0) {
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue
-        }
-        return array
       }
     },
     data() {
       return {
         Deck: [
           {
-            title: 'Ambush Attack'
+            title: 'Saloon'
           },
           {
-            title: 'Attack 1'
+            title: 'Indian Trading Post'
           },
           {
-            title: 'Attack 2 Clue'
+            title: 'General Store'
           },
           {
-            title: 'attack portal'
+            title: 'Smuggler\'s Den'
           },
           {
-            title: 'Encounter 1'
+            title: 'Church'
           },
           {
-            title: 'Encounter 3 clue'
+            title: 'Frontier Outpost'
           },
           {
-            title: 'Encounter Portal clue'
+            title: 'Sherrif\'s Office'
           },
           {
-            title: 'EncounterX2_1'
+            title: 'Doc\'s Office'
           },
           {
-            title: 'EncounterX2_1_clue'
+            title: 'Blacksmith'
           },
           {
-            title: 'EncounterX2_2'
+            title: 'Gambling Hall'
           },
           {
-            title: 'growing_dread_enc_2_clue'
+            title: 'Mutant Quarter'
+          },
+          {
+            title: 'Street Market'
           }
         ]
       }
