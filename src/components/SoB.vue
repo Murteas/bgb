@@ -18,6 +18,9 @@
       <v-btn fab small color="grey darken-3" @click.stop="townBuildingsDialog=!townBuildingsDialog">
         <v-icon>mdi-home-variant</v-icon>
       </v-btn>
+      <v-btn fab small color="teal accent-3" @click.stop="townDailyEventsDialog=!townDailyEventsDialog">
+        <v-icon>mdi-calendar-today</v-icon>
+      </v-btn>
     </v-speed-dial>
     <v-flex xs12>
       <hero-panel/>
@@ -30,6 +33,9 @@
     </v-dialog>
     <v-dialog v-model="encounterDialog" scrollable max-width="600px">
       <encounter-deck/>
+    </v-dialog>
+    <v-dialog v-model="townDailyEventsDialog" scrollable max-width="600px">
+      <town-daily-events/>
     </v-dialog>
     <v-dialog v-model="townBuildingsDialog" scrollable max-width="400px">
       <town-buildings/>
@@ -47,6 +53,7 @@
   import EncounterDeck from './sob/EncounterDeck'
   import DiceRoller from './general/DiceRoller'
   import TownBuildings from './sob/TownBuildings'
+  import TownDailyEvents from './sob/TownDailyEvents'
 
   export default {
     components: {
@@ -61,7 +68,9 @@
       EncounterDeck,
       'encounter-deck': EncounterDeck,
       TownBuildings,
-      'town-buildings': TownBuildings
+      'town-buildings': TownBuildings,
+      TownDailyEvents,
+      'town-daily-events': TownDailyEvents
     },
     data() {
       return {
@@ -69,7 +78,8 @@
         lootDialog: false,
         scavengeDialog: false,
         encounterDialog: false,
-        townBuildingsDialog: false
+        townBuildingsDialog: false,
+        townDailyEventsDialog: false
       }
     }
 
