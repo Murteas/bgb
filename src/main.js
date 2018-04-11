@@ -25,6 +25,17 @@ Vue.mixin({
         array[randomIndex] = temporaryValue
       }
       return array
+    },
+
+    rollDie(sides) {
+      if (!sides) sides = 6;
+      return 1 + Math.floor(Math.random() * sides);
+    },
+
+    rollDice(number, sides) {
+      let total = 0;
+      while (number-- > 0) total += this.rollDie(sides);
+      return total;
     }
   }
 })

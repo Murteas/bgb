@@ -7,24 +7,38 @@
         <v-icon>mdi-chevron-double-down</v-icon>
       </v-btn>
       <v-btn fab small color="amber accent-3" @click.stop="lootDialog=!lootDialog">
-        <v-icon>mdi-treasure-chest</v-icon>
+        <v-avatar>
+          <img src="static/img/cards/loot/loot_cardBack.png">
+        </v-avatar>
+        <!--<v-icon>mdi-treasure-chest</v-icon>-->
       </v-btn>
       <v-btn fab small color="brown darken-4" @click.stop="scavengeDialog=!scavengeDialog">
-        <v-icon>mdi-magnify</v-icon>
+        <v-avatar>
+          <img src="static/img/cards/scavenge/scav_cardBack.png">
+        </v-avatar>
       </v-btn>
       <v-btn fab small color="indigo darken-3" @click.stop="encounterDialog=!encounterDialog">
-        <v-icon>person_pin</v-icon>
+        <v-avatar>
+          <img src="static/img/cards/encounter/explore.png">
+        </v-avatar>
       </v-btn>
       <v-btn fab small color="grey darken-3" @click.stop="townBuildingsDialog=!townBuildingsDialog">
         <v-icon>mdi-home-variant</v-icon>
       </v-btn>
       <v-btn fab small color="teal accent-3" @click.stop="townDailyEventsDialog=!townDailyEventsDialog">
-        <v-icon>mdi-calendar-today</v-icon>
+        <v-avatar>
+          <img src="static/img/cards/townDailyEvents/Card Back.JPG">
+        </v-avatar>
+      </v-btn>
+      <v-btn fab small color="teal accent-3" @click.stop="townTypeDialog=!townTypeDialog">
+        <v-avatar>
+          <img src="static/img/cards/townType/MiningTownF.JPG">
+        </v-avatar>
       </v-btn>
     </v-speed-dial>
-    <v-flex xs12>
-      <hero-panel/>
-    </v-flex>
+    <!--<v-flex xs12>-->
+      <!--<hero-panel/>-->
+    <!--</v-flex>-->
     <v-dialog v-model="lootDialog" scrollable max-width="600px">
       <loot-deck/>
     </v-dialog>
@@ -40,8 +54,10 @@
     <v-dialog v-model="townBuildingsDialog" scrollable max-width="400px">
       <town-buildings/>
     </v-dialog>
+    <v-dialog v-model="townTypeDialog" scrollable max-width="400px">
+      <town-type/>
+    </v-dialog>
   </v-container>
-
   </v-layout>
 </template>
 
@@ -54,6 +70,7 @@
   import DiceRoller from './general/DiceRoller'
   import TownBuildings from './sob/TownBuildings'
   import TownDailyEvents from './sob/TownDailyEvents'
+  import TownType from './sob/TownType'
 
   export default {
     components: {
@@ -70,7 +87,9 @@
       TownBuildings,
       'town-buildings': TownBuildings,
       TownDailyEvents,
-      'town-daily-events': TownDailyEvents
+      'town-daily-events': TownDailyEvents,
+      TownType,
+      'town-type': TownType
     },
     data() {
       return {
@@ -79,7 +98,8 @@
         scavengeDialog: false,
         encounterDialog: false,
         townBuildingsDialog: false,
-        townDailyEventsDialog: false
+        townDailyEventsDialog: false,
+        townTypeDialog: false
       }
     }
 

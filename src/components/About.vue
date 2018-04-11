@@ -1,7 +1,6 @@
 <template>
   <div>
-    <v-jumbotron color="primary" dark>
-      <v-container fill-height>
+   <v-container>
         <v-layout align-center>
           <v-flex text-xs-center>
             <h1 class="display-3">Board Game Buddy</h1>
@@ -13,7 +12,6 @@
           </v-alert>
         </v-layout>
       </v-container>
-    </v-jumbotron>
   </div>
 </template>
 
