@@ -10,11 +10,11 @@
       </v-toolbar>
       <v-container fluid grid-list-sm>
         <v-layout row wrap v-bind:datasrc="rollSum">
-            <v-btn :color="locationColor" @click.native="nextWorld()">{{currentLocation}}</v-btn>
-            <h1>{{die1}} + {{die2}} = {{rollSum}} </h1>
+          <v-btn :color="locationColor" @click.native="nextWorld()">{{currentLocation}}</v-btn>
+          <h1>{{die1}} + {{die2}} = {{rollSum}} </h1>
         </v-layout>
       </v-container>
-      <v-card-text> <h2>{{currentEffect}}</h2> </v-card-text>
+      <v-card-text><h2>{{currentEffect}}</h2></v-card-text>
     </v-card>
   </v-container>
 </template>
@@ -32,31 +32,30 @@
         this.UpdateEventText();
       },
       UpdateEventText() {
-        if (this.die1 != this.die2) {
+        if (this.die1 !== this.die2) {
           this.currentEffect = 'No event'
-        }
-        else {
-           var dieRoll = this.die1 -1;
+        } else {
+          let dieRoll = this.die1 - 1;
           switch (this.currentLocation) {
-            case "Mines":
+            case 'Mines':
               this.currentEffect = 'Mines: ' + this.Mines[dieRoll].description;
               break;
-            case "Targa":
+            case 'Targa':
               this.currentEffect = 'Targa: ' + this.Targa[dieRoll].description;
               break;
-            case "Jargono":
+            case 'Jargono':
               this.currentEffect = 'Jargono: ' + this.Jargono[dieRoll].description;
               break;
-            case "Cynder":
+            case 'Cynder':
               this.currentEffect = 'Cynder: ' + this.Cynder[dieRoll].description;
               break;
-            case "Trederra":
+            case 'Trederra':
               this.currentEffect = 'Trederra: ' + this.Trederra[dieRoll].description;
               break;
-            case "DerelictShip":
+            case 'DerelictShip':
               this.currentEffect = 'Derelict Ship: ' + this.DerelictShip[dieRoll].description;
               break;
-            case "Town":
+            case 'Town':
               this.currentEffect = 'Town: ' + this.Town[dieRoll].description;
               break;
           }
