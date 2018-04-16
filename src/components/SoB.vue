@@ -35,6 +35,9 @@
           <img src="static/img/cards/townType/MiningTownF.JPG">
         </v-avatar>
       </v-btn>
+      <v-btn fab small color="red darken-4" @click.stop="darknessRollDialog=!darknessRollDialog">
+        <v-icon>mdi-emoticon-devil</v-icon>
+      </v-btn>
     </v-speed-dial>
     <!--<v-flex xs12>-->
       <!--<hero-panel/>-->
@@ -54,8 +57,11 @@
     <v-dialog v-model="townBuildingsDialog" scrollable max-width="400px">
       <town-buildings/>
     </v-dialog>
-    <v-dialog v-model="townTypeDialog" scrollable max-width="400px">
+    <v-dialog v-model="townTypeDialog" scrollable max-width="600px">
       <town-type/>
+    </v-dialog>
+    <v-dialog v-model="darknessRollDialog" scrollable max-width="600px">
+      <darkness-roll/>
     </v-dialog>
   </v-container>
   </v-layout>
@@ -71,6 +77,7 @@
   import TownBuildings from './sob/TownBuildings'
   import TownDailyEvents from './sob/TownDailyEvents'
   import TownType from './sob/TownType'
+  import DarknessRoll from './sob/DarknessRoll'
 
   export default {
     components: {
@@ -89,7 +96,9 @@
       TownDailyEvents,
       'town-daily-events': TownDailyEvents,
       TownType,
-      'town-type': TownType
+      'town-type': TownType,
+      DarknessRoll,
+      'darkness-roll': DarknessRoll
     },
     data() {
       return {
@@ -99,7 +108,8 @@
         encounterDialog: false,
         townBuildingsDialog: false,
         townDailyEventsDialog: false,
-        townTypeDialog: false
+        townTypeDialog: false,
+        darknessRollDialog: false
       }
     }
 
