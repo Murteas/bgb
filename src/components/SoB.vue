@@ -39,9 +39,9 @@
         <v-icon>mdi-emoticon-devil</v-icon>
       </v-btn>
     </v-speed-dial>
-    <!--<v-flex xs12>-->
-      <!--<hero-panel/>-->
-    <!--</v-flex>-->
+    <v-flex xs12>
+      <hero-panel/>
+    </v-flex>
     <v-dialog v-model="lootDialog" scrollable max-width="600px">
       <loot-deck/>
     </v-dialog>

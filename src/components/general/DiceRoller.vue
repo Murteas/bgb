@@ -1,51 +1,51 @@
 <template>
   <v-container fluid grid-list-sm secondary>
-    <v-layout justify-start align-center align-content-center row wrap>
-      <v-layout align-center align-content-center column>
-        <v-btn xs2 sm1 round :color="select.color"
-               @click.native="selectDieType()">
-          <span>{{select.dieType}} </span>
-          <v-icon large>{{select.icon}}</v-icon>
-        </v-btn>
-        <v-btn flat icon color="light-green" @click.native.stop="dialog = true">
-          <v-icon>mdi-table</v-icon>
-        </v-btn>
-      </v-layout>
-      <v-layout align-center align-content-center column>
-        <v-btn xs1 flat icon @click.native="changeNumDice(1)">
-          <v-icon large>mdi-chevron-up</v-icon>
-        </v-btn>
-        <h2>{{numDice}}</h2>
-        <v-btn xs1 flat icon @click.native="changeNumDice(-1)">
-          <v-icon large>mdi-chevron-down</v-icon>
-        </v-btn>
-      </v-layout>
-      <v-btn xs2 sm1 large fab round @click.native="rollDice()">
-        <v-icon x-large color="white">mdi-dice-multiple</v-icon>
-      </v-btn>
-      <v-spacer/>
-      <v-layout row wrap justify-start v-for="die in dice" v-if="dice.indexOf(die) < numDice">
-        <v-badge overlap left :color="select.color">
-          <!--<v-icon slot="badge">{{select.icon}}</v-icon>-->
-          <span slot="badge">{{die.rerolls}}</span>
-          <v-btn large fab round :color="die.color"
-                 @click.native="reRoll(die, select.maxNum)">
-            <h1>{{die.roll}}</h1>
-          </v-btn>
-        </v-badge>
-      </v-layout>
-      <v-dialog v-model="dialog" max-width="200">
-        <v-card>
-          <v-card-title class="headline">D6 Dice Rolls</v-card-title>
-          <v-data-table :items="d6RollData" class="elevation-1" hide-headers hide-actions>
-            <template slot="items" slot-scope="props">
-              <td bgcolor="#6495ed">{{props.item.number}}</td>
-              <td>{{props.item.rolls}}</td>
-            </template>
-          </v-data-table>
-        </v-card>
-      </v-dialog>
+    <v-layout row>
+      <v-flex xs3>
+        <v-layout column wrap>
+          <v-flex>
+            <v-btn flat icon color="light-green" @click.native.stop="dialog = true">
+              <v-icon>mdi-table</v-icon>
+            </v-btn>
+            <v-btn round :color="select.color"
+                   @click.native="selectDieType()">
+              <span>{{select.dieType}} </span>
+              <v-icon large>{{select.icon}}</v-icon>
+            </v-btn>
+            <v-btn large fab round @click.native="rollDice()">
+              <v-icon x-large color="white">mdi-dice-multiple</v-icon>
+            </v-btn>
+          </v-flex>
+          <v-slider label="#" v-model="numDice" thumb-label step="1" max="20"></v-slider>
+        </v-layout>
+      </v-flex>
+      <v-flex xs9>
+        <v-layout row wrap grid-list-sm>
+          <v-flex v-for="die in dice" v-if="dice.indexOf(die) < numDice">
+            <v-badge overlap left :color="select.color">
+              <!--<v-icon slot="badge">{{select.icon}}</v-icon>-->
+              <span slot="badge">{{die.rerolls}}</span>
+              <v-btn large fab round :color="die.color"
+                     @click.native="reRoll(die, select.maxNum)">
+                <h1>{{die.roll}}</h1>
+              </v-btn>
+            </v-badge>
+          </v-flex>
+        </v-layout>
+      </v-flex>
     </v-layout>
+    <v-dialog v-model="dialog" max-width="200">
+      <v-card>
+        <v-card-title class="headline">D6 Dice Rolls</v-card-title>
+        <v-data-table :items="d6RollData" class="elevation-1" hide-headers hide-actions>
+          <template slot="items" slot-scope="props">
+            <td bgcolor="#6495ed">{{props.item.number}}</td>
+            <td>{{props.item.rolls}}</td>
+          </template>
+        </v-data-table>
+      </v-card>
+    </v-dialog>
+
   </v-container>
 </template>
 <script>
