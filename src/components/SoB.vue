@@ -1,7 +1,7 @@
 <template>
   <v-layout>
     <v-container fluid grid-list-sm>
-      <v-speed-dial fixed bottom right  direction="top" origin="top" v-model="fab">
+      <v-speed-dial fixed bottom right direction="top" origin="top" v-model="fab">
         <v-btn slot="activator" color="black" fab v-model="fab">
           <v-icon>mdi-chevron-double-up</v-icon>
           <v-icon>mdi-chevron-double-down</v-icon>
@@ -29,19 +29,41 @@
           <v-icon>mdi-theme-light-dark</v-icon>
         </v-btn>
       </v-speed-dial>
-      <v-flex xs12>
-        <hero-panel/>
-      </v-flex>
-      <v-dialog v-model="lootDialog" scrollable max-width="800px">
+      <v-layout row>
+        <v-flex xs4>
+            <v-expansion-panel expand>
+              <v-expansion-panel-content>
+                <div slot="header">Hold Back the Darkness</div>
+                <darkness-roll/>
+              </v-expansion-panel-content>
+              <v-expansion-panel-content>
+                <div slot="header">Scavenge Deck</div>
+                <scavenge-deck/>
+              </v-expansion-panel-content>
+              <v-expansion-panel-content>
+                <div slot="header">Loot Deck</div>
+                <loot-deck/>
+              </v-expansion-panel-content>
+              <v-expansion-panel-content>
+                <div slot="header">Encounter Deck</div>
+                <encounter-deck/>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+        </v-flex>
+        <v-flex xs8>
+          <hero-panel/>
+        </v-flex>
+      </v-layout>
+      <v-dialog v-model="lootDialog" scrollable max-width="600px">
         <loot-deck/>
       </v-dialog>
-      <v-dialog v-model="scavengeDialog" scrollable max-width="800px">
+      <v-dialog v-model="scavengeDialog" scrollable max-width="600px">
         <scavenge-deck/>
       </v-dialog>
       <v-dialog v-model="encounterDialog" scrollable max-width="600px">
         <encounter-deck/>
       </v-dialog>
-      <v-dialog v-model="townDailyEventsDialog" scrollable max-width="800px">
+      <v-dialog v-model="townDailyEventsDialog" scrollable max-width="600px">
         <town-daily-events/>
       </v-dialog>
       <v-dialog v-model="townBuildingsDialog" scrollable max-width="400px">

@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-card>
+    <v-card height="auto">
       <v-toolbar card>
         <v-toolbar-title>Encounter</v-toolbar-title>
         <v-spacer></v-spacer>
