@@ -4,27 +4,28 @@
       <v-flex xs2>
         <v-layout column wrap>
           <v-flex>
-            <v-btn round :color="select.color"
-                   @click.native="selectDieType()">
-              <span>{{select.dieType}} </span>
-              <v-icon large>{{select.icon}}</v-icon>
-            </v-btn>
-            <v-btn large fab round @click.native="rollDice()">
-              <v-icon x-large color="white">mdi-dice-multiple</v-icon>
-            </v-btn>
+            <v-layout row wrap>
+              <v-btn round :color="select.color"
+                     @click.native="selectDieType()">
+                <span>{{select.dieType}} </span>
+              </v-btn>
+              <v-btn flat icon color="lime accent-2" @click.native.stop="dialog = true">
+                <v-icon>mdi-table</v-icon>
+              </v-btn>
+            </v-layout>
           </v-flex>
           <v-flex>
-          <v-layout row wrap>
-            <v-btn flat icon color="light-green" @click.native.stop="dialog = true">
-              <v-icon>mdi-table</v-icon>
-            </v-btn>
-            <v-btn fab round dark @click.native="changeNumDice(-1)">
-              <v-icon x-large>mdi-minus</v-icon>
-            </v-btn>
-            <v-btn fab round light @click.native="changeNumDice(1)">
-              <v-icon x-large>mdi-plus</v-icon>
-            </v-btn>
-          </v-layout>
+            <v-layout row wrap>
+              <v-btn flat icon color="blue darken-2" @click.native="changeNumDice(-1)">
+                <v-icon>mdi-minus</v-icon>
+              </v-btn>
+              <v-btn flat icon color="blue lighten-2" @click.native="changeNumDice(1)">
+                <v-icon>mdi-plus</v-icon>
+              </v-btn>
+              <v-btn flat icon @click.native="rollDice()">
+                <v-icon>mdi-dice-multiple</v-icon>
+              </v-btn>
+            </v-layout>
           </v-flex>
         </v-layout>
       </v-flex>
@@ -66,8 +67,8 @@
         this.numDice += change
         if (this.numDice < 1) {
           this.numDice = 1
-        } else if (this.numDice > 20) {
-          this.numDice = 20
+        } else if (this.numDice > 15) {
+          this.numDice = 15
         }
       },
       selectDieType: function () {
