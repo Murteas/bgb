@@ -23,7 +23,7 @@
         <router-view/>
       </v-container>
     </main>
-    <v-footer >
+    <v-footer height="auto" fixed>
       <dice-roller/>
     </v-footer>
   </v-app>

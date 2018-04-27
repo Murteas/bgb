@@ -1,12 +1,9 @@
 <template>
   <v-container fluid grid-list-sm secondary>
     <v-layout row>
-      <v-flex xs3>
+      <v-flex xs2>
         <v-layout column wrap>
           <v-flex>
-            <v-btn flat icon color="light-green" @click.native.stop="dialog = true">
-              <v-icon>mdi-table</v-icon>
-            </v-btn>
             <v-btn round :color="select.color"
                    @click.native="selectDieType()">
               <span>{{select.dieType}} </span>
@@ -16,10 +13,22 @@
               <v-icon x-large color="white">mdi-dice-multiple</v-icon>
             </v-btn>
           </v-flex>
-          <v-slider label="#" v-model="numDice" thumb-label step="1" max="20"></v-slider>
+          <v-flex>
+          <v-layout row wrap>
+            <v-btn flat icon color="light-green" @click.native.stop="dialog = true">
+              <v-icon>mdi-table</v-icon>
+            </v-btn>
+            <v-btn fab round dark @click.native="changeNumDice(-1)">
+              <v-icon x-large>mdi-minus</v-icon>
+            </v-btn>
+            <v-btn fab round light @click.native="changeNumDice(1)">
+              <v-icon x-large>mdi-plus</v-icon>
+            </v-btn>
+          </v-layout>
+          </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex xs9>
+      <v-flex xs10>
         <v-layout row wrap grid-list-sm>
           <v-flex v-for="die in dice" v-if="dice.indexOf(die) < numDice">
             <v-badge overlap left :color="select.color">
@@ -55,8 +64,8 @@
     methods: {
       changeNumDice: function (change) {
         this.numDice += change
-        if (this.numDice < 0) {
-          this.numDice = 0
+        if (this.numDice < 1) {
+          this.numDice = 1
         } else if (this.numDice > 20) {
           this.numDice = 20
         }

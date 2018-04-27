@@ -9,15 +9,9 @@
         </v-btn>
       </v-toolbar>
       <v-container fluid grid-list-sm>
-        <v-layout row wrap v-bind:datasrc="currentIndex">
-          <v-flex>
-            <img class="image" :src="Deck[currentIndex].src" :alt="Deck[currentIndex].title"
-                 width="75%">
-          </v-flex>
-          <v-flex >
-            <img class="image" :src="Deck[currentIndex].back_src" :alt="Deck[currentIndex].title"
-                 width="75%">
-          </v-flex>
+        <v-layout content-align-center>
+          <v-flex><h1>{{die1}} + {{die2}} = {{rollSum}}</h1></v-flex>
+          <v-flex><h1>{{Deck[currentIndex].title}}</h1></v-flex>
         </v-layout>
       </v-container>
     </v-card>
@@ -31,67 +25,51 @@
     },
     methods: {
       drawCard() {
-        this.currentIndex = this.rollDice(2, 6) - 2;
+        this.die1 = this.rollDice(1, 6);
+        this.die2 = this.rollDice(1, 6);
+        this.rollSum = this.die1 + this.die2;
+        this.currentIndex = this.rollSum - 2;
       }
     },
     data() {
       return {
+        die1: 0,
+        die2: 0,
+        rollSum: 0,
         currentIndex: 5,
         Deck: [
           {
-            title: 'Town Ruins',
-            src: 'static/img/cards/townType/TownRuinsF.JPG',
-            back_src: 'static/img/cards/townType/TownRuinsB.JPG'
+            title: 'Town Ruins'
           },
           {
-            title: 'Haunted Town',
-            src: 'static/img/cards/townType/HauntedTownF.JPG',
-            back_src: 'static/img/cards/townType/HauntedTownB.JPG'
+            title: 'Haunted Town'
           },
           {
-            title: 'Plague Town',
-            src: 'static/img/cards/townType/PlagueTownF.JPG',
-            back_src: 'static/img/cards/townType/PlagueTownB.JPG'
+            title: 'Plague Town'
           },
           {
-            title: 'Rail Town',
-            src: 'static/img/cards/townType/RailTownF.JPG',
-            back_src: 'static/img/cards/townType/RailTownB.JPG'
+            title: 'Rail Town'
           },
           {
-            title: 'Normal Town',
-            src: 'static/img/icons/apple-touch-icon-152x152.png',
-            back_src: 'static/img/icons/apple-touch-icon-152x152.png'
+            title: 'Normal Town'
           },
           {
-            title: 'Normal Town',
-            src: 'static/img/icons/apple-touch-icon-152x152.png',
-            back_src: 'static/img/icons/apple-touch-icon-152x152.png'
+            title: 'Normal Town'
           },
           {
-            title: 'Normal Town',
-            src: 'static/img/icons/apple-touch-icon-152x152.png',
-            back_src: 'static/img/icons/apple-touch-icon-152x152.png'
+            title: 'Normal Town'
           },
           {
-            title: 'Mutant Town',
-            src: 'static/img/cards/townType/MutantTownF.JPG',
-            back_src: 'static/img/cards/townType/MutantTownB.JPG'
+            title: 'Mutant Town'
           },
           {
-            title: 'River Town',
-            src: 'static/img/cards/townType/RiverTownF.JPG',
-            back_src: 'static/img/cards/townType/RiverTownB.JPG'
+            title: 'River Town'
           },
           {
-            title: 'Mining Town',
-            src: 'static/img/cards/townType/MiningTownF.JPG',
-            back_src: 'static/img/cards/townType/MiningTownB.JPG'
+            title: 'Mining Town'
           },
           {
-            title: 'Outlaw Town',
-            src: 'static/img/cards/townType/OutlawTownF.JPG',
-            back_src: 'static/img/cards/townType/OutlawTownB.JPG'
+            title: 'Outlaw Town'
           }
         ]
       }
