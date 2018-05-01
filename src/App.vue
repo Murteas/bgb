@@ -42,7 +42,8 @@
         sheet: false,
         appTitle: 'Board Game Buddy',
         menuItems: [
-          {title: 'SoB', path: '/sob', icon: 'fa-search'}
+          {title: 'SoB', path: '/sob', icon: 'fa-search'},
+          {title: 'Aeon\'s End', path: '/aeon', icon: 'fa-gem'}
         ]
       }
     }

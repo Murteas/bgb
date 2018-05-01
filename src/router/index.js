@@ -3,7 +3,8 @@ import Router from 'vue-router'
 
 const routerOptions = [
   { path: '/', component: 'About' },
-  { path: '/sob', component: 'SoB' }
+  { path: '/sob', component: 'SoB' },
+  { path: '/aeon', component: 'AE' }
 ]
 
 const routes = routerOptions.map(route => {
