@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-sm>
     <v-layout row wrap>
-      <v-flex xs4>
+      <v-flex xs6>
         <v-card>
           <v-card-title><h1>Turn Order</h1></v-card-title>
           <turn-order/>
