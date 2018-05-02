@@ -1,20 +1,13 @@
 <template>
-  <v-container fluid>
-    <v-card>
-      <v-toolbar card>
-        <v-toolbar-title>Town Type</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon @click.native="drawCard()">
-          <v-icon>mdi-cards</v-icon>
-        </v-btn>
-      </v-toolbar>
-      <v-container fluid grid-list-sm>
-        <v-layout content-align-center>
-          <v-flex><h1>{{die1}} + {{die2}} = {{rollSum}}</h1></v-flex>
-          <v-flex><h1>{{Deck[currentIndex].title}}</h1></v-flex>
-        </v-layout>
-      </v-container>
-    </v-card>
+  <v-container fluid grid-list-sm>
+    <v-layout row wrap>
+      <v-btn @click.native="drawCard()">
+        <v-icon>mdi-dice-multiple</v-icon>
+        <b>Roll</b>
+      </v-btn>
+      <h1>{{die1}} + {{die2}} = {{rollSum}} </h1>
+      <v-flex xs12><h1>{{Deck[currentIndex].title}}</h1></v-flex>
+    </v-layout>
   </v-container>
 </template>
 <script>

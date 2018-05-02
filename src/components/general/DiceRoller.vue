@@ -1,7 +1,7 @@
 <template>
   <v-container fluid grid-list-sm secondary>
     <v-layout row>
-      <v-flex xs2>
+      <v-flex xs3>
         <v-layout column wrap>
           <v-flex>
             <v-layout row wrap>
@@ -19,6 +19,7 @@
               <v-btn flat icon color="blue darken-2" @click.native="changeNumDice(-1)">
                 <v-icon>mdi-minus</v-icon>
               </v-btn>
+                <h1>{{numDice}}</h1>
               <v-btn flat icon color="blue lighten-2" @click.native="changeNumDice(1)">
                 <v-icon>mdi-plus</v-icon>
               </v-btn>
@@ -29,7 +30,7 @@
           </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex xs10>
+      <v-flex xs9>
         <v-layout row wrap grid-list-sm>
           <v-flex v-for="die in dice" v-if="dice.indexOf(die) < numDice">
             <v-badge overlap left :color="select.color">
@@ -67,8 +68,8 @@
         this.numDice += change
         if (this.numDice < 1) {
           this.numDice = 1
-        } else if (this.numDice > 15) {
-          this.numDice = 15
+        } else if (this.numDice > 20) {
+          this.numDice = 20
         }
       },
       selectDieType: function () {
@@ -169,7 +170,7 @@
           {number: 5, rolls: 0},
           {number: 6, rolls: 0}
         ],
-        numDice: 7,
+        numDice: 3,
         dialog: false
       }
     }

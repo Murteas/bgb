@@ -1,13 +1,10 @@
 <template>
   <v-container fluid>
-    <v-card>
-      <v-toolbar card>
-        <v-toolbar-title>Town Buildings</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon @click.native="shuffleDeck()">
+    <v-layout column>
+        <v-btn @click.native="shuffleDeck()">
           <v-icon>mdi-shuffle</v-icon>
+          <span>Shuffle</span>
         </v-btn>
-      </v-toolbar>
       <v-list v-model="Deck">
         <v-list-tile v-for="item in Deck" :key="item.title">
           <v-list-tile-content>
@@ -15,7 +12,7 @@
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
-    </v-card>
+     </v-layout>
   </v-container>
 </template>
 <script>

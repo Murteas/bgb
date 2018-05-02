@@ -1,21 +1,14 @@
 <template>
-  <v-container fluid>
-    <v-card>
-      <v-toolbar card>
-        <v-toolbar-title>Darkness Roll</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-btn icon @click.native="DarknessRoll()">
-          <v-icon>mdi-dice-multiple</v-icon>
-        </v-btn>
-      </v-toolbar>
-      <v-container fluid grid-list-sm>
-        <v-layout row wrap v-bind:datasrc="rollSum">
-          <v-btn :color="locationColor" @click.native="nextWorld()">{{currentLocation}}</v-btn>
-          <h1>{{die1}} + {{die2}} = {{rollSum}} </h1>
-        </v-layout>
-      </v-container>
-      <v-card-text><h2>{{currentEffect}}</h2></v-card-text>
-    </v-card>
+  <v-container fluid grid-list-sm>
+    <v-layout row wrap>
+      <v-btn @click.native="DarknessRoll()">
+        <v-icon>mdi-dice-multiple</v-icon>
+        <b>Roll</b>
+      </v-btn>
+      <v-btn :color="locationColor" @click.native="nextWorld()">{{currentLocation}}</v-btn>
+      <h1>{{die1}} + {{die2}} = {{rollSum}} </h1>
+      <v-flex xs12>{{currentEffect}}</v-flex>
+    </v-layout>
   </v-container>
 </template>
 <script>

@@ -1,25 +1,23 @@
 <template>
-  <v-container fluid>
-    <v-card>
-      <v-toolbar card>
-        <v-toolbar-title>Scavenge</v-toolbar-title>
-        <v-spacer/>
-        <v-btn icon @click.native="shuffleDeck()">
+  <v-container fluid grid-list-sm>
+    <v-layout column>
+      <v-layout row wrap>
+        <v-btn @click.native="shuffleDeck()">
           <v-icon>mdi-shuffle</v-icon>
+          <span>Shuffle</span>
         </v-btn>
-        <v-btn icon @click.native="drawCard()">
+        <v-btn @click.native="drawCard()">
           <v-icon>mdi-cards</v-icon>
+          <span>Draw Card</span>
         </v-btn>
-      </v-toolbar>
-      <v-container fluid grid-list-sm>
-        <v-layout row wrap>
-          <v-flex xs4 md4 lg3 v-for="(value, i) in numDrawn" :key="i">
-            <img class="image" :src="Deck[i].src" :alt="Deck[i].title"
-                 width="85%">
-          </v-flex>
-        </v-layout>
-      </v-container>
-    </v-card>
+      </v-layout>
+      <v-layout row wrap>
+        <v-flex xs6 md6 lg3 v-for="(value, i) in numDrawn" :key="i">
+          <img class="image" :src="Deck[i].src" :alt="Deck[i].title"
+               width="85%">
+        </v-flex>
+      </v-layout>
+    </v-layout>
   </v-container>
 </template>
 <script>

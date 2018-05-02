@@ -1,7 +1,8 @@
 <template>
   <v-container fluid justify-start>
-    <v-layout column>
-      <v-layout row wrap>
+    <v-layout row>
+      <v-flex xs6>
+      <v-layout align-content-start column>
         <v-btn @click.native="shuffleDeck()">
           <v-icon>mdi-shuffle</v-icon>
           <b>Shuffle</b>
@@ -10,21 +11,20 @@
           <v-icon>mdi-cards</v-icon>
           <b>Draw</b>
         </v-btn>
-        <v-tooltip top v-model="revealToolTip">
-          <v-chip :color="topCard.color" text-color="black">
-            <h1>{{topCard.title}}</h1>
-          </v-chip>
-          <v-btn slot="activator" @click.native="revealTop()">
-            <v-icon>mdi-eye</v-icon>
-            <b>Reveal</b>
-          </v-btn>
-        </v-tooltip>
+        <v-btn @click.native="revealTop()">
+          <v-icon>mdi-eye</v-icon>
+          <b>Reveal Top Card</b>
+        </v-btn>
+        <v-alert dismissible  :color="topCard.color" v-model="revealToolTip">
+          {{topCard.title}}
+        </v-alert>
         <v-btn @click.native="moveTopToBottom()">
           <v-icon>mdi-arrow-down</v-icon>
           <b>Top to Bottom</b>
         </v-btn>
       </v-layout>
-      <v-layout row wrap>
+      </v-flex>
+      <v-layout column>
         <v-flex v-for="(value, i) in numDrawn" :key="i">
           <v-chip :color="Deck[i].color" text-color="black">
             <h1>{{Deck[i].title}}</h1>
