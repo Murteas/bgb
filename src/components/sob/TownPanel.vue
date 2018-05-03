@@ -4,7 +4,10 @@
       <v-flex sm4 md4 v-for="town in towns" :key="town.name">
         <v-card :color="town.townColor">
           <v-card-title>
-            <h1>{{town.name}}</h1><h3>({{town.size}})</h3><v-spacer/><h2>{{town.type}}</h2>
+            <h1>{{town.name}}</h1>
+            <h3>({{town.size}})</h3>
+            <v-spacer/>
+            <h2>{{town.type}}</h2>
           </v-card-title>
         </v-card>
         <v-card-text>
@@ -26,10 +29,10 @@
       }
     },
     methods: {
-      createTowns: function() {
+      createTowns: function () {
         this.shuffle(this.townNames);
-         for(let i=0; i<10; i++) {
-           this.towns[i] = this.createTown(i);
+        for (let i = 0; i < 10; i++) {
+          this.towns[i] = this.createTown(i);
         }
         localStorage.setItem('townPanel', JSON.stringify(this.towns));
       },
@@ -88,12 +91,11 @@
             return 'Outlaw'
         }
       },
-      generateBuildings: function(type, size) {
+      generateBuildings: function (type, size) {
         let count = 0;
         let buildingString = '';
         let customizedBuildings = this.townBuildings.slice();
-        switch (size)
-        {
+        switch (size) {
           case 'S':
             count = 4;
             break;
@@ -108,12 +110,11 @@
             break;
         }
 
-        switch (type)
-        {
+        switch (type) {
           case 'Mining':
             count--;
             buildingString += 'General Store, ';
-            this.removeElement(customizedBuildings,'General Store');
+            this.removeElement(customizedBuildings, 'General Store');
             break;
           case 'Mutant':
             count--;
@@ -124,7 +125,7 @@
           case 'Outlaw':
             count--;
             buildingString += 'Smuggler\'s Den, ';
-            this.removeElement(customizedBuildings,'Smuggler\'s Den');
+            this.removeElement(customizedBuildings, 'Smuggler\'s Den');
             this.removeElement(customizedBuildings, 'Sheriff');
             break;
           case 'Plague':
@@ -135,16 +136,16 @@
             break;
           case 'River':
             count--;
-            buildingString +='Street Market, Gambling Hall, ';
+            buildingString += 'Street Market, Gambling Hall, ';
             this.removeElement(customizedBuildings, 'Street Market');
             this.removeElement(customizedBuildings, 'Gambling Hall');
             break;
           default:
             break;
         }
-          this.shuffle(customizedBuildings);
-        for(let i=0; i<count; i++) {
-          if (i >0) {
+        this.shuffle(customizedBuildings);
+        for (let i = 0; i < count; i++) {
+          if (i > 0) {
             buildingString += ', ';
           }
           buildingString += customizedBuildings[i];
@@ -163,7 +164,7 @@
       return {
         townColor: 'white',
         townNames: [
-          "Pure Gorge","Bull Peaks","Dusty Hill","Coyote's Gate","Purity Post","New Plains","Scorpion's Mountain","Crimsonvale","Deadbrook","Oatpass","Scorpiongorge","Scorpion's Plains","Farmbrook","Cruelty Trails","Devilbluff","Stifffort","Desolation Pass","Shady Bluff","Wrathmesa","Grindhowl","Deadmesa","Lightroost","Starksprings","Bruiselanding","Crazylanding","Dryroost","Old Cliff","Slimsummit","Aurora Mesa","Thincity","Devildowns","Shadowfield","Richsummit","Rapidcanyon","Bullcreek","Tombglen","Shadowtusk","Freedom Canyon","Barren River","Farmstead","Devildowns","Shadowfield","Richsummit","Rapidcanyon","Bullcreek","Tombglen","Shadowtusk","Freedom Canyon","Barren River","Farmstead","Coyote's Branch","Sandy Spring","Grimrange","Demonville","Wolfcrag","Thornspring","Angelglen","Tamecliff","Lostmountain","Bonesprings","Breakbranch","Braveridge","Last Reach","Devil's Bellow","Vastgulch","Silvermesa","Grand Mesa","Brokensnag","Swift Roost","Bull's Creak","Breakbranch","Braveridge","Last Reach","Devil's Bellow","Vastgulch","Silvermesa","Grand Mesa","Brokensnag","Swift Roost","Bull's Creak","Shallow Post","Softcreak","Littletown","Devil's Edge","Grindcross","Warmpost","Meektown","Bullville","Pride Gate","Angeredge","Sunnyrise","Cripple Roost","Losttrails","Vainpass","Crimsonwater","Lordsplains","Grimworth","Lowchapel","Violence Scar","Glumgulch"
+          'Pure Gorge', 'Bull Peaks', 'Dusty Hill', 'Coyote\'s Gate', 'Purity Post', 'New Plains', 'Scorpion\'s Mountain', 'Crimsonvale', 'Deadbrook', 'Oatpass', 'Scorpiongorge', 'Scorpion\'s Plains', 'Farmbrook', 'Cruelty Trails', 'Devilbluff', 'Stifffort', 'Desolation Pass', 'Shady Bluff', 'Wrathmesa', 'Grindhowl', 'Deadmesa', 'Lightroost', 'Starksprings', 'Bruiselanding', 'Crazylanding', 'Dryroost', 'Old Cliff', 'Slimsummit', 'Aurora Mesa', 'Thincity', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Bullcreek', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Bullcreek', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Coyote\'s Branch', 'Sandy Spring', 'Grimrange', 'Demonville', 'Wolfcrag', 'Thornspring', 'Angelglen', 'Tamecliff', 'Lostmountain', 'Bonesprings', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Bull\'s Creek', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Bull\'s Creek', 'Shallow Post', 'Softcreek', 'Littletown', 'Devil\'s Edge', 'Grindcross', 'Warmpost', 'Meektown', 'Bullville', 'Pride Gate', 'Angeredge', 'Sunnyrise', 'Cripple Roost', 'Losttrails', 'Vainpass', 'Crimsonwater', 'Lordsplains', 'Grimworth', 'Lowchapel', 'Violence Scar', 'Glumgulch'
         ],
         townBuildings: [
           'Saloon',
