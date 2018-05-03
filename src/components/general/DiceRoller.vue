@@ -1,7 +1,7 @@
 <template>
   <v-container fluid grid-list-sm secondary>
     <v-layout row>
-      <v-flex xs3>
+      <v-flex sm3 md3>
         <v-layout column wrap>
           <v-flex>
             <v-layout row wrap>
@@ -30,7 +30,7 @@
           </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex xs9>
+      <v-flex sm9 md9>
         <v-layout row wrap grid-list-sm>
           <v-flex v-for="die in dice" v-if="dice.indexOf(die) < numDice">
             <v-badge overlap left :color="select.color">

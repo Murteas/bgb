@@ -23,7 +23,7 @@
         <router-view/>
       </v-container>
     </main>
-    <v-footer app height="auto" fixed>
+    <v-footer app height="auto">
       <dice-roller/>
     </v-footer>
   </v-app>
@@ -41,7 +41,6 @@
       return {
         sheet: false,
         appTitle: 'Board Game Buddy',
-        appVersion: 'v.0.2.4',
         menuItems: [
           {title: 'SoB', path: '/sob', icon: 'fa-search'},
           {title: 'Aeon\'s End', path: '/aeon', icon: 'fa-gem'}

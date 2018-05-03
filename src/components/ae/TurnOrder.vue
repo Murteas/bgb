@@ -1,7 +1,7 @@
 <template>
   <v-container fluid justify-start>
     <v-layout row>
-      <v-flex xs6>
+      <v-flex md6>
       <v-layout align-content-start column>
         <v-btn @click.native="shuffleDeck()">
           <v-icon>mdi-shuffle</v-icon>

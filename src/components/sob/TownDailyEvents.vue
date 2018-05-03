@@ -12,7 +12,7 @@
         </v-btn>
       </v-layout>
       <v-layout row wrap>
-        <v-flex xs6 md6 lg3 v-for="(value, i) in numDrawn" :key="i">
+        <v-flex sm6 md6 v-for="(value, i) in numDrawn" :key="i">
           <img class="image" :src="Deck[i].src" :alt="Deck[i].title"
                width="85%">
         </v-flex>

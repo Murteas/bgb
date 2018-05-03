@@ -6,7 +6,7 @@
         <b>Roll</b>
       </v-btn>
       <h1>{{die1}} + {{die2}} = {{rollSum}} </h1>
-      <v-flex xs12><h1>{{Deck[currentIndex].title}}</h1></v-flex>
+      <v-flex sm12 md12 ><h1>{{Deck[currentIndex].title}}</h1></v-flex>
     </v-layout>
   </v-container>
 </template>

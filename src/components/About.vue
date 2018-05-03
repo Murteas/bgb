@@ -4,7 +4,7 @@
       <v-layout align-center column>
         <v-flex text-xs-center>
           <h1 class="display-3">Board Game Buddy</h1>
-          <h5>0.5.1.1</h5>
+          <h5>0.5.1.2</h5>
         </v-flex>
         <v-btn color="red" dark v-if="!warning" @click="warning = true">Clear all Saved Data</v-btn>
         <v-alert type="warning" dismissible v-model="warning">

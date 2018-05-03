@@ -1,11 +1,16 @@
 <template>
   <v-container fluid grid-list-sm>
     <v-layout row wrap>
-      <v-flex xs7>
+      <v-flex sm7 md7>
         <v-card>
           <v-card-title><h1>Turn Order</h1></v-card-title>
           <turn-order/>
         </v-card>
+      </v-flex>
+      <v-flex sm5 md5>
+        <a href="https://www.actionphasegames.com/pages/aerandomizer" target="_blank">
+          <h1>Aeon's End Randomizer</h1>
+        </a>
       </v-flex>
     </v-layout>
   </v-container>

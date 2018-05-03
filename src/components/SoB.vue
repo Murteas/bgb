@@ -1,12 +1,20 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-layout row>
-      <v-flex xs4>
+    <v-layout row wrap>
+      <v-flex md4 sm4>
         <v-expansion-panel expand>
           <v-expansion-panel-content>
             <div slot="header">Hold Back the Darkness</div>
             <darkness-roll/>
           </v-expansion-panel-content>
+          <v-expansion-panel-content>
+            <div slot="header">Encounter Deck</div>
+            <encounter-deck/>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-flex>
+      <v-flex md4 sm4>
+        <v-expansion-panel expand>
           <v-expansion-panel-content>
             <div slot="header">Scavenge Deck</div>
             <scavenge-deck/>
@@ -15,26 +23,27 @@
             <div slot="header">Loot Deck</div>
             <loot-deck/>
           </v-expansion-panel-content>
-          <v-expansion-panel-content>
-            <div slot="header">Encounter Deck</div>
-            <encounter-deck/>
-          </v-expansion-panel-content>
-          <v-expansion-panel-content>
-            <div slot="header">Town Buildings</div>
-            <town-buildings/>
-          </v-expansion-panel-content>
+        </v-expansion-panel>
+      </v-flex>
+      <v-flex md4 sm4>
+        <v-expansion-panel expand>
           <v-expansion-panel-content>
             <div slot="header">Town Daily Events Deck</div>
             <town-daily-events/>
           </v-expansion-panel-content>
-          <v-expansion-panel-content>
-            <div slot="header">Town Type</div>
-            <town-type/>
-          </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
-      <v-flex xs8>
-        <hero-panel/>
+      <v-flex md12 sm12>
+        <v-expansion-panel expand>
+          <v-expansion-panel-content>
+            <div slot="header">Town Panel</div>
+            <town-panel/>
+          </v-expansion-panel-content>
+          <v-expansion-panel-content>
+            <div slot="header">Hero Panel</div>
+            <hero-panel/>
+          </v-expansion-panel-content>
+        </v-expansion-panel>
       </v-flex>
     </v-layout>
 
@@ -101,6 +110,7 @@
   import TownDailyEvents from './sob/TownDailyEvents'
   import TownType from './sob/TownType'
   import DarknessRoll from './sob/DarknessRoll'
+  import TownPanel from './sob/TownPanel'
 
   export default {
     components: {
@@ -121,7 +131,9 @@
       TownType,
       'town-type': TownType,
       DarknessRoll,
-      'darkness-roll': DarknessRoll
+      'darkness-roll': DarknessRoll,
+      TownPanel,
+      'town-panel': TownPanel
     },
     data() {
       return {

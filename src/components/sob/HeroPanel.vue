@@ -1,6 +1,6 @@
 <template>
   <v-container grid-list-sm secondary>
-      <v-expansion-panel expand>
+      <v-expansion-panel light expand>
         <v-expansion-panel-content v-for="hero in heroes">
           <v-layout slot="header" align-center align-content-start row>
             <v-avatar>
