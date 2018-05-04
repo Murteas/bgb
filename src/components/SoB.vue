@@ -36,7 +36,7 @@
       <v-flex md12 sm12>
         <v-expansion-panel expand>
           <v-expansion-panel-content>
-            <div slot="header">Town Panel</div>
+              <span slot="header">Town Panel</span>
             <town-panel/>
           </v-expansion-panel-content>
           <v-expansion-panel-content>

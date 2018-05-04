@@ -1,23 +1,34 @@
 <template>
-  <v-container grid-list-sm>
-    <v-layout row wrap>
-      <v-flex sm4 md4 v-for="town in towns" :key="town.name">
-        <v-card :color="town.townColor">
-          <v-card-title>
-            <h1>{{town.name}}</h1>
-            <h3>({{town.size}})</h3>
-            <v-spacer/>
-            <h2>{{town.type}}</h2>
-          </v-card-title>
-        </v-card>
-        <v-card-text>
-          <h3>{{town.buildings}}</h3>
-        </v-card-text>
-      </v-flex>
-    </v-layout>
+  <v-container fluid grid-list-sm>
+    <v-toolbar>
+        <v-btn flat icon @click.native="createTowns()">
+          <v-icon>mdi-shuffle</v-icon>
+        </v-btn>
+    </v-toolbar>
+      <v-layout row wrap>
+        <v-flex sm4 md4 v-for="town in towns" :key="town.name">
+          <v-card dark color="black">
+            <v-toolbar :color="town.townColor">
+              <v-badge color="secondary">
+                <span slot="badge">{{town.size}}</span>
+                <v-toolbar-title>{{town.name}}</v-toolbar-title>
+              </v-badge>
+              <v-spacer/>
+              <v-chip color="black" :text-color="town.townColor">
+                <h2>{{town.type}}</h2>
+              </v-chip>
+            </v-toolbar>
+            <v-layout row wrap>
+              <v-chip outline :color="town.townColor" v-for="building in town.buildings">
+                {{building}}
+              </v-chip>
+            </v-layout>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    <h1>TBD - More Campaign stuff</h1>
   </v-container>
 </template>
-
 <script>
   export default {
     name: 'town-panel',
@@ -31,8 +42,9 @@
     methods: {
       createTowns: function () {
         this.shuffle(this.townNames);
-        for (let i = 0; i < 10; i++) {
-          this.towns[i] = this.createTown(i);
+        this.towns = [];
+        for (let i = 0; i < 12; i++) {
+          this.towns.push(this.createTown(i));
         }
         localStorage.setItem('townPanel', JSON.stringify(this.towns));
       },
@@ -61,16 +73,16 @@
         let rollSum = this.rollDice(1, 6) + this.rollDice(1, 6);
         switch (rollSum) {
           case 2:
-            this.townColor = 'black';
+            this.townColor = 'grey darken-2';
             return 'Ruins';
           case 3:
-            this.townColor = 'indigo darken-1';
+            this.townColor = 'purple darken-1';
             return 'Haunted';
           case 4:
             this.townColor = 'lime darken-3';
             return 'Plague';
           case 5:
-            this.townColor = 'blue-grey lighten-5';
+            this.townColor = 'teal lighten-1';
             return 'Rail';
           case 6:
           case 7:
@@ -84,17 +96,17 @@
             this.townColor = 'blue darken-1';
             return 'River';
           case 11:
-            this.townColor = 'amber lighten-2';
+            this.townColor = 'amber darken-2';
             return 'Mining';
           case 12:
-            this.townColor = 'deep-orange';
+            this.townColor = 'deep-orange darken-2';
             return 'Outlaw'
         }
       },
       generateBuildings: function (type, size) {
         let count = 0;
-        let buildingString = '';
         let customizedBuildings = this.townBuildings.slice();
+        this.shuffle(customizedBuildings);
         switch (size) {
           case 'S':
             count = 4;
@@ -112,51 +124,42 @@
 
         switch (type) {
           case 'Mining':
-            count--;
-            buildingString += 'General Store, ';
-            this.removeElement(customizedBuildings, 'General Store');
+            this.promote(customizedBuildings, 'General Store');
             break;
           case 'Mutant':
-            count--;
-            buildingString += ('Mutant Quarter, ');
-            this.removeElement(customizedBuildings, 'Mutant Quarter');
+            this.promote(customizedBuildings, 'Mutant Quarter');
             this.removeElement(customizedBuildings, 'Outpost');
             break;
           case 'Outlaw':
-            count--;
-            buildingString += 'Smuggler\'s Den, ';
-            this.removeElement(customizedBuildings, 'Smuggler\'s Den');
+            this.promote(customizedBuildings, 'Smuggler\'s Den');
             this.removeElement(customizedBuildings, 'Sheriff');
             break;
           case 'Plague':
-            count = count - 2;
-            buildingString += 'Doctor, Church, ';
-            this.removeElement(customizedBuildings, 'Doctor');
-            this.removeElement(customizedBuildings, 'Church');
+            this.promote(customizedBuildings, 'Doctor');
+            this.promote(customizedBuildings, 'Church');
             break;
           case 'River':
-            count--;
-            buildingString += 'Street Market, Gambling Hall, ';
-            this.removeElement(customizedBuildings, 'Street Market');
-            this.removeElement(customizedBuildings, 'Gambling Hall');
+            count++;
+            this.promote(customizedBuildings, 'Street Market');
+            this.promote(customizedBuildings, 'Gambling Hall');
             break;
           default:
             break;
         }
-        this.shuffle(customizedBuildings);
-        for (let i = 0; i < count; i++) {
-          if (i > 0) {
-            buildingString += ', ';
-          }
-          buildingString += customizedBuildings[i];
-        }
-
-        return buildingString;
+        customizedBuildings.splice(count);
+        return customizedBuildings;
       },
       removeElement: function (array, element) {
         const index = array.indexOf(element);
         if (index !== -1) {
           array.splice(index, 1);
+        }
+      },
+      promote: function (arr, target) {
+        const index = arr.indexOf(target);
+        if (index !== -1) {
+          let a = arr.splice(index, 1);
+          arr.unshift(a[0]);
         }
       }
     },
@@ -164,7 +167,7 @@
       return {
         townColor: 'white',
         townNames: [
-          'Pure Gorge', 'Bull Peaks', 'Dusty Hill', 'Coyote\'s Gate', 'Purity Post', 'New Plains', 'Scorpion\'s Mountain', 'Crimsonvale', 'Deadbrook', 'Oatpass', 'Scorpiongorge', 'Scorpion\'s Plains', 'Farmbrook', 'Cruelty Trails', 'Devilbluff', 'Stifffort', 'Desolation Pass', 'Shady Bluff', 'Wrathmesa', 'Grindhowl', 'Deadmesa', 'Lightroost', 'Starksprings', 'Bruiselanding', 'Crazylanding', 'Dryroost', 'Old Cliff', 'Slimsummit', 'Aurora Mesa', 'Thincity', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Bullcreek', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Bullcreek', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Coyote\'s Branch', 'Sandy Spring', 'Grimrange', 'Demonville', 'Wolfcrag', 'Thornspring', 'Angelglen', 'Tamecliff', 'Lostmountain', 'Bonesprings', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Bull\'s Creek', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Bull\'s Creek', 'Shallow Post', 'Softcreek', 'Littletown', 'Devil\'s Edge', 'Grindcross', 'Warmpost', 'Meektown', 'Bullville', 'Pride Gate', 'Angeredge', 'Sunnyrise', 'Cripple Roost', 'Losttrails', 'Vainpass', 'Crimsonwater', 'Lordsplains', 'Grimworth', 'Lowchapel', 'Violence Scar', 'Glumgulch'
+          'Pure Gorge', 'Bull Peaks', 'Dusty Hill', 'Coyote\'s Gate', 'Purity Post', 'New Plains', 'Scorpion\'s Mountain', 'Crimsonvale', 'Deadbrook', 'Oatpass', 'Scorpiongorge', 'Scorpion\'s Plains', 'Farmbrook', 'Cruelty Trails', 'Devilbluff', 'Stifffort', 'Desolation Pass', 'Shady Bluff', 'Wrathmesa', 'Grindhowl', 'Deadmesa', 'Lightroost', 'Starksprings', 'Bruiselanding', 'Crazylanding', 'Dryroost', 'Old Cliff', 'Slimsummit', 'Aurora Mesa', 'Thincity', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Coyote\'s Branch', 'Sandy Spring', 'Grimrange', 'Demonville', 'Wolfcrag', 'Thornspring', 'Angelglen', 'Tamecliff', 'Lostmountain', 'Bonesprings', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Bull\'s Creek', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Shallow Post', 'Softcreek', 'Littletown', 'Devil\'s Edge', 'Grindcross', 'Warmpost', 'Meektown', 'Bullville', 'Pride Gate', 'Angeredge', 'Sunnyrise', 'Cripple Roost', 'Losttrails', 'Vainpass', 'Crimsonwater', 'Lordsplains', 'Grimworth', 'Lowchapel', 'Violence Scar', 'Glumgulch'
         ],
         townBuildings: [
           'Saloon',
@@ -185,7 +188,7 @@
             name: 'Town1',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -193,7 +196,7 @@
             name: 'Town2',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -201,7 +204,7 @@
             name: 'Town3',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -209,7 +212,7 @@
             name: 'Town4',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -217,7 +220,7 @@
             name: 'Town5',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -225,7 +228,7 @@
             name: 'Town6',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -233,7 +236,7 @@
             name: 'Town7',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -241,7 +244,7 @@
             name: 'Town8',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -249,7 +252,7 @@
             name: 'Town9',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
             selected: false,
             townColor: 'white'
           },
@@ -257,7 +260,23 @@
             name: 'Town10',
             size: 'M',
             type: 'Normal',
-            buildings: '',
+            buildings: [],
+            selected: false,
+            townColor: 'white'
+          },
+          {
+            name: 'Town11',
+            size: 'M',
+            type: 'Normal',
+            buildings: [],
+            selected: false,
+            townColor: 'white'
+          },
+          {
+            name: 'Town12',
+            size: 'M',
+            type: 'Normal',
+            buildings: [],
             selected: false,
             townColor: 'white'
           }
