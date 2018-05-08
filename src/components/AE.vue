@@ -1,8 +1,8 @@
 <template>
   <v-container fluid grid-list-sm>
     <v-layout row wrap>
-      <v-flex sm7 md7>
-        <v-card>
+      <v-flex xs12 sm6 md5>
+        <v-card height="auto">
           <v-card-title><h1>Turn Order</h1></v-card-title>
           <turn-order/>
         </v-card>

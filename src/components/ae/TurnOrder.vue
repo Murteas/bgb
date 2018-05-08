@@ -1,36 +1,38 @@
 <template>
-  <v-container fluid justify-start>
-    <v-layout row>
-      <v-flex md6>
-      <v-layout align-content-start column>
-        <v-btn @click.native="shuffleDeck()">
-          <v-icon>mdi-shuffle</v-icon>
-          <b>Shuffle</b>
-        </v-btn>
-        <v-btn @click.native="drawCard()">
-          <v-icon>mdi-cards</v-icon>
-          <b>Draw</b>
-        </v-btn>
-        <v-btn @click.native="revealTop()">
-          <v-icon>mdi-eye</v-icon>
-          <b>Reveal Top Card</b>
-        </v-btn>
-        <v-alert dismissible  :color="topCard.color" v-model="revealToolTip">
-          {{topCard.title}}
-        </v-alert>
-        <v-btn @click.native="moveTopToBottom()">
-          <v-icon>mdi-arrow-down</v-icon>
-          <b>Top to Bottom</b>
-        </v-btn>
-      </v-layout>
+  <v-container grid-list-md justify-start>
+    <v-layout row wrap>
+      <v-flex xs4 sm6 md6>
+        <v-layout align-content-start column>
+          <v-btn @click.native="shuffleDeck()">
+            <v-icon>mdi-shuffle</v-icon>
+            <b>Shuffle</b>
+          </v-btn>
+          <v-btn @click.native="drawCard()">
+            <v-icon>mdi-cards</v-icon>
+            <b>Draw</b>
+          </v-btn>
+          <v-btn @click.native="revealTop()">
+            <v-icon>mdi-eye</v-icon>
+            <b>Reveal Top Card</b>
+          </v-btn>
+          <v-alert dismissible :color="topCard.color" v-model="revealToolTip">
+            {{topCard.title}}
+          </v-alert>
+          <v-btn @click.native="moveTopToBottom()">
+            <v-icon>mdi-arrow-down</v-icon>
+            <b>Top to Bottom</b>
+          </v-btn>
+        </v-layout>
       </v-flex>
-      <v-layout column>
-        <v-flex v-for="(value, i) in numDrawn" :key="i">
-          <v-chip :color="Deck[i].color" text-color="black">
-            <h1>{{Deck[i].title}}</h1>
-          </v-chip>
-        </v-flex>
-      </v-layout>
+      <v-flex xs8 sm6 md6>
+        <v-layout align-content-start column wrap>
+          <v-flex v-for="(value, i) in numDrawn" :key="i">
+            <v-chip :color="Deck[i].color" text-color="black">
+              <h1>{{Deck[i].title}}</h1>
+            </v-chip>
+          </v-flex>
+        </v-layout>
+      </v-flex>
     </v-layout>
 
   </v-container>

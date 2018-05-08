@@ -1,32 +1,66 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-toolbar>
-        <v-btn flat icon @click.native="createTowns()">
-          <v-icon>mdi-shuffle</v-icon>
-        </v-btn>
-    </v-toolbar>
-      <v-layout row wrap>
-        <v-flex sm4 md4 v-for="town in towns" :key="town.name">
-          <v-card dark color="black">
-            <v-toolbar :color="town.townColor">
-              <v-badge color="secondary">
-                <span slot="badge">{{town.size}}</span>
-                <v-toolbar-title>{{town.name}}</v-toolbar-title>
-              </v-badge>
-              <v-spacer/>
+    <v-speed-dial fixed bottom right direction="top" v-model="fab">
+      <v-btn slot="activator" color="pink" fab v-model="fab">
+        <v-icon>mdi-chevron-double-up</v-icon>
+        <v-icon>mdi-chevron-double-down</v-icon>
+      </v-btn>
+      <v-btn fab color="red" @click.stop="warning=!warning">
+        <v-icon>mdi-swap-vertical</v-icon>
+      </v-btn>
+      <v-btn fab color="blue" @click.stop="addNewTown()">
+        <v-icon>mdi-map-marker-plus</v-icon>
+      </v-btn>
+    </v-speed-dial>
+    <v-alert type="warning" dismissible v-model="warning">
+      Are you sure you want to delete all the towns and recreate new ones?
+      <v-btn color="deep-orange accent-3" @click.native="createTowns()">YES</v-btn>
+    </v-alert>
+    <v-layout row wrap>
+      <v-flex sm4 md4 v-for="town in towns" :key="town.name">
+        <v-card color="black" height="100%">
+          <v-toolbar :color="town.townColor">
+            <v-badge left top overlap>
+              <span slot="badge">{{town.size}}</span>
+              <v-toolbar-title>
+                <v-menu offset-y>
+                  <span slot="activator">{{town.name}}</span>
+                  <v-list>
+                    <v-list-tile @click.native="deleteTown(town)">
+                      <v-list-tile-title>
+                        <v-icon>mdi-delete-forever</v-icon>
+                        Delete Town
+                      </v-list-tile-title>
+                    </v-list-tile>
+                    <v-list-tile @click.native="replenishBuildings(town)">
+                      <v-list-tile-title>
+                        <v-icon>mdi-wrench</v-icon>
+                        Rebuild Town
+                      </v-list-tile-title>
+                    </v-list-tile>
+                  </v-list>
+                </v-menu>
+              </v-toolbar-title>
+            </v-badge>
+            <v-spacer/>
+            <v-badge overlap color="amber" v-model="town.selected">
+              <v-icon slot="badge" >star</v-icon>
               <v-chip color="black" :text-color="town.townColor">
-                <h2>{{town.type}}</h2>
+                {{town.type}}
               </v-chip>
-            </v-toolbar>
-            <v-layout row wrap>
-              <v-chip outline :color="town.townColor" v-for="building in town.buildings">
-                {{building}}
-              </v-chip>
-            </v-layout>
-          </v-card>
-        </v-flex>
-      </v-layout>
-    <h1>TBD - More Campaign stuff</h1>
+            </v-badge>
+          </v-toolbar>
+          <v-layout row wrap>
+            <v-chip close outline
+                    :color="town.townColor"
+                    v-for="building in town.buildings"
+                    @input="deleteBuilding(town, building)">
+              {{building}}
+            </v-chip>
+          </v-layout>
+        </v-card>
+      </v-flex>
+    </v-layout>
   </v-container>
 </template>
 <script>
@@ -40,6 +74,23 @@
       }
     },
     methods: {
+      replenishBuildings: function (town) {
+        town.buildings = this.generateBuildings(town.type, town.size);
+        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+      },
+      addNewTown: function () {
+        this.shuffle(this.townNames);
+        this.towns.push(this.createTown(0));
+        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+      },
+      deleteBuilding: function (town, building) {
+        this.removeElement(town.buildings, building);
+        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+      },
+      deleteTown: function (town) {
+        this.removeElement(this.towns, town);
+        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+      },
       createTowns: function () {
         this.shuffle(this.townNames);
         this.towns = [];
@@ -47,6 +98,7 @@
           this.towns.push(this.createTown(i));
         }
         localStorage.setItem('townPanel', JSON.stringify(this.towns));
+        this.warning = false;
       },
       createTown: function (townNum) {
         let town = {};
@@ -165,6 +217,8 @@
     },
     data() {
       return {
+        fab: false,
+        warning: false,
         townColor: 'white',
         townNames: [
           'Pure Gorge', 'Bull Peaks', 'Dusty Hill', 'Coyote\'s Gate', 'Purity Post', 'New Plains', 'Scorpion\'s Mountain', 'Crimsonvale', 'Deadbrook', 'Oatpass', 'Scorpiongorge', 'Scorpion\'s Plains', 'Farmbrook', 'Cruelty Trails', 'Devilbluff', 'Stifffort', 'Desolation Pass', 'Shady Bluff', 'Wrathmesa', 'Grindhowl', 'Deadmesa', 'Lightroost', 'Starksprings', 'Bruiselanding', 'Crazylanding', 'Dryroost', 'Old Cliff', 'Slimsummit', 'Aurora Mesa', 'Thincity', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Coyote\'s Branch', 'Sandy Spring', 'Grimrange', 'Demonville', 'Wolfcrag', 'Thornspring', 'Angelglen', 'Tamecliff', 'Lostmountain', 'Bonesprings', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Bull\'s Creek', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Shallow Post', 'Softcreek', 'Littletown', 'Devil\'s Edge', 'Grindcross', 'Warmpost', 'Meektown', 'Bullville', 'Pride Gate', 'Angeredge', 'Sunnyrise', 'Cripple Roost', 'Losttrails', 'Vainpass', 'Crimsonwater', 'Lordsplains', 'Grimworth', 'Lowchapel', 'Violence Scar', 'Glumgulch'

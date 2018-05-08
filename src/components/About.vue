@@ -20,7 +20,7 @@
   export default {
     name: 'about',
     data: () => ({
-      appVersion: '0.5.4b',
+      appVersion: '0.5.6d',
       warning: false
     }),
     methods: {
