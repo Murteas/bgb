@@ -1,18 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer temporary absolute v-model="sidebar">
-      <v-list>
-        <v-list-tile
-          v-for="item in menuItems"
-          :key="item.title"
-          :to="item.path">
-          <v-list-tile-action>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>{{ item.title }}</v-list-tile-content>
-        </v-list-tile>
-      </v-list>
-    </v-navigation-drawer>
+
     <v-toolbar dark dense scroll-off-screen clipped-left>
       <v-toolbar-side-icon @click.stop="sidebar = !sidebar">
       </v-toolbar-side-icon>
@@ -33,13 +21,26 @@
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>
+    <v-navigation-drawer app temporary v-model="sidebar">
+      <v-list>
+        <v-list-tile
+          v-for="item in menuItems"
+          :key="item.title"
+          :to="item.path">
+          <v-list-tile-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>{{ item.title }}</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+    </v-navigation-drawer>
     <main>
       <v-container fluid>
         <router-view/>
       </v-container>
     </main>
-    <v-footer height="auto">
-      <dice-roller/>
+    <v-footer fixed height="auto">
+        <dice-roller />
     </v-footer>
   </v-app>
 </template>
@@ -54,6 +55,7 @@
     },
     data() {
       return {
+        showDice: true,
         sidebar: false,
         sheet: false,
         appTitle: 'Board Game Buddy',

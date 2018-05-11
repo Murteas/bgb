@@ -1,17 +1,17 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-speed-dial absolute right direction="bottom" v-model="fab">
-      <v-btn small slot="activator" color="blue-grey" fab v-model="fab">
-        <v-icon>mdi-menu-down</v-icon>
-        <v-icon>mdi-close</v-icon>
+    <v-speed-dial fixed bottom right direction="top" v-model="fab">
+      <v-btn slot="activator" color="pink" fab v-model="fab">
+        <v-icon>mdi-chevron-double-up</v-icon>
+        <v-icon>mdi-chevron-double-down</v-icon>
       </v-btn>
-      <v-btn small fab color="green" @click.stop="warning=!warning">
-        <v-icon>mdi-recycle</v-icon>
+      <v-btn fab color="red" @click.stop="warning=!warning">
+        <v-icon>mdi-swap-vertical</v-icon>
       </v-btn>
-      <v-btn small fab color="blue" @click.stop="addNewTown()">
+      <v-btn fab color="blue" @click.stop="addNewTown()">
         <v-icon>mdi-map-marker-plus</v-icon>
       </v-btn>
-      <v-btn small fab color="amber" @click.stop="selectTowns(3)">
+      <v-btn fab color="amber" @click.stop="selectTowns(3)">
         <v-icon>star</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -46,8 +46,8 @@
               </v-toolbar-title>
             </v-badge>
             <v-spacer/>
-            <v-badge overlap left color="amber" v-model="town.selected">
-              <v-icon slot="badge">star</v-icon>
+            <v-badge overlap color="amber" v-model="town.selected">
+              <v-icon slot="badge" >star</v-icon>
               <v-chip color="black" :text-color="town.townColor">
                 {{town.type}}
               </v-chip>
@@ -68,10 +68,10 @@
 </template>
 <script>
   export default {
-    name: 'town-panel',
+    name: 'mine-panel',
     mounted() {
-      if (localStorage.getItem('townPanel')) {
-        this.towns = JSON.parse(localStorage.getItem('townPanel'));
+      if (localStorage.getItem('minePanel')) {
+        this.towns = JSON.parse(localStorage.getItem('minePanel'));
       } else {
         this.createTowns();
       }
@@ -83,24 +83,24 @@
           let selected = i < numSelected;
           this.towns[i].selected = selected;
         }
-        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+        localStorage.setItem('minePanel', JSON.stringify(this.towns));
       },
       replenishBuildings: function (town) {
         town.buildings = this.generateBuildings(town.type, town.size);
-        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+        localStorage.setItem('minePanel', JSON.stringify(this.towns));
       },
       addNewTown: function () {
         this.shuffle(this.townNames);
         this.towns.push(this.createTown(0));
-        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+        localStorage.setItem('minePanel', JSON.stringify(this.towns));
       },
       deleteBuilding: function (town, building) {
         this.removeElement(town.buildings, building);
-        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+        localStorage.setItem('minePanel', JSON.stringify(this.towns));
       },
       deleteTown: function (town) {
         this.removeElement(this.towns, town);
-        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+        localStorage.setItem('minePanel', JSON.stringify(this.towns));
       },
       createTowns: function () {
         this.shuffle(this.townNames);
@@ -108,7 +108,7 @@
         for (let i = 0; i < 12; i++) {
           this.towns.push(this.createTown(i));
         }
-        localStorage.setItem('townPanel', JSON.stringify(this.towns));
+        localStorage.setItem('minePanel', JSON.stringify(this.towns));
         this.warning = false;
       },
       createTown: function (townNum) {
