@@ -39,10 +39,10 @@
               <span slot="header">Town Panel</span>
             <town-panel/>
           </v-expansion-panel-content>
-          <!--<v-expansion-panel-content>-->
-            <!--<span slot="header">Mine Panel</span>-->
-            <!--<mine-panel/>-->
-          <!--</v-expansion-panel-content>-->
+          <v-expansion-panel-content>
+            <span slot="header">Mine Panel</span>
+            <mine-panel/>
+          </v-expansion-panel-content>
           <!--<v-expansion-panel-content>-->
             <!--<div slot="header">Hero Panel</div>-->
             <!--<hero-panel/>-->

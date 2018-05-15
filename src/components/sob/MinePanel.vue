@@ -8,57 +8,54 @@
       <v-btn fab color="red" @click.stop="warning=!warning">
         <v-icon>mdi-swap-vertical</v-icon>
       </v-btn>
-      <v-btn fab color="blue" @click.stop="addNewTown()">
+      <v-btn fab color="blue" @click.stop="addNewMine()">
         <v-icon>mdi-map-marker-plus</v-icon>
       </v-btn>
-      <v-btn fab color="amber" @click.stop="selectTowns(3)">
+      <v-btn fab color="amber" @click.stop="selectMines(3)">
         <v-icon>star</v-icon>
       </v-btn>
     </v-speed-dial>
     <v-alert type="warning" dismissible v-model="warning">
-      Are you sure you want to delete all the towns and recreate new ones?
-      <v-btn color="deep-orange accent-3" @click.native="createTowns()">YES</v-btn>
+      Are you sure you want to delete all the mines and recreate new ones?
+      <v-btn color="deep-orange accent-3" @click.native="createMines()">YES</v-btn>
     </v-alert>
     <v-layout row wrap>
-      <v-flex sm4 md4 v-for="town in towns" :key="town.name">
+      <v-flex sm4 md4 v-for="mine in mines" :key="mine.name">
         <v-card color="black" height="100%">
-          <v-toolbar :color="town.townColor">
-            <v-badge left top overlap>
-              <span slot="badge">{{town.size}}</span>
+          <v-toolbar :color="mine.mineColor">
               <v-toolbar-title>
                 <v-menu offset-y>
-                  <span slot="activator">{{town.name}}</span>
+                  <span slot="activator">{{mine.name}}</span>
                   <v-list>
-                    <v-list-tile @click.native="deleteTown(town)">
+                    <v-list-tile @click.native="deleteMine(mine)">
                       <v-list-tile-title>
                         <v-icon>mdi-delete-forever</v-icon>
-                        Delete Town
+                        Delete Mine
                       </v-list-tile-title>
                     </v-list-tile>
-                    <v-list-tile @click.native="replenishBuildings(town)">
+                    <v-list-tile @click.native="replenishMissions(mine)">
                       <v-list-tile-title>
                         <v-icon>mdi-wrench</v-icon>
-                        Rebuild Town
+                        Regenerate Missions
                       </v-list-tile-title>
                     </v-list-tile>
                   </v-list>
                 </v-menu>
               </v-toolbar-title>
-            </v-badge>
             <v-spacer/>
-            <v-badge overlap color="amber" v-model="town.selected">
+            <v-badge overlap color="amber" v-model="mine.selected">
               <v-icon slot="badge" >star</v-icon>
-              <v-chip color="black" :text-color="town.townColor">
-                {{town.type}}
+              <v-chip color="black" :text-color="mine.mineColor">
+                {{mine.type}}
               </v-chip>
             </v-badge>
           </v-toolbar>
           <v-layout row wrap>
             <v-chip close outline
-                    :color="town.townColor"
-                    v-for="building in town.buildings"
-                    @input="deleteBuilding(town, building)">
-              {{building}}
+                    :color="mine.mineColor"
+                    v-for="mission in mine.missions"
+                    @input="deleteMission(mine, mission)">
+              {{mission}}
             </v-chip>
           </v-layout>
         </v-card>
@@ -71,146 +68,113 @@
     name: 'mine-panel',
     mounted() {
       if (localStorage.getItem('minePanel')) {
-        this.towns = JSON.parse(localStorage.getItem('minePanel'));
+        this.mines = JSON.parse(localStorage.getItem('minePanel'));
       } else {
-        this.createTowns();
+        this.createMines();
       }
     },
     methods: {
-      selectTowns: function (numSelected) {
-        this.shuffle(this.towns);
-        for (let i = 0; i < this.towns.length; i++) {
+      selectMines: function (numSelected) {
+        this.shuffle(this.mines);
+        for (let i = 0; i < this.mines.length; i++) {
           let selected = i < numSelected;
-          this.towns[i].selected = selected;
+          this.mines[i].selected = selected;
         }
-        localStorage.setItem('minePanel', JSON.stringify(this.towns));
+        localStorage.setItem('minePanel', JSON.stringify(this.mines));
       },
-      replenishBuildings: function (town) {
-        town.buildings = this.generateBuildings(town.type, town.size);
-        localStorage.setItem('minePanel', JSON.stringify(this.towns));
+      replenishMissions: function (mine) {
+        mine.missions = this.generateMissions(mine.type);
+        localStorage.setItem('minePanel', JSON.stringify(this.mines));
       },
-      addNewTown: function () {
-        this.shuffle(this.townNames);
-        this.towns.push(this.createTown(0));
-        localStorage.setItem('minePanel', JSON.stringify(this.towns));
+      addNewMine: function () {
+        this.shuffle(this.mineNames);
+        this.mines.push(this.createMine(0));
+        localStorage.setItem('minePanel', JSON.stringify(this.mines));
       },
-      deleteBuilding: function (town, building) {
-        this.removeElement(town.buildings, building);
-        localStorage.setItem('minePanel', JSON.stringify(this.towns));
+      deleteMission: function (mine, mission) {
+        this.removeElement(mine.missions, mission);
+        localStorage.setItem('minePanel', JSON.stringify(this.mines));
       },
-      deleteTown: function (town) {
-        this.removeElement(this.towns, town);
-        localStorage.setItem('minePanel', JSON.stringify(this.towns));
+      deleteMine: function (mine) {
+        this.removeElement(this.mines, mine);
+        localStorage.setItem('minePanel', JSON.stringify(this.mines));
       },
-      createTowns: function () {
-        this.shuffle(this.townNames);
-        this.towns = [];
-        for (let i = 0; i < 12; i++) {
-          this.towns.push(this.createTown(i));
+      createMines: function () {
+        this.shuffle(this.mineNames);
+        this.mines = [];
+        for (let i = 0; i < 6; i++) {
+          this.mines.push(this.createMine(i));
         }
-        localStorage.setItem('minePanel', JSON.stringify(this.towns));
+        localStorage.setItem('minePanel', JSON.stringify(this.mines));
         this.warning = false;
       },
-      createTown: function (townNum) {
-        let town = {};
-        town.name = this.townNames[townNum];
-        town.size = this.townSize();
-        town.type = this.townType();
-        town.townColor = this.townColor;
-        town.buildings = this.generateBuildings(town.type, town.size);
-        town.selected = false;
-        return town
+      createMine: function (mineNum) {
+        let mine = {};
+        mine.name = this.mineNames[mineNum];
+        mine.type = this.mineType();
+        mine.mineColor = this.mineColor;
+        mine.missions = this.generateMissions(mine.type);
+        mine.selected = false;
+        return mine
       },
-      townSize: function () {
-        switch (this.rollDice(1, 4)) {
-          case 1:
-            return 'S';
-          case 2:
-          case 3:
-            return 'M';
-          case 4:
-            return 'L';
-        }
-      },
-      townType: function () {
-        let rollSum = this.rollDice(1, 6) + this.rollDice(1, 6);
+      mineType: function () {
+        let rollSum = this.rollDice(1, 7);
         switch (rollSum) {
+          case 1:
+            this.mineColor = 'red darken-2';
+            return 'Cynder';
           case 2:
-            this.townColor = 'grey darken-2';
-            return 'Ruins';
+            this.mineColor = 'light-blue';
+            return 'Targa Plateau';
           case 3:
-            this.townColor = 'purple darken-1';
-            return 'Haunted';
+            this.mineColor = 'green darken-3';
+            return 'Jargono';
           case 4:
-            this.townColor = 'lime darken-3';
-            return 'Plague';
+            this.mineColor = 'lime darken-3';
+            return 'Trederra';
           case 5:
-            this.townColor = 'teal lighten-1';
-            return 'Rail';
+            this.mineColor = 'grey darken-2';
+            return 'Derelict Ship'
           case 6:
           case 7:
-          case 8:
-            this.townColor = 'brown';
-            return 'Normal';
-          case 9:
-            this.townColor = 'green accent-4';
-            return 'Mutant';
-          case 10:
-            this.townColor = 'blue darken-1';
-            return 'River';
-          case 11:
-            this.townColor = 'amber darken-2';
-            return 'Mining';
-          case 12:
-            this.townColor = 'deep-orange darken-2';
-            return 'Outlaw'
+            this.mineColor = 'brown';
+            return 'Any';
         }
       },
-      generateBuildings: function (type, size) {
-        let count = 0;
-        let customizedBuildings = this.townBuildings.slice();
-        this.shuffle(customizedBuildings);
-        switch (size) {
-          case 'S':
-            count = 4;
-            break;
-          case 'M':
-            count = 6;
-            break;
-          case 'L':
-            count = 8;
-            break;
-          default:
-            count = 6;
-            break;
-        }
-
+      generateMissions: function (type) {
+        let customizedMissions = [];
+        this.shuffle(this.mineMissions);
         switch (type) {
-          case 'Mining':
-            this.promote(customizedBuildings, 'General Store');
+          case 'Cynder':
+            this.shuffle(this.cynderMissions);
+            customizedMissions = this.cynderMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 1));
             break;
-          case 'Mutant':
-            this.promote(customizedBuildings, 'Mutant Quarter');
-            this.removeElement(customizedBuildings, 'Outpost');
+          case 'Targa Plateau':
+            this.shuffle(this.targaMissions);
+            customizedMissions = this.targaMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 1));
             break;
-          case 'Outlaw':
-            this.promote(customizedBuildings, 'Smuggler\'s Den');
-            this.removeElement(customizedBuildings, 'Sheriff');
+          case 'Jargono':
+            this.shuffle(this.jargonoMissions);
+            customizedMissions = this.jargonoMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 1));
             break;
-          case 'Plague':
-            this.promote(customizedBuildings, 'Doctor');
-            this.promote(customizedBuildings, 'Church');
+          case 'Trederra':
+            this.shuffle(this.trederraMissions);
+            customizedMissions = this.trederraMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 1));
             break;
-          case 'River':
-            count++;
-            this.promote(customizedBuildings, 'Street Market');
-            this.promote(customizedBuildings, 'Gambling Hall');
+          case 'Derelict Ship':
+            this.shuffle(this.derelictMissions);
+            customizedMissions = this.derelictMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 1));
             break;
           default:
+            customizedMissions = this.mineMissions.slice(0, 3);
             break;
         }
-        customizedBuildings.splice(count);
-        return customizedBuildings;
+        return customizedMissions;
       },
       removeElement: function (array, element) {
         const index = array.indexOf(element);
@@ -230,120 +194,73 @@
       return {
         fab: false,
         warning: false,
-        townColor: 'white',
-        townNames: [
-          'Pure Gorge', 'Bull Peaks', 'Dusty Hill', 'Coyote\'s Gate', 'Purity Post', 'New Plains', 'Scorpion\'s Mountain', 'Crimsonvale', 'Deadbrook', 'Oatpass', 'Scorpiongorge', 'Scorpion\'s Plains', 'Farmbrook', 'Cruelty Trails', 'Devilbluff', 'Stifffort', 'Desolation Pass', 'Shady Bluff', 'Wrathmesa', 'Grindhowl', 'Deadmesa', 'Lightroost', 'Starksprings', 'Bruiselanding', 'Crazylanding', 'Dryroost', 'Old Cliff', 'Slimsummit', 'Aurora Mesa', 'Thincity', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Coyote\'s Branch', 'Sandy Spring', 'Grimrange', 'Demonville', 'Wolfcrag', 'Thornspring', 'Angelglen', 'Tamecliff', 'Lostmountain', 'Bonesprings', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Bull\'s Creek', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Shallow Post', 'Softcreek', 'Littletown', 'Devil\'s Edge', 'Grindcross', 'Warmpost', 'Meektown', 'Bullville', 'Pride Gate', 'Angeredge', 'Sunnyrise', 'Cripple Roost', 'Losttrails', 'Vainpass', 'Crimsonwater', 'Lordsplains', 'Grimworth', 'Lowchapel', 'Violence Scar', 'Glumgulch'
+        mineColor: 'white',
+        mineNames: [
+          'The Depths','Gold River','Silver Gulch','Gemheart','Stoneheart','Talon\'s Cave','Black Hat Mine','Death\'s Head Claim','ShadowMaw','Rusty Pickaxe','No Return','Lodestone Caves','BottomFeeder Ravine','Wolf\'s Mine','Daggervale Dig','Dusty\'s Bottom','Nose Pick','Blood Ravine','The War','Shotgun Chute','Ghost Gulch','Darkness Cave','Glittering Gulch','Tyrone\'s Claim','Bear Cave','Coyote Cavern','Bloody Mouth Caverns','DeathWail Ravine','Bottomless Well','Lucky\'s Strike','Empty Hole','Minecart','Gumption Gain','Motherload','Chemist Claim','Gov\'t Lands','GoatEater\'s Pass'
         ],
-        townBuildings: [
-          'Saloon',
-          'Trading Post',
-          'General Store',
-          'Smuggler\'s Den',
-          'Church',
-          'Outpost',
-          'Sheriff',
-          'Doctor',
-          'Blacksmith',
-          'Gambling Hall',
-          'Mutant Quarter',
-          'Street Market'
+        mineMissions: [
+          'For a Few Darkstone More',
+          'Exploration',
+          'Rescue Party',
+          'Seal the Gate',
+          'Blow the Mine',
+          'Escape',
+          'VM Hunted',
+          'VM Call of the Void',
+          'UO Wanted: Undead or Alive',
+          'UO Revenge of the Dead',
+          'FS Experimentation',
+          'FS Out of Time'
         ],
-        towns: [
+        cynderMissions: [
+          'Cracks in Reality',
+          'Defend the Bridge',
+          'Dark Deal',
+          'Fire & Ash',
+          'Hunt for Liquid DS',
+          'Broken Seals'
+        ],
+        targaMissions: [
+          'Terror in the Night',
+          'Stop the Ritual',
+          'Last Stand',
+          'Overload',
+          'City of the Ancients',
+          'Frozen Expedition'
+        ],
+        jargonoMissions: [
+          'Night of the Dead',
+          'Seal the Hell Pit',
+          'The Lost Journal',
+          'Cursed Idol',
+          'Swamps of Death',
+          'Temple of Dread',
+          'SM Human Sacrifice',
+          'SM Warring Tribes'
+        ],
+        derelictMissions: [
+          'Time\'s Echo',
+          'Collapse the Vortex',
+          'Lost in Space',
+          'The Captain\'s Log',
+          'Voyage of the Dead',
+          'Reactor Breach'
+        ],
+        trederraMissions: [
+          'Foothold',
+          'Toxic Purge',
+          'Battlefield Recon',
+          'Front Lines',
+          'Guns of War',
+          'Doomsday'
+        ],
+        mines: [
           {
-            name: 'Town1',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
+            name: 'Mine1',
+            type: 'Any',
+            missions: [],
             selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town2',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town3',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town4',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town5',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town6',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town7',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town8',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town9',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town10',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town11',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town12',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
+            mineColor: 'white'
           }
         ]
       }
