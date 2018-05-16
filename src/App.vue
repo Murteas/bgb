@@ -60,8 +60,8 @@
         sheet: false,
         appTitle: 'Board Game Buddy',
         menuItems: [
-          {title: 'SoB', path: '/sob', icon: 'fa-search'},
-          {title: 'Aeon\'s End', path: '/aeon', icon: 'fa-gem'}
+          {title: 'SoB', path: '/sob', icon: 'mdi-pickaxe'},
+          {title: 'Aeon\'s End', path: '/aeon', icon: 'mdi-diamond'}
         ]
       }
     }

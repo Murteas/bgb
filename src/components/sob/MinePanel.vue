@@ -1,17 +1,17 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-speed-dial fixed bottom right direction="top" v-model="fab">
-      <v-btn slot="activator" color="pink" fab v-model="fab">
-        <v-icon>mdi-chevron-double-up</v-icon>
-        <v-icon>mdi-chevron-double-down</v-icon>
+    <v-speed-dial absolute right direction="bottom" v-model="fab">
+      <v-btn small slot="activator" color="blue-grey" fab v-model="fab">
+        <v-icon>mdi-menu-down</v-icon>
+        <v-icon>mdi-close</v-icon>
       </v-btn>
-      <v-btn fab color="red" @click.stop="warning=!warning">
-        <v-icon>mdi-swap-vertical</v-icon>
+      <v-btn small fab color="green" @click.stop="warning=!warning">
+        <v-icon>mdi-recycle</v-icon>
       </v-btn>
-      <v-btn fab color="blue" @click.stop="addNewMine()">
+      <v-btn small fab color="blue" @click.stop="addNewMine()">
         <v-icon>mdi-map-marker-plus</v-icon>
       </v-btn>
-      <v-btn fab color="amber" @click.stop="selectMines(3)">
+      <v-btn small fab color="amber" @click.stop="selectMines(3)">
         <v-icon>star</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -23,36 +23,42 @@
       <v-flex sm4 md4 v-for="mine in mines" :key="mine.name">
         <v-card color="black" height="100%">
           <v-toolbar :color="mine.mineColor">
-              <v-toolbar-title>
-                <v-menu offset-y>
-                  <span slot="activator">{{mine.name}}</span>
-                  <v-list>
-                    <v-list-tile @click.native="deleteMine(mine)">
-                      <v-list-tile-title>
-                        <v-icon>mdi-delete-forever</v-icon>
-                        Delete Mine
-                      </v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile @click.native="replenishMissions(mine)">
-                      <v-list-tile-title>
-                        <v-icon>mdi-wrench</v-icon>
-                        Regenerate Missions
-                      </v-list-tile-title>
-                    </v-list-tile>
-                  </v-list>
-                </v-menu>
-              </v-toolbar-title>
+            <v-toolbar-title>
+              <v-menu offset-y>
+                <span slot="activator">{{mine.name}}</span>
+                <v-list>
+
+                  <v-list-tile @click.native="deleteMine(mine)">
+                    <v-list-tile-title>
+                      <v-icon>mdi-delete-forever</v-icon>
+                      Delete Mine
+                    </v-list-tile-title>
+                  </v-list-tile>
+                  <v-list-tile @click.native="replenishMissions(mine)">
+                    <v-list-tile-title>
+                      <v-icon>mdi-wrench</v-icon>
+                      Regenerate Missions
+                    </v-list-tile-title>
+                  </v-list-tile>
+                  <v-list-tile @click.native="changeType(mine)">
+                    <v-list-tile-title>
+                      <v-icon>mdi-pickaxe</v-icon>
+                      Change Mine Type
+                    </v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
+            </v-toolbar-title>
             <v-spacer/>
             <v-badge overlap color="amber" v-model="mine.selected">
-              <v-icon slot="badge" >star</v-icon>
+              <v-icon slot="badge">star</v-icon>
               <v-chip color="black" :text-color="mine.mineColor">
                 {{mine.type}}
               </v-chip>
             </v-badge>
           </v-toolbar>
           <v-layout row wrap>
-            <v-chip close outline
-                    :color="mine.mineColor"
+            <v-chip color="grey" close
                     v-for="mission in mine.missions"
                     @input="deleteMission(mine, mission)">
               {{mission}}
@@ -74,11 +80,15 @@
       }
     },
     methods: {
+      changeType: function (mine) {
+        mine.type = this.mineType();
+        mine.mineColor = this.mineColor;
+        this.replenishMissions(mine);
+      },
       selectMines: function (numSelected) {
         this.shuffle(this.mines);
         for (let i = 0; i < this.mines.length; i++) {
-          let selected = i < numSelected;
-          this.mines[i].selected = selected;
+          this.mines[i].selected = i < numSelected;
         }
         localStorage.setItem('minePanel', JSON.stringify(this.mines));
       },
@@ -118,28 +128,9 @@
         return mine
       },
       mineType: function () {
-        let rollSum = this.rollDice(1, 7);
-        switch (rollSum) {
-          case 1:
-            this.mineColor = 'red darken-2';
-            return 'Cynder';
-          case 2:
-            this.mineColor = 'light-blue';
-            return 'Targa Plateau';
-          case 3:
-            this.mineColor = 'green darken-3';
-            return 'Jargono';
-          case 4:
-            this.mineColor = 'lime darken-3';
-            return 'Trederra';
-          case 5:
-            this.mineColor = 'grey darken-2';
-            return 'Derelict Ship'
-          case 6:
-          case 7:
-            this.mineColor = 'brown';
-            return 'Any';
-        }
+        this.shuffle(this.mineTypes);
+        this.mineColor = this.mineTypes[0].color;
+        return this.mineTypes[0].name;
       },
       generateMissions: function (type) {
         let customizedMissions = [];
@@ -196,7 +187,33 @@
         warning: false,
         mineColor: 'white',
         mineNames: [
-          'The Depths','Gold River','Silver Gulch','Gemheart','Stoneheart','Talon\'s Cave','Black Hat Mine','Death\'s Head Claim','ShadowMaw','Rusty Pickaxe','No Return','Lodestone Caves','BottomFeeder Ravine','Wolf\'s Mine','Daggervale Dig','Dusty\'s Bottom','Nose Pick','Blood Ravine','The War','Shotgun Chute','Ghost Gulch','Darkness Cave','Glittering Gulch','Tyrone\'s Claim','Bear Cave','Coyote Cavern','Bloody Mouth Caverns','DeathWail Ravine','Bottomless Well','Lucky\'s Strike','Empty Hole','Minecart','Gumption Gain','Motherload','Chemist Claim','Gov\'t Lands','GoatEater\'s Pass'
+          'The Depths', 'Gold River', 'Silver Gulch', 'Gemheart', 'Stoneheart', 'Talon\'s Cave', 'Black Hat Mine', 'Death\'s Head Claim', 'ShadowMaw', 'Rusty Pickaxe', 'No Return', 'Lodestone Caves', 'BottomFeeder Ravine', 'Wolf\'s Mine', 'Daggervale Dig', 'Dusty\'s Bottom', 'Nose Pick', 'Blood Ravine', 'The War', 'Shotgun Chute', 'Ghost Gulch', 'Darkness Cave', 'Glittering Gulch', 'Tyrone\'s Claim', 'Bear Cave', 'Coyote Cavern', 'Bloody Mouth Caverns', 'DeathWail Ravine', 'Bottomless Well', 'Lucky\'s Strike', 'Empty Hole', 'Minecart', 'Gumption Gain', 'Motherload', 'Chemist Claim', 'Gov\'t Lands', 'GoatEater\'s Pass'
+        ],
+        mineTypes: [
+          {
+            name: 'Any',
+            color: 'brown'
+          },
+          {
+            name: 'Cynder',
+            color: 'deep-orange accent-3'
+          },
+          {
+            name: 'Targa Plateau',
+            color: 'light-blue lighten-4'
+          },
+          {
+            name: 'Jargono',
+            color: 'light-green darken-3'
+          },
+          {
+            name: 'Trederra',
+            color: 'lime darken-4'
+          },
+          {
+            name: 'Derelict Ship',
+            color: 'indigo'
+          }
         ],
         mineMissions: [
           'For a Few Darkstone More',
