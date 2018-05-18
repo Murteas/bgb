@@ -43,6 +43,10 @@
             <span slot="header">Mine Panel</span>
             <mine-panel/>
           </v-expansion-panel-content>
+          <v-expansion-panel-content>
+            <span slot="header">Campaign Panel</span>
+            <campaign-panel/>
+          </v-expansion-panel-content>
           <!--<v-expansion-panel-content>-->
             <!--<div slot="header">Hero Panel</div>-->
             <!--<hero-panel/>-->
@@ -68,6 +72,7 @@
   import DarknessRoll from './sob/DarknessRoll'
   import TownPanel from './sob/TownPanel'
   import MinePanel from './sob/MinePanel'
+  import CampaignPanel from './sob/CampaignPanel'
 
   export default {
     components: {
@@ -92,7 +97,9 @@
       TownPanel,
       'town-panel': TownPanel,
       MinePanel,
-      'mine-panel': MinePanel
+      'mine-panel': MinePanel,
+      CampaignPanel,
+      'campaign-panel': CampaignPanel
     },
     data() {
       return {

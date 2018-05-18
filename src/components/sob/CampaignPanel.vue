@@ -1,0 +1,364 @@
+<template>
+  <v-container fluid grid-list-sm>
+    <v-speed-dial absolute right direction="bottom" v-model="fab">
+      <v-btn small slot="activator" color="blue-grey" fab v-model="fab">
+        <v-icon>mdi-menu-down</v-icon>
+        <v-icon>mdi-close</v-icon>
+      </v-btn>
+      <v-btn small fab color="green" @click.stop="warning=!warning">
+        <v-icon>mdi-recycle</v-icon>
+      </v-btn>
+    </v-speed-dial>
+    <v-alert type="warning" dismissible v-model="warning">
+      Are you sure you want to delete the campaign and create a new one?
+      <v-btn color="deep-orange accent-3" @click.native="createCampaign()">YES</v-btn>
+    </v-alert>
+    <v-layout column>
+      <v-flex sm12>
+        <h1> {{campaign.Overlord.name}} - {{campaign.Overlord.type}} - {{campaign.Overlord.otherworld}}</h1>
+      </v-flex>
+    <v-layout row wrap>
+      <v-flex sm4 md4 v-for="lt in campaign.Lieutenants" :key="lt.name">
+        <v-card color="black" height="100%">
+          <v-toolbar :color="lt.color">
+            <v-toolbar-title>
+              <v-menu offset-y>
+                <span slot="activator">{{lt.name}} - {{lt.type}}</span>
+                <v-list>
+                  <v-list-tile @click.native="deleteLt(lt)">
+                    <v-list-tile-title>
+                      <v-icon>mdi-delete-forever</v-icon>
+                      Delete Lieutenant
+                    </v-list-tile-title>
+                  </v-list-tile>
+                  <v-list-tile @click.native="replenishMissions(lt)">
+                    <v-list-tile-title>
+                      <v-icon>mdi-wrench</v-icon>
+                      Regenerate Missions
+                    </v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
+            </v-toolbar-title>
+            <v-spacer/>
+              <v-chip color="black" :text-color="lt.color">
+                {{lt.otherworld}}
+              </v-chip>
+          </v-toolbar>
+          <v-layout row wrap>
+            <v-chip color="grey" close
+                    v-for="mission in lt.missions"
+                    @input="deleteMission(lt, mission)">
+              {{mission}}
+            </v-chip>
+          </v-layout>
+        </v-card>
+      </v-flex>
+    </v-layout>
+    </v-layout>
+  </v-container>
+</template>
+<script>
+  export default {
+    name: 'campaign-panel',
+    mounted() {
+      if (localStorage.getItem('campaignPanel')) {
+        this.campaign = JSON.parse(localStorage.getItem('campaignPanel'));
+      } else {
+        this.createCampaign();
+      }
+    },
+    methods: {
+      replenishMissions: function (lt) {
+        lt.missions = this.generateMissions(lt.otherworld);
+        localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
+      },
+      deleteMission: function (lt, mission) {
+        this.removeElement(lt.missions, mission);
+        localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
+      },
+      deleteLt: function (lt) {
+        this.removeElement(this.campaign.Lieutenants, lt);
+        localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
+      },
+      createCampaign: function () {
+        this.shuffle(this.overlords);
+        this.shuffle(this.lieutenants);
+        this.campaign.Overlord = this.createOverlord();
+        this.campaign.Lieutenants = [];
+        for (let i = 0; i < 3; i++) {
+          this.campaign.Lieutenants.push(this.createLt(i));
+        }
+        localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
+        this.warning = false;
+      },
+      createLt: function (mineNum) {
+        let lieutenant = this.lieutenants.slice(mineNum, mineNum + 1)[0];
+        if (lieutenant.otherworld === 'RANDOM') {
+          let ow = this.generateOtherworld();
+          lieutenant.otherworld = ow.name;
+          lieutenant.color = ow.color;
+        }
+        lieutenant.missions = this.generateMissions(lieutenant.otherworld);
+        return lieutenant;
+      },
+      createOverlord: function () {
+        return this.overlords.slice(0, 1)[0];
+      },
+      generateOtherworld: function() {
+        this.shuffle(this.otherworldTypes);
+        return this.otherworldTypes[0];
+      },
+      generateMissions: function (type) {
+        let customizedMissions = [];
+        this.shuffle(this.mineMissions);
+        switch (type) {
+          case 'Cynder':
+            this.shuffle(this.cynderMissions);
+            customizedMissions = this.cynderMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            break;
+          case 'Targa Plateau':
+            this.shuffle(this.targaMissions);
+            customizedMissions = this.targaMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            break;
+          case 'Jargono':
+            this.shuffle(this.jargonoMissions);
+            customizedMissions = this.jargonoMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            break;
+          case 'Trederra':
+            this.shuffle(this.trederraMissions);
+            customizedMissions = this.trederraMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            break;
+          case 'Derelict Ship':
+            this.shuffle(this.derelictMissions);
+            customizedMissions = this.derelictMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            break;
+          default:
+            customizedMissions = this.mineMissions.slice(0, 4);
+            break;
+        }
+        return customizedMissions;
+      },
+      removeElement: function (array, element) {
+        const index = array.indexOf(element);
+        if (index !== -1) {
+          array.splice(index, 1);
+        }
+      },
+      promote: function (arr, target) {
+        const index = arr.indexOf(target);
+        if (index !== -1) {
+          let a = arr.splice(index, 1);
+          arr.unshift(a[0]);
+        }
+      }
+    },
+    data() {
+      return {
+        fab: false,
+        warning: false,
+        enemyNames: [
+          'The Depths', 'Gold River', 'Silver Gulch', 'Gemheart', 'Stoneheart', 'Talon\'s Cave', 'Black Hat Mine', 'Death\'s Head Claim', 'ShadowMaw', 'Rusty Pickaxe', 'No Return', 'Lodestone Caves', 'BottomFeeder Ravine', 'Wolf\'s Mine', 'Daggervale Dig', 'Dusty\'s Bottom', 'Nose Pick', 'Blood Ravine', 'The War', 'Shotgun Chute', 'Ghost Gulch', 'Darkness Cave', 'Glittering Gulch', 'Tyrone\'s Claim', 'Bear Cave', 'Coyote Cavern', 'Bloody Mouth Caverns', 'DeathWail Ravine', 'Bottomless Well', 'Lucky\'s Strike', 'Empty Hole', 'Minecart', 'Gumption Gain', 'Motherload', 'Chemist Claim', 'Gov\'t Lands', 'GoatEater\'s Pass'
+        ],
+        otherworldTypes: [
+          {
+            name: 'Cynder',
+            color: 'deep-orange accent-3'
+          },
+          {
+            name: 'Targa Plateau',
+            color: 'light-blue lighten-4'
+          },
+          {
+            name: 'Jargono',
+            color: 'light-green darken-3'
+          },
+          {
+            name: 'Trederra',
+            color: 'lime darken-4'
+          },
+          {
+            name: 'Derelict Ship',
+            color: 'indigo'
+          }
+        ],
+        mineMissions: [
+          'For a Few Darkstone More',
+          'Exploration',
+          'Rescue Party',
+          'Seal the Gate',
+          'Blow the Mine',
+          'Escape',
+          'VM Hunted',
+          'VM Call of the Void',
+          'UO Wanted: Undead or Alive',
+          'UO Revenge of the Dead',
+          'FS Experimentation',
+          'FS Out of Time'
+        ],
+        cynderMissions: [
+          'Cracks in Reality',
+          'Defend the Bridge',
+          'Dark Deal',
+          'Fire & Ash',
+          'Hunt for Liquid DS',
+          'Broken Seals'
+        ],
+        targaMissions: [
+          'Terror in the Night',
+          'Stop the Ritual',
+          'Last Stand',
+          'Overload',
+          'City of the Ancients',
+          'Frozen Expedition'
+        ],
+        jargonoMissions: [
+          'Night of the Dead',
+          'Seal the Hell Pit',
+          'The Lost Journal',
+          'Cursed Idol',
+          'Swamps of Death',
+          'Temple of Dread',
+          'SM Human Sacrifice',
+          'SM Warring Tribes'
+        ],
+        derelictMissions: [
+          'Time\'s Echo',
+          'Collapse the Vortex',
+          'Lost in Space',
+          'The Captain\'s Log',
+          'Voyage of the Dead',
+          'Reactor Breach'
+        ],
+        trederraMissions: [
+          'Foothold',
+          'Toxic Purge',
+          'Battlefield Recon',
+          'Front Lines',
+          'Guns of War',
+          'Doomsday'
+        ],
+        campaign: {
+          Overlord: {},
+          Lieutenants: []
+        },
+        overlords: [
+          {
+            name: 'Great Name of Names',
+            type: 'Grand Shaman',
+            otherworld: 'Jargono',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Great Name2 of Names',
+            type: 'Grand Shaman',
+            otherworld: 'Targa Plateau',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Great Name3 of Names',
+            type: 'Grand Shaman',
+            otherworld: 'Trederra',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Great Name4 of Names',
+            type: 'Grand Shaman',
+            otherworld: 'Derelict Ship',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Great Name5 of Names',
+            type: 'Grand Shaman',
+            otherworld: 'Cynder',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          }
+        ],
+        lieutenants: [
+          {
+            name: 'Lt minion',
+            type: 'Trederran Lt',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Lt minion1',
+            type: 'Trederran Lt',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Lt minion2',
+            type: 'Trederran Lt',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Lt minion3',
+            type: 'Trederran Lt',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Lt minion4',
+            type: 'Trederran Lt',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Lt minion5',
+            type: 'Trederran Lt',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Lt minion6',
+            type: 'Trederran Lt',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          }
+        ]
+      }
+    }
+  }
+</script>
+
+<style scoped>
+
+</style>
