@@ -249,7 +249,7 @@
         },
         overlords: [
           {
-            name: 'Great Name of Names',
+            name: 'Sslither, the World Eater',
             type: 'Grand Shaman',
             otherworld: 'Jargono',
             revealed: false,
@@ -257,7 +257,7 @@
             failedMissions: 0
           },
           {
-            name: 'Great Name2 of Names',
+            name: 'Frost Bite',
             type: 'Grand Shaman',
             otherworld: 'Targa Plateau',
             revealed: false,
@@ -265,25 +265,57 @@
             failedMissions: 0
           },
           {
-            name: 'Great Name3 of Names',
-            type: 'Grand Shaman',
-            otherworld: 'Trederra',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Great Name4 of Names',
-            type: 'Grand Shaman',
+            name: 'Master Replica',
+            type: 'Flesh Stalker',
             otherworld: 'Derelict Ship',
             revealed: false,
             successfulMissions: 0,
             failedMissions: 0
           },
           {
-            name: 'Great Name5 of Names',
-            type: 'Grand Shaman',
+            name: 'The Perfector',
+            type: 'Flesh Stalker',
+            otherworld: 'Trederra',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'The Burning Cosmos',
+            type: 'Void Magus',
             otherworld: 'Cynder',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'The Undying',
+            type: 'Void Magus',
+            otherworld: 'Derelict Ship',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'General Malaise',
+            type: 'Trederran General',
+            otherworld: 'Trederra',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Forsook',
+            type: 'Harbinger',
+            otherworld: 'Jargono',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Monstro',
+            type: 'Goliath',
+            otherworld: 'Targa Plateau',
             revealed: false,
             successfulMissions: 0,
             failedMissions: 0
@@ -291,7 +323,7 @@
         ],
         lieutenants: [
           {
-            name: 'Lt minion',
+            name: 'Lt Bile',
             type: 'Trederran Lt',
             otherworld: 'RANDOM',
             color: 'white',
@@ -300,7 +332,7 @@
             failedMissions: 0
           },
           {
-            name: 'Lt minion1',
+            name: 'Lt Drift',
             type: 'Trederran Lt',
             otherworld: 'RANDOM',
             color: 'white',
@@ -309,8 +341,8 @@
             failedMissions: 0
           },
           {
-            name: 'Lt minion2',
-            type: 'Trederran Lt',
+            name: 'Darkfang',
+            type: 'Serpent Shaman',
             otherworld: 'RANDOM',
             color: 'white',
             missions: [],
@@ -318,8 +350,8 @@
             failedMissions: 0
           },
           {
-            name: 'Lt minion3',
-            type: 'Trederran Lt',
+            name: 'Plague Tongue',
+            type: 'Serpent Shaman',
             otherworld: 'RANDOM',
             color: 'white',
             missions: [],
@@ -327,8 +359,8 @@
             failedMissions: 0
           },
           {
-            name: 'Lt minion4',
-            type: 'Trederran Lt',
+            name: 'Master Corruptor',
+            type: 'Void Sorceror',
             otherworld: 'RANDOM',
             color: 'white',
             missions: [],
@@ -336,8 +368,8 @@
             failedMissions: 0
           },
           {
-            name: 'Lt minion5',
-            type: 'Trederran Lt',
+            name: 'Void Echo',
+            type: 'Void Sorceror',
             otherworld: 'RANDOM',
             color: 'white',
             missions: [],
@@ -345,8 +377,53 @@
             failedMissions: 0
           },
           {
-            name: 'Lt minion6',
-            type: 'Trederran Lt',
+            name: 'TombStone',
+            type: 'Undead Outlaw',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Mass Grave',
+            type: 'Undead Outlaw',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'The Beast',
+            type: 'Goliath',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Dark Guardian',
+            type: 'Harbinger',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'DeathMaw',
+            type: 'Goliath',
+            otherworld: 'RANDOM',
+            color: 'white',
+            missions: [],
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Dymond',
+            type: 'Harbinger',
             otherworld: 'RANDOM',
             color: 'white',
             missions: [],
