@@ -11,16 +11,25 @@
           Are you sure you want to delete all saved data in Board Game Buddy?
           <v-btn color="deep-orange accent-3" @click="clearData()">YES</v-btn>
         </v-alert>
+        <v-flex sm6 md6>
+          <list-randomizer/>
+        </v-flex>
       </v-layout>
     </v-container>
   </div>
 </template>
 
 <script>
+  import ListRandomizer from './general/ListRandomizer'
+
   export default {
+    components: {
+      ListRandomizer,
+      'list-randomizer': ListRandomizer
+    },
     name: 'about',
     data: () => ({
-      appVersion: '0.6.1v',
+      appVersion: '0.6.2b',
       warning: false
     }),
     methods: {
