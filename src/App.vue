@@ -61,7 +61,8 @@
         appTitle: 'Board Game Buddy',
         menuItems: [
           {title: 'SoB', path: '/sob', icon: 'mdi-pickaxe'},
-          {title: 'Aeon\'s End', path: '/aeon', icon: 'mdi-diamond'}
+          {title: 'Aeon\'s End', path: '/aeon', icon: 'mdi-diamond'},
+          {title: 'HexploreIt', path: '/hex', icon: 'mdi-hexagon-multiple'}
         ]
       }
     }
