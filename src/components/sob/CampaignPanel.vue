@@ -15,46 +15,57 @@
     </v-alert>
     <v-layout column>
       <v-flex sm12>
-        <h1> {{campaign.Overlord.name}} - {{campaign.Overlord.type}} - {{campaign.Overlord.otherworld}}</h1>
+        <v-layout row>
+          <h1> {{campaign.Overlord.name}}</h1>
+          <v-chip outline color="black">{{campaign.Overlord.type}}</v-chip>
+          <v-chip color="green" @click.native="addSuccess(campaign.Overlord)">{{campaign.Overlord.successfulMissions}}
+          </v-chip>
+          <v-chip color="red" @click.native="addFailure(campaign.Overlord)">{{campaign.Overlord.failedMissions}}
+          </v-chip>
+          <v-chip outline color="white">{{campaign.Overlord.otherworld}}</v-chip>
+        </v-layout>
       </v-flex>
-    <v-layout row wrap>
-      <v-flex sm4 md4 v-for="lt in campaign.Lieutenants" :key="lt.name">
-        <v-card color="black" height="100%">
-          <v-toolbar :color="lt.color">
-            <v-toolbar-title>
-              <v-menu offset-y>
-                <span slot="activator">{{lt.name}} - {{lt.type}}</span>
-                <v-list>
-                  <v-list-tile @click.native="deleteLt(lt)">
-                    <v-list-tile-title>
-                      <v-icon>mdi-delete-forever</v-icon>
-                      Delete Lieutenant
-                    </v-list-tile-title>
-                  </v-list-tile>
-                  <v-list-tile @click.native="replenishMissions(lt)">
-                    <v-list-tile-title>
-                      <v-icon>mdi-wrench</v-icon>
-                      Regenerate Missions
-                    </v-list-tile-title>
-                  </v-list-tile>
-                </v-list>
-              </v-menu>
-            </v-toolbar-title>
-            <v-spacer/>
+      <v-layout row wrap>
+        <v-flex sm4 md4 v-for="lt in campaign.Lieutenants" :key="lt.name">
+          <v-card color="black" height="100%">
+            <v-toolbar :color="lt.color">
+              <v-toolbar-title>
+                <v-menu offset-y>
+                  <span slot="activator">{{lt.name}}</span>
+                  <v-list>
+                    <v-list-tile @click.native="deleteLt(lt)">
+                      <v-list-tile-title>
+                        <v-icon>mdi-delete-forever</v-icon>
+                        Delete Lieutenant
+                      </v-list-tile-title>
+                    </v-list-tile>
+                    <v-list-tile @click.native="replenishMissions(lt)">
+                      <v-list-tile-title>
+                        <v-icon>mdi-wrench</v-icon>
+                        Regenerate Missions
+                      </v-list-tile-title>
+                    </v-list-tile>
+                  </v-list>
+                </v-menu>
+                <v-chip outline color="black">{{lt.type}}</v-chip>
+                <v-chip color="green" @click.native="addSuccess(lt)">{{lt.successfulMissions}}</v-chip>
+                <v-chip color="red" @click.native="addFailure(lt)">{{lt.failedMissions}}</v-chip>
+              </v-toolbar-title>
+              <v-spacer/>
               <v-chip color="black" :text-color="lt.color">
                 {{lt.otherworld}}
               </v-chip>
-          </v-toolbar>
-          <v-layout row wrap>
-            <v-chip color="grey" close
-                    v-for="mission in lt.missions"
-                    @input="deleteMission(lt, mission)">
-              {{mission}}
-            </v-chip>
-          </v-layout>
-        </v-card>
-      </v-flex>
-    </v-layout>
+            </v-toolbar>
+            <v-layout row wrap>
+              <v-chip color="grey" close
+                      v-for="mission in lt.missions"
+                      @input="deleteMission(lt, mission)">
+                {{mission}}
+              </v-chip>
+            </v-layout>
+          </v-card>
+        </v-flex>
+      </v-layout>
     </v-layout>
   </v-container>
 </template>
@@ -69,6 +80,20 @@
       }
     },
     methods: {
+      addSuccess: function (lt) {
+        lt.successfulMissions += 1;
+        if (lt.successfulMissions >= 10) {
+          lt.successfulMissions = 0;
+        }
+        localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
+      },
+      addFailure: function (lt) {
+        lt.failedMissions += 1;
+        if (lt.failedMissions >= 10) {
+          lt.failedMissions = 0;
+        }
+        localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
+      },
       replenishMissions: function (lt) {
         lt.missions = this.generateMissions(lt.otherworld);
         localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
@@ -105,7 +130,7 @@
       createOverlord: function () {
         return this.overlords.slice(0, 1)[0];
       },
-      generateOtherworld: function() {
+      generateOtherworld: function () {
         this.shuffle(this.otherworldTypes);
         return this.otherworldTypes[0];
       },
@@ -297,8 +322,8 @@
             failedMissions: 0
           },
           {
-            name: 'General Malaise',
-            type: 'Trederran General',
+            name: 'Marshal Malaise',
+            type: 'Field Marshal',
             otherworld: 'Trederra',
             revealed: false,
             successfulMissions: 0,
