@@ -1,13 +1,15 @@
 <template>
   <v-container grid-list-md justify-start>
     <v-layout row wrap>
-      <v-btn @click.native="selectChars(6)">
+      <v-btn @click.native="selectChars(8)">
         <v-icon>mdi-dice-multiple</v-icon>
         <b>Gen Characters</b>
       </v-btn>
-      <v-layout column>
+      <v-layout row wrap>
         <v-flex v-for="char in chars" :key="char.role">
-          <h2>{{char.race}} - {{char.role}}</h2>
+          <v-chip color="indigo darken-3">
+            <h2><b>{{char.race}}</b>  <i>{{char.role}}</i></h2>
+          </v-chip>
         </v-flex>
       </v-layout>
     </v-layout>
@@ -17,7 +19,7 @@
   export default {
     name: 'random-chars',
     mounted() {
-      this.selectChars(6);
+      this.selectChars(8);
     },
     watch: {
     },

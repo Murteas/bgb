@@ -1,7 +1,7 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-layout row wrap>
-      <v-flex md4 sm4>
+    <v-layout column>
+      <v-flex>
         <v-expansion-panel expand>
           <v-expansion-panel-content>
             <div slot="header">Random Characters</div>
@@ -9,7 +9,7 @@
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
-      <v-flex md4 sm4>
+      <v-flex>
         <v-expansion-panel expand>
           <v-expansion-panel-content>
             <div slot="header">Skill Roll</div>

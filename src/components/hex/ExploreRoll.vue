@@ -1,19 +1,17 @@
 <template>
   <v-container fluid grid-list-sm>
     <v-layout column>
-      <v-btn @click.native="rollAll()">
-        <v-icon>mdi-dice-multiple</v-icon>
-        <b>Roll All</b>
-      </v-btn>
-    <v-layout v-for="player in players" :key="player.name" row>
-      <v-btn @click.native="roll(player)">
-        <v-icon>mdi-dice-6</v-icon>
-        <b>Roll</b>
-      </v-btn>
-      <v-chip color="green"><h1>{{player.die1}}</h1></v-chip>
-      <v-chip color="yellow"><h1>{{player.die2}}</h1></v-chip>
-      <v-chip color="blue"><h1>{{player.die3}}</h1></v-chip>
-    </v-layout>
+      <v-layout v-for="player in players" :key="player.name" row>
+        <v-btn @click.native="roll(player)">
+          <v-icon>mdi-dice-6</v-icon>
+          <b>Roll</b>
+        </v-btn>
+        <v-btn round color="green" @click.native="player.navigateDie = hexRoll()"><h1>{{player.navigateDie}}</h1>
+        </v-btn>
+        <v-btn round color="yellow darken-2" @click.native="player.exploreDie = hexRoll()"><h1>
+          {{player.exploreDie}}</h1></v-btn>
+        <v-btn round color="blue" @click.native="player.survivalDie = hexRoll()"><h1>{{player.survivalDie}}</h1></v-btn>
+      </v-layout>
     </v-layout>
   </v-container>
 </template>
@@ -24,13 +22,20 @@
       this.rollAll();
     },
     methods: {
-      rollAll: function() {
+      rollAll: function () {
         this.players.forEach(this.roll);
       },
-      roll: function(player) {
-        player.die1 = this.rollDice(1, 10);
-        player.die2 = this.rollDice(1, 10);
-        player.die3 = this.rollDice(1, 10);
+      roll: function (player) {
+        player.navigateDie = this.hexRoll();
+        player.exploreDie = this.hexRoll();
+        player.survivalDie = this.hexRoll();
+      },
+      hexRoll: function () {
+        let dieRoll = this.rollDice(1, 10);
+        if (dieRoll === 1) {
+          return 'HEX';
+        }
+        return dieRoll;
       }
     },
     data() {
@@ -38,27 +43,27 @@
         players: [
           {
             name: 'P1',
-            die1: 0,
-            die2: 0,
-            die3: 0
+            navigateDie: 0,
+            exploreDie: 0,
+            survivalDie: 0
           },
           {
             name: 'P2',
-            die1: 0,
-            die2: 0,
-            die3: 0
+            navigateDie: 0,
+            exploreDie: 0,
+            survivalDie: 0
           }
           // {
           //   name: 'P3',
-          //   die1: 0,
-          //   die2: 0,
-          //   die3: 0
+          //   navigateDie: 0,
+          //   exploreDie: 0,
+          //   survivalDie: 0
           // },
           // {
           //   name: 'P4',
-          //   die1: 0,
-          //   die2: 0,
-          //   die3: 0
+          //   navigateDie: 0,
+          //   exploreDie: 0,
+          //   survivalDie: 0
           // }
         ]
       }
