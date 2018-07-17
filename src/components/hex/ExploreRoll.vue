@@ -1,7 +1,8 @@
 <template>
-  <v-container fluid grid-list-sm>
-    <v-layout column>
-      <v-layout v-for="player in players" :key="player.name" row>
+  <v-container fluid grid-list-sm >
+    <v-layout column >
+      <v-layout v-for="player in players" :key="player.name" row wrap>
+        <v-flex md12 sm12 xs12>
         <v-btn @click.native="roll(player)">
           <v-icon>mdi-dice-6</v-icon>
           <b>Roll</b>
@@ -11,6 +12,7 @@
         <v-btn round color="yellow darken-2" @click.native="player.exploreDie = hexRoll()"><h1>
           {{player.exploreDie}}</h1></v-btn>
         <v-btn round color="blue" @click.native="player.survivalDie = hexRoll()"><h1>{{player.survivalDie}}</h1></v-btn>
+        </v-flex>
       </v-layout>
     </v-layout>
   </v-container>

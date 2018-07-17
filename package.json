@@ -15,7 +15,7 @@
     "shuffle-array": "^1.0.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.0.18"
+    "vuetify": "^1.1.5"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.6",

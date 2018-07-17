@@ -8,16 +8,19 @@
       <v-btn small fab color="green" @click.stop="warning=!warning">
         <v-icon>mdi-recycle</v-icon>
       </v-btn>
+      <v-btn small fab color="grey" @click.stop="campaign.Overlord.revealed=!campaign.Overlord.revealed">
+        <v-icon>mdi-eye-off</v-icon>
+      </v-btn>
     </v-speed-dial>
     <v-alert type="warning" dismissible v-model="warning">
       Are you sure you want to delete the campaign and create a new one?
       <v-btn color="deep-orange accent-3" @click.native="createCampaign()">YES</v-btn>
     </v-alert>
     <v-layout column>
-      <v-flex sm12>
-        <v-layout row>
+      <v-flex sm12 >
+        <v-layout row justify-center >
           <h1> {{campaign.Overlord.name}}</h1>
-          <v-chip outline color="black">{{campaign.Overlord.type}}</v-chip>
+          <v-chip outline color="black" :v-model=campaign.Overlord.revealed>{{campaign.Overlord.type}}</v-chip>
           <v-chip color="green" @click.native="addSuccess(campaign.Overlord)">{{campaign.Overlord.successfulMissions}}
           </v-chip>
           <v-chip color="red" @click.native="addFailure(campaign.Overlord)">{{campaign.Overlord.failedMissions}}
