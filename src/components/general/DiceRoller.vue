@@ -31,7 +31,10 @@
         </v-layout>
       </v-flex>
       <v-flex sm9 md9>
-        <v-layout row wrap grid-list-sm>
+        <v-layout row wrap grid-list-sm
+                  v-touch="{left: () => changeNumDice(-1),
+                  right: () => changeNumDice(1)}"
+        >
           <v-flex v-for="die in dice" v-if="dice.indexOf(die) < numDice">
             <v-badge overlap left :color="select.color">
               <!--<v-icon slot="badge">{{select.icon}}</v-icon>-->
