@@ -5,26 +5,26 @@
         <v-layout column wrap>
           <v-flex>
             <v-layout row wrap>
-              <v-btn round :color="select.color"
-                     @click.native="selectDieType()">
-                <span>{{select.dieType}} </span>
+              <v-btn fab color="green accent-4" @click.native="rollDice()">
+                <v-icon>mdi-dice-multiple</v-icon>
               </v-btn>
-              <v-btn flat icon color="lime accent-2" @click.native.stop="dialog = true">
-                <v-icon>mdi-table</v-icon>
-              </v-btn>
+              <v-layout column>
+                <v-btn flat icon color="white" @click.native.stop="dialog = true">
+                  <v-icon>mdi-table</v-icon>
+                </v-btn>
+                <v-btn flat icon :color="select.color"
+                       @click.native="selectDieType()">
+                  <span>{{select.dieType}} </span>
+                </v-btn>
+              </v-layout>
             </v-layout>
-          </v-flex>
-          <v-flex>
-            <v-layout row wrap>
+            <v-layout row>
               <v-btn flat icon color="blue darken-2" @click.native="changeNumDice(-1)">
                 <v-icon>mdi-minus</v-icon>
               </v-btn>
-                <h1>{{numDice}}</h1>
+              <h1>{{numDice}}</h1>
               <v-btn flat icon color="blue lighten-2" @click.native="changeNumDice(1)">
                 <v-icon>mdi-plus</v-icon>
-              </v-btn>
-              <v-btn flat icon @click.native="rollDice()">
-                <v-icon>mdi-dice-multiple</v-icon>
               </v-btn>
             </v-layout>
           </v-flex>

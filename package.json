@@ -1,6 +1,6 @@
 {
   "name": "bgb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Board Game Buddy web app",
   "author": "murteas <murteas@gmail.com>",
   "private": true,
@@ -15,7 +15,7 @@
     "shuffle-array": "^1.0.1",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
-    "vuetify": "^1.1.5"
+    "vuetify": "^1.1.9"
   },
   "devDependencies": {
     "autoprefixer": "^7.2.6",
