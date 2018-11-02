@@ -166,6 +166,11 @@
             customizedMissions = this.derelictMissions.slice(0, 2);
             customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
             break;
+          case 'Blasted Wastes':
+            this.shuffle(this.blastedMissions);
+            customizedMissions = this.blastedMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            break;
           default:
             customizedMissions = this.mineMissions.slice(0, 4);
             break;
@@ -213,6 +218,10 @@
           {
             name: 'Derelict Ship',
             color: 'indigo'
+          },
+          {
+            name: 'Blasted Wastes',
+            color: 'brown'
           }
         ],
         mineMissions: [
@@ -271,6 +280,14 @@
           'Guns of War',
           'Doomsday'
         ],
+        blastedMissions: [
+          'Missing Patrol',
+          'Ghosts in the Dark',
+          'Across the Desert Dunes',
+          'Starfall',
+          'Water of Life',
+          'Warmaster\'s Fury'
+        ],
         campaign: {
           Overlord: {},
           Lieutenants: []
@@ -288,6 +305,14 @@
             name: 'Frost Bite',
             type: 'Grand Shaman',
             otherworld: 'Targa Plateau',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Master of the Sands',
+            type: 'Grand Shaman',
+            otherworld: 'Blasted Wastes',
             revealed: false,
             successfulMissions: 0,
             failedMissions: 0
@@ -344,6 +369,14 @@
             name: 'Monstro',
             type: 'Goliath',
             otherworld: 'Targa Plateau',
+            revealed: false,
+            successfulMissions: 0,
+            failedMissions: 0
+          },
+          {
+            name: 'Sand Behemoth',
+            type: 'Goliath',
+            otherworld: 'Blasted Wastes',
             revealed: false,
             successfulMissions: 0,
             failedMissions: 0

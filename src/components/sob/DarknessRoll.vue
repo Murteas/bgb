@@ -51,6 +51,9 @@
             case 'Town':
               this.currentEffect = 'Town: ' + this.Town[dieRoll].description;
               break;
+            case 'BlastedWastes':
+              this.currentEffect = 'Blasted Wastes: ' + this.BlastedWastes[dieRoll].description;
+              break;
           }
         }
       },
@@ -101,6 +104,10 @@
           {
             name: 'Town',
             color: 'brown lighten-2'
+          },
+          {
+            name: 'BlastedWastes',
+            color: 'brown darken-3'
           }
         ],
         Mines: [
@@ -284,7 +291,33 @@
             roll: '6',
             description: '6 A Line is Drawn – This is it! Somebody’s got to save this Town and you’re not about to give up now! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering.'
           }
-        ]
+        ],
+        BlastedWastes: [
+          {
+            roll: '1',
+            description: '1 Ambush Attack - TBD Ambush Attack! Draw a threat to immediately Ambush the Heroes.'
+          },
+          {
+            roll: '2',
+            description: '2 Dark Dread – TBD Draw a Growing Dread card to add to the stack.'
+          },
+          {
+            roll: '3',
+            description: '3 Creeping Darkness – TBD Move the Darkness 2 steps forward on the Depth Track.'
+          },
+          {
+            roll: '4',
+            description: '4 Incoming – TBD'
+          },
+          {
+            roll: '5',
+            description: '5 TBD'
+          },
+          {
+            roll: '6',
+            description: '6 TBD Each Hero may immediately remove any Poison and Stunned Markers they have as well as either Heal 2D6 Wounds/Sanity (any mix) or remove D6 Corruption Points. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering.'
+          }
+        ],
       }
     }
   }

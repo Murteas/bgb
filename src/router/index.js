@@ -5,7 +5,8 @@ const routerOptions = [
   { path: '/', component: 'About' },
   { path: '/sob', component: 'SoB' },
   { path: '/aeon', component: 'AE' },
-  { path: '/hex', component: 'HexploreIt' }
+  { path: '/hex', component: 'HexploreIt' },
+  { path: '/fww', component: 'FWW' }
 
 ]
 

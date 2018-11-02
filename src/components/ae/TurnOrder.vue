@@ -13,14 +13,14 @@
           </v-btn>
           <v-btn @click.native="revealTop()">
             <v-icon>mdi-eye</v-icon>
-            <b>Reveal Top Card</b>
+            <b>Reveal</b>
           </v-btn>
           <v-alert dismissible :color="topCard.color" v-model="revealToolTip">
             {{topCard.title}}
           </v-alert>
           <v-btn @click.native="moveTopToBottom()">
             <v-icon>mdi-arrow-down</v-icon>
-            <b>Top to Bottom</b>
+            <b>Move</b>
           </v-btn>
         </v-layout>
       </v-flex>
