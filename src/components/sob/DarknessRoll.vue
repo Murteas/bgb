@@ -317,7 +317,7 @@
             roll: '6',
             description: '6 TBD Each Hero may immediately remove any Poison and Stunned Markers they have as well as either Heal 2D6 Wounds/Sanity (any mix) or remove D6 Corruption Points. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering.'
           }
-        ],
+        ]
       }
     }
   }

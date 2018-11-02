@@ -46,7 +46,7 @@
         localStorage.setItem('turnOrderDeck', JSON.stringify(this.Deck));
       },
       roll() {
-        //Do something
+        // Do something
       }
     },
     data() {
