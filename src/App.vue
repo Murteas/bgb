@@ -63,7 +63,7 @@
           {title: 'SoB', path: '/sob', icon: 'mdi-pickaxe'},
           {title: 'Aeon\'s End', path: '/aeon', icon: 'mdi-diamond'},
           {title: 'HexploreIt', path: '/hex', icon: 'mdi-hexagon-multiple'},
-          {title: 'Fallout WW', path: '/fww', icon: 'mdi-radioactive'}
+          {title: 'Arkham Horror', path: '/ah3', icon: 'mdi-skull'}
         ]
       }
     }

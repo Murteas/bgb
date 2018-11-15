@@ -6,7 +6,7 @@ const routerOptions = [
   { path: '/sob', component: 'SoB' },
   { path: '/aeon', component: 'AE' },
   { path: '/hex', component: 'HexploreIt' },
-  { path: '/fww', component: 'FWW' }
+  { path: '/ah3', component: 'Arkham' }
 
 ]
 
