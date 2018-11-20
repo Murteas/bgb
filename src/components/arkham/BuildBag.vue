@@ -90,7 +90,7 @@
           {
             title: 'Reckoning',
             count: 0
-          },
+          }
         ],
         CardTypes: [
           {
