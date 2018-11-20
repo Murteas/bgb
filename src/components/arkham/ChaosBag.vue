@@ -1,7 +1,11 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-layout column>
+    <v-layout row wrap>
       <v-layout row wrap>
+        <v-btn @click.native="loadDeck()">
+          <v-icon>mdi-disk</v-icon>
+          <span>Load Deck</span>
+        </v-btn>
         <v-btn @click.native="shuffleDeck()">
           <v-icon>mdi-shuffle</v-icon>
           <span>Shuffle</span>
@@ -44,6 +48,15 @@
       }
     },
     methods: {
+      addToken: function (cardType) {
+        this.Deck.push(this.CardTypes[cardType]);
+      },
+      loadDeck() {
+        if (localStorage.getItem('chaosBag')) {
+          this.Deck = JSON.parse(localStorage.getItem('chaosBag'));
+        }
+        this.shuffleDeck();
+      },
       shuffleDeck() {
         this.numDrawn = 0;
         this.shuffle(this.Deck)
@@ -59,36 +72,12 @@
     data() {
       return {
         numDrawn: 0,
-        Deck: [
+        CardTypes: [
           {
             drawn: false,
             title: 'Blank',
             src: '/static/img/arkham/mythosTokens/blank.png',
             color: 'grey darken-1'
-          },
-          {
-            drawn: false,
-            title: 'Blank',
-            src: '/static/img/arkham/mythosTokens/blank.png',
-            color: 'grey darken-1'
-          },
-          {
-            drawn: false,
-            title: 'Blank',
-            src: '/static/img/arkham/mythosTokens/blank.png',
-            color: 'grey darken-1'
-          },
-          {
-            drawn: false,
-            title: 'Blank',
-            src: '/static/img/arkham/mythosTokens/blank.png',
-            color: 'grey darken-1'
-          },
-          {
-            drawn: false,
-            title: 'Clue',
-            src: '/static/img/arkham/mythosTokens/clue.png',
-            color: 'green darken-1'
           },
           {
             drawn: false,
@@ -104,30 +93,6 @@
           },
           {
             drawn: false,
-            title: 'Headline',
-            src: '/static/img/arkham/mythosTokens/headline.png',
-            color: 'yellow darken-1'
-          },
-          {
-            drawn: false,
-            title: 'Doom',
-            src: '/static/img/arkham/mythosTokens/doom.png',
-            color: 'red darken-4'
-          },
-          {
-            drawn: false,
-            title: 'Doom',
-            src: '/static/img/arkham/mythosTokens/doom.png',
-            color: 'red darken-4'
-          },
-          {
-            drawn: false,
-            title: 'Doom',
-            src: '/static/img/arkham/mythosTokens/doom.png',
-            color: 'red darken-4'
-          },
-          {
-            drawn: false,
             title: 'Doom',
             src: '/static/img/arkham/mythosTokens/doom.png',
             color: 'red darken-4'
@@ -137,24 +102,6 @@
             title: 'Monster',
             src: '/static/img/arkham/mythosTokens/monster.png',
             color: 'purple'
-          },
-          {
-            drawn: false,
-            title: 'Monster',
-            src: '/static/img/arkham/mythosTokens/monster.png',
-            color: 'purple'
-          },
-          {
-            drawn: false,
-            title: 'Monster',
-            src: '/static/img/arkham/mythosTokens/monster.png',
-            color: 'purple'
-          },
-          {
-            drawn: false,
-            title: 'Anomaly',
-            src: '/static/img/arkham/mythosTokens/anomaly.png',
-            color: 'blue'
           },
           {
             drawn: false,
@@ -168,7 +115,8 @@
             src: '/static/img/arkham/mythosTokens/reckoning.png',
             color: 'red'
           }
-        ]
+        ],
+        Deck: []
       }
     }
   }
