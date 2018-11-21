@@ -29,7 +29,7 @@
     },
     name: 'about',
     data: () => ({
-      appVersion: '1.0.2a',
+      appVersion: '1.0.3',
       warning: false
     }),
     methods: {
