@@ -1,6 +1,6 @@
 {
-  "name": "Brimstone Buddy",
-  "short_name": "Brimstone Buddy",
+  "name": "Board Game Buddy",
+  "short_name": "BGB",
   "icons": [
     {
       "src": "/static/img/icons/android-chrome-192x192.png",

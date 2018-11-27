@@ -105,7 +105,7 @@
           },
           {
             drawn: false,
-            title: 'Anomaly',
+            title: 'Gate Burst',
             src: '/static/img/arkham/mythosTokens/anomaly.png',
             color: 'blue'
           },

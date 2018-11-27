@@ -18,7 +18,7 @@
           <h3>Monster</h3>
         </v-btn>
         <v-btn @click.native="addToken(5)">
-          <h3>Anomaly</h3>
+          <h3>Gate Burst</h3>
         </v-btn>
         <v-btn @click.native="addToken(6)">
           <h3>Reckoning</h3>
@@ -84,7 +84,7 @@
             count: 0
           },
           {
-            title: 'Anomaly',
+            title: 'Gate Burst',
             count: 0
           },
           {
@@ -125,7 +125,7 @@
           },
           {
             drawn: false,
-            title: 'Anomaly',
+            title: 'Gate Burst',
             src: '/static/img/arkham/mythosTokens/anomaly.png',
             color: 'blue'
           },

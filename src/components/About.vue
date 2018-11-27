@@ -14,6 +14,14 @@
         <v-flex sm6 md6>
           <list-randomizer/>
         </v-flex>
+        <v-flex sm8 md8>
+          <v-layout row wrap>
+            <random-die/>
+            <random-die/>
+            <random-die/>
+            <random-die/>
+          </v-layout>
+        </v-flex>
       </v-layout>
     </v-container>
   </div>
@@ -21,15 +29,21 @@
 
 <script>
   import ListRandomizer from './general/ListRandomizer'
+  import RandomDie from './general/RandomDie';
 
   export default {
     components: {
+      RandomDie,
+      'random-die': RandomDie,
       ListRandomizer,
       'list-randomizer': ListRandomizer
     },
     name: 'about',
+    mounted() {
+      this.appVersion = '1.0.4d';
+    },
     data: () => ({
-      appVersion: '1.0.3',
+      appVersion: '0.0.0',
       warning: false
     }),
     methods: {
