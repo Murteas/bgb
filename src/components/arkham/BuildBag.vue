@@ -33,9 +33,12 @@
       <v-list v-model="TypeCount">
         <v-list-tile v-for="item in TypeCount" :key="item.title">
           <v-list-tile-content>
-            <v-list-tile-title>
-              <h3>{{item.title}} x {{item.count}}</h3>
-            </v-list-tile-title>
+           <v-chip outline>
+             <v-avatar>
+               <img :src="item.src">
+             </v-avatar>
+             <h2>{{item.count}}</h2>
+           </v-chip>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -65,30 +68,37 @@
         TypeCount: [
           {
             title: 'Blank',
+            src: '/static/img/arkham/mythosTokens/blank.png',
             count: 0
           },
           {
             title: 'Clue',
+            src: '/static/img/arkham/mythosTokens/clue.png',
             count: 0
           },
           {
             title: 'Headline',
+            src: '/static/img/arkham/mythosTokens/headline.png',
             count: 0
           },
           {
             title: 'Doom',
+            src: '/static/img/arkham/mythosTokens/doom.png',
             count: 0
           },
           {
             title: 'Monster',
+            src: '/static/img/arkham/mythosTokens/monster.png',
             count: 0
           },
           {
             title: 'Gate Burst',
+            src: '/static/img/arkham/mythosTokens/anomaly.png',
             count: 0
           },
           {
             title: 'Reckoning',
+            src: '/static/img/arkham/mythosTokens/reckoning.png',
             count: 0
           }
         ],
