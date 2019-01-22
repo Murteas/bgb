@@ -236,7 +236,13 @@
           'UO Wanted: Undead or Alive',
           'UO Revenge of the Dead',
           'FS Experimentation',
-          'FS Out of Time'
+          'FS Out of Time',
+          'Canyon #1',
+          'Canyon #2',
+          'Canyon #3',
+          'Canyon #4',
+          'Canyon #5',
+          'Canyon #6'
         ],
         cynderMissions: [
           'Cracks in Reality',

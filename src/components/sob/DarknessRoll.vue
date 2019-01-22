@@ -54,6 +54,9 @@
             case 'BlastedWastes':
               this.currentEffect = 'Blasted Wastes: ' + this.BlastedWastes[dieRoll].description;
               break;
+            case 'Canyon':
+              this.currentEffect = 'Canyon: ' + this.Canyon[dieRoll].description;
+              break;
           }
         }
       },
@@ -108,6 +111,10 @@
           {
             name: 'BlastedWastes',
             color: 'brown darken-3'
+          },
+          {
+            name: 'Canyon',
+            color: 'brown accent-3'
           }
         ],
         Mines: [
@@ -295,27 +302,53 @@
         BlastedWastes: [
           {
             roll: '1',
-            description: '1 Ambush Attack - TBD Ambush Attack! Draw a threat to immediately Ambush the Heroes.'
+            description: '1 Ambush Attack - There are fiendish creatures and demons in the dark places of the world! Ambush Attack! Draw a threat to immediately Ambush the Heroes.'
           },
           {
             roll: '2',
-            description: '2 Dark Dread – TBD Draw a Growing Dread card to add to the stack.'
+            description: '2 Dark Dread – Things are looking more and more bleak by the moment! Draw a Growing Dread card to add to the stack.'
           },
           {
             roll: '3',
-            description: '3 Creeping Darkness – TBD Move the Darkness 2 steps forward on the Depth Track.'
+            description: '3 Creeping Darkness – The Darkness is always searching for a way out! Move the Darkness 2 steps forward on the Depth Track.'
           },
           {
             roll: '4',
-            description: '4 Incoming – TBD'
+            description: '4 Twin Suns – The twin suns of the Blasted Wastes move at a brisk pace, and can be unforgiving to those traveling through the deserts, day or night. Advance the Sun Track 1 position.'
           },
           {
             roll: '5',
-            description: '5 TBD'
+            description: '5 Magnetic Arcing - A molten Dark Stone core churns at the heart of the Blasted Wastes causing frequent quakes, sand storms, and magnetic pulses which disrupt and arc off of electrical equipment.  Every Hero takes 2 Hits for every Tech item or Tech Token they carry.'
           },
           {
             roll: '6',
-            description: '6 TBD Each Hero may immediately remove any Poison and Stunned Markers they have as well as either Heal 2D6 Wounds/Sanity (any mix) or remove D6 Corruption Points. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering.'
+            description: '6 Weather the Storm - Discard any Weather or Storm currently in play. Each hero can recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering.'
+          }
+        ],
+        Canyon: [
+          {
+            roll: '1',
+            description: '1 Ambush Attack - There are fiendish creatures and demons in the dark places of the world! Ambush Attack! Draw a threat to immediately Ambush the Heroes.'
+          },
+          {
+            roll: '2',
+            description: '2 Dark Dread – Things are looking more and more bleak by the moment! Draw a Growing Dread card to add to the stack.'
+          },
+          {
+            roll: '3',
+            description: '3 Creeping Darkness – The Darkness is always searching for a way out! Move the Darkness 2 steps forward on the Depth Track.'
+          },
+          {
+            roll: '4',
+            description: '4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each'
+          },
+          {
+            roll: '5',
+            description: '5 Being Watched – You can\'t shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card.'
+          },
+          {
+            roll: '6',
+            description: '6 Stubborn Resolve – This place is horrible and unforgiving, but you’re not about to give up without a fight! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering.'
           }
         ]
       }
