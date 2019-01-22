@@ -121,7 +121,7 @@
         this.warning = false;
       },
       createLt: function (mineNum) {
-        let lieutenant = this.lieutenants.slice(mineNum, mineNum + 1)[0];
+        let lieutenant = JSON.parse(JSON.stringify(this.lieutenants.slice(mineNum, mineNum + 1)[0]));
         if (lieutenant.otherworld === 'RANDOM') {
           let ow = this.generateOtherworld();
           lieutenant.otherworld = ow.name;
