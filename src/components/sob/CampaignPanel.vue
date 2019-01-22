@@ -216,12 +216,12 @@
             color: 'lime darken-4'
           },
           {
-            name: 'Derelict Ship',
-            color: 'indigo'
-          },
-          {
             name: 'Blasted Wastes',
             color: 'brown'
+          },
+          {
+            name: 'Derelict Ship',
+            color: 'indigo'
           }
         ],
         mineMissions: [
