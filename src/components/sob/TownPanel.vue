@@ -67,6 +67,8 @@
   </v-container>
 </template>
 <script>
+  import TOWN_NAMES from './data/townNames.json'
+  import TOWN_BUILDINGS from './data/townBuildings.json'
   export default {
     name: 'town-panel',
     mounted() {
@@ -231,121 +233,9 @@
         fab: false,
         warning: false,
         townColor: 'white',
-        townNames: [
-          'Pure Gorge', 'Bull Peaks', 'Dusty Hill', 'Coyote\'s Gate', 'Purity Post', 'New Plains', 'Scorpion\'s Mountain', 'Crimsonvale', 'Deadbrook', 'Oatpass', 'Scorpiongorge', 'Scorpion\'s Plains', 'Farmbrook', 'Cruelty Trails', 'Devilbluff', 'Stifffort', 'Desolation Pass', 'Shady Bluff', 'Wrathmesa', 'Grindhowl', 'Deadmesa', 'Lightroost', 'Starksprings', 'Bruiselanding', 'Crazylanding', 'Dryroost', 'Old Cliff', 'Slimsummit', 'Aurora Mesa', 'Thincity', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Devildowns', 'Shadowfield', 'Richsummit', 'Rapidcanyon', 'Tombglen', 'Shadowtusk', 'Freedom Canyon', 'Barren River', 'Farmstead', 'Coyote\'s Branch', 'Sandy Spring', 'Grimrange', 'Demonville', 'Wolfcrag', 'Thornspring', 'Angelglen', 'Tamecliff', 'Lostmountain', 'Bonesprings', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Bull\'s Creek', 'Breakbranch', 'Braveridge', 'Last Reach', 'Devil\'s Bellow', 'Vastgulch', 'Silvermesa', 'Grand Mesa', 'Brokensnag', 'Swift Roost', 'Shallow Post', 'Softcreek', 'Littletown', 'Devil\'s Edge', 'Grindcross', 'Warmpost', 'Meektown', 'Bullville', 'Pride Gate', 'Angeredge', 'Sunnyrise', 'Cripple Roost', 'Losttrails', 'Vainpass', 'Crimsonwater', 'Lordsplains', 'Grimworth', 'Lowchapel', 'Violence Scar', 'Glumgulch'
-        ],
-        townBuildings: [
-          'Saloon',
-          'Trading Post',
-          'General Store',
-          'Smuggler\'s Den',
-          'Church',
-          'Outpost',
-          'Sheriff',
-          'Doctor',
-          'Blacksmith',
-          'Gambling Hall',
-          'Mutant Quarter',
-          'Street Market'
-        ],
-        towns: [
-          {
-            name: 'Town1',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town2',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town3',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town4',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town5',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town6',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town7',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town8',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town9',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town10',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town11',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          },
-          {
-            name: 'Town12',
-            size: 'M',
-            type: 'Normal',
-            buildings: [],
-            selected: false,
-            townColor: 'white'
-          }
-        ]
+        townNames: TOWN_NAMES,
+        townBuildings: TOWN_BUILDINGS,
+        towns: []
       }
     }
   }

@@ -73,6 +73,10 @@
   </v-container>
 </template>
 <script>
+  import OTHERWORLDS from './data/otherworlds.json'
+  import MISSIONS_BY_WORLD from './data/missions.json'
+  import OVERLORDS from './data/overlords.json'
+  import LIEUTENANTS from './data/lieutenants'
   export default {
     name: 'campaign-panel',
     mounted() {
@@ -139,40 +143,40 @@
       },
       generateMissions: function (type) {
         let customizedMissions = [];
-        this.shuffle(this.mineMissions);
+        this.shuffle(this.missions.mineMissions);
         switch (type) {
           case 'Cynder':
-            this.shuffle(this.cynderMissions);
-            customizedMissions = this.cynderMissions.slice(0, 2);
-            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            this.shuffle(this.missions.cynderMissions);
+            customizedMissions = this.missions.cynderMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Targa Plateau':
-            this.shuffle(this.targaMissions);
-            customizedMissions = this.targaMissions.slice(0, 2);
-            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            this.shuffle(this.missions.targaMissions);
+            customizedMissions = this.missions.targaMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Jargono':
-            this.shuffle(this.jargonoMissions);
-            customizedMissions = this.jargonoMissions.slice(0, 2);
-            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            this.shuffle(this.missions.jargonoMissions);
+            customizedMissions = this.missions.jargonoMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Trederra':
-            this.shuffle(this.trederraMissions);
-            customizedMissions = this.trederraMissions.slice(0, 2);
-            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            this.shuffle(this.missions.trederraMissions);
+            customizedMissions = this.missions.trederraMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Derelict Ship':
-            this.shuffle(this.derelictMissions);
-            customizedMissions = this.derelictMissions.slice(0, 2);
-            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            this.shuffle(this.missions.derelictMissions);
+            customizedMissions = this.missions.derelictMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Blasted Wastes':
-            this.shuffle(this.blastedMissions);
-            customizedMissions = this.blastedMissions.slice(0, 2);
-            customizedMissions = customizedMissions.concat(this.mineMissions.slice(0, 2));
+            this.shuffle(this.missions.blastedMissions);
+            customizedMissions = this.missions.blastedMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           default:
-            customizedMissions = this.mineMissions.slice(0, 4);
+            customizedMissions = this.missions.mineMissions.slice(0, 4);
             break;
         }
         return customizedMissions;
@@ -195,309 +199,14 @@
       return {
         fab: false,
         warning: false,
-        enemyNames: [
-          'The Depths', 'Gold River', 'Silver Gulch', 'Gemheart', 'Stoneheart', 'Talon\'s Cave', 'Black Hat Mine', 'Death\'s Head Claim', 'ShadowMaw', 'Rusty Pickaxe', 'No Return', 'Lodestone Caves', 'BottomFeeder Ravine', 'Wolf\'s Mine', 'Daggervale Dig', 'Dusty\'s Bottom', 'Nose Pick', 'Blood Ravine', 'The War', 'Shotgun Chute', 'Ghost Gulch', 'Darkness Cave', 'Glittering Gulch', 'Tyrone\'s Claim', 'Bear Cave', 'Coyote Cavern', 'Bloody Mouth Caverns', 'DeathWail Ravine', 'Bottomless Well', 'Lucky\'s Strike', 'Empty Hole', 'Minecart', 'Gumption Gain', 'Motherload', 'Chemist Claim', 'Gov\'t Lands', 'GoatEater\'s Pass'
-        ],
-        otherworldTypes: [
-          {
-            name: 'Cynder',
-            color: 'deep-orange accent-3'
-          },
-          {
-            name: 'Targa Plateau',
-            color: 'light-blue lighten-4'
-          },
-          {
-            name: 'Jargono',
-            color: 'light-green darken-3'
-          },
-          {
-            name: 'Trederra',
-            color: 'lime darken-4'
-          },
-          {
-            name: 'Blasted Wastes',
-            color: 'brown'
-          },
-          {
-            name: 'Derelict Ship',
-            color: 'indigo'
-          }
-        ],
-        mineMissions: [
-          'For a Few Darkstone More',
-          'Exploration',
-          'Rescue Party',
-          'Seal the Gate',
-          'Blow the Mine',
-          'Escape',
-          'VM Hunted',
-          'VM Call of the Void',
-          'UO Wanted: Undead or Alive',
-          'UO Revenge of the Dead',
-          'FS Experimentation',
-          'FS Out of Time',
-          'Canyon #1',
-          'Canyon #2',
-          'Canyon #3',
-          'Canyon #4',
-          'Canyon #5',
-          'Canyon #6'
-        ],
-        cynderMissions: [
-          'Cracks in Reality',
-          'Defend the Bridge',
-          'Dark Deal',
-          'Fire & Ash',
-          'Hunt for Liquid DS',
-          'Broken Seals'
-        ],
-        targaMissions: [
-          'Terror in the Night',
-          'Stop the Ritual',
-          'Last Stand',
-          'Overload',
-          'City of the Ancients',
-          'Frozen Expedition'
-        ],
-        jargonoMissions: [
-          'Night of the Dead',
-          'Seal the Hell Pit',
-          'The Lost Journal',
-          'Cursed Idol',
-          'Swamps of Death',
-          'Temple of Dread',
-          'SM Human Sacrifice',
-          'SM Warring Tribes'
-        ],
-        derelictMissions: [
-          'Time\'s Echo',
-          'Collapse the Vortex',
-          'Lost in Space',
-          'The Captain\'s Log',
-          'Voyage of the Dead',
-          'Reactor Breach'
-        ],
-        trederraMissions: [
-          'Foothold',
-          'Toxic Purge',
-          'Battlefield Recon',
-          'Front Lines',
-          'Guns of War',
-          'Doomsday'
-        ],
-        blastedMissions: [
-          'Missing Patrol',
-          'Ghosts in the Dark',
-          'Across the Desert Dunes',
-          'Starfall',
-          'Water of Life',
-          'Warmaster\'s Fury'
-        ],
+        otherworldTypes: OTHERWORLDS,
+        missions: MISSIONS_BY_WORLD,
         campaign: {
           Overlord: {},
           Lieutenants: []
         },
-        overlords: [
-          {
-            name: 'Sslither, the World Eater',
-            type: 'Grand Shaman',
-            otherworld: 'Jargono',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Frost Bite',
-            type: 'Grand Shaman',
-            otherworld: 'Targa Plateau',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Master of the Sands',
-            type: 'Grand Shaman',
-            otherworld: 'Blasted Wastes',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Master Replica',
-            type: 'Flesh Stalker',
-            otherworld: 'Derelict Ship',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'The Perfector',
-            type: 'Flesh Stalker',
-            otherworld: 'Trederra',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'The Burning Cosmos',
-            type: 'Void Magus',
-            otherworld: 'Cynder',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'The Undying',
-            type: 'Void Magus',
-            otherworld: 'Derelict Ship',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Marshal Malaise',
-            type: 'Field Marshal',
-            otherworld: 'Trederra',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Forsook',
-            type: 'Harbinger',
-            otherworld: 'Jargono',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Monstro',
-            type: 'Goliath',
-            otherworld: 'Targa Plateau',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Sand Behemoth',
-            type: 'Goliath',
-            otherworld: 'Blasted Wastes',
-            revealed: false,
-            successfulMissions: 0,
-            failedMissions: 0
-          }
-        ],
-        lieutenants: [
-          {
-            name: 'Lt Bile',
-            type: 'Trederran Lt',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Lt Drift',
-            type: 'Trederran Lt',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Darkfang',
-            type: 'Serpent Shaman',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Plague Tongue',
-            type: 'Serpent Shaman',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Master Corruptor',
-            type: 'Void Sorceror',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Void Echo',
-            type: 'Void Sorceror',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'TombStone',
-            type: 'Undead Outlaw',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Mass Grave',
-            type: 'Undead Outlaw',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'The Beast',
-            type: 'Goliath',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Dark Guardian',
-            type: 'Harbinger',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'DeathMaw',
-            type: 'Goliath',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          },
-          {
-            name: 'Dymond',
-            type: 'Harbinger',
-            otherworld: 'RANDOM',
-            color: 'white',
-            missions: [],
-            successfulMissions: 0,
-            failedMissions: 0
-          }
-        ]
+        overlords: OVERLORDS,
+        lieutenants: LIEUTENANTS
       }
     }
   }

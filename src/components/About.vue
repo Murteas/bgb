@@ -40,7 +40,7 @@
     },
     name: 'about',
     mounted() {
-      this.appVersion = '1.0.5c';
+      this.appVersion = '1.0.6o';
     },
     data: () => ({
       appVersion: '0.0.0',

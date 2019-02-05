@@ -21,6 +21,7 @@
   </v-container>
 </template>
 <script>
+  import ENCOUNTER_TOKENS from './data/encounterTokens.json'
   export default {
     name: 'encounter-deck',
     mounted() {
@@ -55,68 +56,7 @@
     data() {
       return {
         numDrawn: 0,
-        Deck: [
-          {
-            drawn: false,
-            title: 'Ambush Attack',
-            src: '/static/img/cards/encounter/ambush_attack_2.png'
-          },
-          {
-            drawn: false,
-            title: 'Attack 1',
-            src: '/static/img/cards/encounter/attack_1.png'
-          },
-          {
-            drawn: false,
-            title: 'Attack 2 Clue',
-            src: '/static/img/cards/encounter/Attack_2_clue.png'
-          },
-          {
-            drawn: false,
-            title: 'attack portal',
-            src: '/static/img/cards/encounter/attack_portal.png'
-          },
-          {
-            drawn: false,
-            title: 'Encounter 1',
-            src: '/static/img/cards/encounter/Encounter_1.png'
-          },
-          {
-            drawn: false,
-            title: 'Encounter 1',
-            src: '/static/img/cards/encounter/Encounter_1.png'
-          },
-          {
-            drawn: false,
-            title: 'Encounter 3 clue',
-            src: '/static/img/cards/encounter/Encounter_3_clue.png'
-          },
-          {
-            drawn: false,
-            title: 'Encounter Portal clue',
-            src: '/static/img/cards/encounter/encounter_portal_clue.png'
-          },
-          {
-            drawn: false,
-            title: 'EncounterX2_1',
-            src: '/static/img/cards/encounter/EncounterX2_1.png'
-          },
-          {
-            drawn: false,
-            title: 'EncounterX2_1_clue',
-            src: '/static/img/cards/encounter/EncounterX2_1_clue.png'
-          },
-          {
-            drawn: false,
-            title: 'EncounterX2_2',
-            src: '/static/img/cards/encounter/EncounterX2_2.png'
-          },
-          {
-            drawn: false,
-            title: 'growing_dread_enc_2_clue',
-            src: '/static/img/cards/encounter/growing_dread_enc_2_clue.png'
-          }
-        ]
+        Deck: ENCOUNTER_TOKENS
       }
     }
   }

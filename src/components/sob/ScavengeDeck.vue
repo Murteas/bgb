@@ -21,6 +21,7 @@
   </v-container>
 </template>
 <script>
+  import SCAVENGE_CARDS from './data/scavengeCards.json'
   export default {
     name: 'scavenge-deck',
     mounted() {
@@ -54,68 +55,7 @@
     data() {
       return {
         numDrawn: 0,
-        Deck: [
-          {
-            drawn: false,
-            title: 'Nothing',
-            src: '/static/img/cards/scavenge/scav_nothing.png'
-          },
-          {
-            drawn: false,
-            title: 'Nothing',
-            src: '/static/img/cards/scavenge/scav_nothing.png'
-          },
-          {
-            drawn: false,
-            title: 'Nothing',
-            src: '/static/img/cards/scavenge/scav_nothing.png'
-          },
-          {
-            drawn: false,
-            title: 'Nothing',
-            src: '/static/img/cards/scavenge/scav_nothing.png'
-          },
-          {
-            drawn: false,
-            title: 'Hideous',
-            src: '/static/img/cards/scavenge/scav_hideous.png'
-          },
-          {
-            drawn: false,
-            title: 'Hideous',
-            src: '/static/img/cards/scavenge/scav_hideous.png'
-          },
-          {
-            drawn: false,
-            title: 'Chilling',
-            src: '/static/img/cards/scavenge/scav_chilling.png'
-          },
-          {
-            drawn: false,
-            title: 'Small',
-            src: '/static/img/cards/scavenge/scav_small.png'
-          },
-          {
-            drawn: false,
-            title: 'Small',
-            src: '/static/img/cards/scavenge/scav_small.png'
-          },
-          {
-            drawn: false,
-            title: 'Useful',
-            src: '/static/img/cards/scavenge/scav_useful.png'
-          },
-          {
-            drawn: false,
-            title: 'Useful',
-            src: '/static/img/cards/scavenge/scav_useful.png'
-          },
-          {
-            drawn: false,
-            title: 'Shiny',
-            src: '/static/img/cards/scavenge/scav_shiny.png'
-          }
-        ]
+        Deck: SCAVENGE_CARDS
       }
     }
   }

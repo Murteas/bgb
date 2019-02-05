@@ -21,6 +21,7 @@
   </v-container>
 </template>
 <script>
+  import DAILY_EVENTS from './data/dailyEvents.json'
   export default {
     name: 'town-daily-events',
     mounted() {
@@ -54,113 +55,7 @@
     data() {
       return {
         numDrawn: 0,
-        Deck: [
-          {
-            drawn: false,
-            title: 'Found Something',
-            src: '/static/img/cards/townDailyEvents/FoundSomething.JPG'
-          },
-          {
-            drawn: false,
-            title: 'Hangin',
-            src: '/static/img/cards/townDailyEvents/Hangin.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/HighNoon.JPG',
-            src: '/static/img/cards/townDailyEvents/HighNoon.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/MarketDown.JPG',
-            src: 'static/img/cards/townDailyEvents/MarketDown.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/MarketUp.JPG',
-            src: '/static/img/cards/townDailyEvents/MarketUp.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/Mob.JPG',
-            src: 'static/img/cards/townDailyEvents/Mob.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/NoEffect.JPG',
-            src: '/static/img/cards/townDailyEvents/NoEffect.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/NoEffect.JPG',
-            src: '/static/img/cards/townDailyEvents/NoEffect.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/NoEffect.JPG',
-            src: '/static/img/cards/townDailyEvents/NoEffect.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/NoEffect.JPG',
-            src: '/static/img/cards/townDailyEvents/NoEffect.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/OpenSkies.JPG',
-            src: '/static/img/cards/townDailyEvents/OpenSkies.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/Persecution.JPG',
-            src: '/static/img/cards/townDailyEvents/Persecution.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/Rain.JPG',
-            src: '/static/img/cards/townDailyEvents/Rain.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/StrangeLights.JPG',
-            src: '/static/img/cards/townDailyEvents/StrangeLights.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/TonicWagon.JPG',
-            src: '/static/img/cards/townDailyEvents/TonicWagon.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/WoundedSoldiers.JPG',
-            src: '/static/img/cards/townDailyEvents/WoundedSoldiers.JPG'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/AHelpingHand.jpg',
-            src: '/static/img/cards/townDailyEvents/AHelpingHand.jpg'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/IveSeenThings.jpg',
-            src: '/static/img/cards/townDailyEvents/IveSeenThings.jpg'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/LookingForWork.jpg',
-            src: '/static/img/cards/townDailyEvents/LookingForWork.jpg'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/TheyveAllHeardStories.jpg',
-            src: '/static/img/cards/townDailyEvents/TheyveAllHeardStories.jpg'
-          },
-          {
-            drawn: false,
-            title: 'static/img/cards/townDailyEvents/TaintedByDarkness.jpg',
-            src: '/static/img/cards/townDailyEvents/TaintedByDarkness.jpg'
-          }
-        ]
+        Deck: DAILY_EVENTS
       }
     }
   }

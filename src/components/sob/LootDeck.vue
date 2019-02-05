@@ -21,6 +21,7 @@
   </v-container>
 </template>
 <script>
+  import LOOT_CARDS from './data/lootCards.json'
   export default {
     name: 'loot-deck',
     mounted() {
@@ -54,68 +55,7 @@
     data() {
       return {
         numDrawn: 0,
-        Deck: [
-          {
-            drawn: false,
-            title: 'Blood Money',
-            src: '/static/img/cards/loot/loot_bloodMoney.png'
-          },
-          {
-            drawn: false,
-            title: 'Cash',
-            src: '/static/img/cards/loot/loot_Cash.png'
-          },
-          {
-            drawn: false,
-            title: 'Coins',
-            src: '/static/img/cards/loot/loot_coins.png'
-          },
-          {
-            drawn: false,
-            title: 'Dark Stone Rock',
-            src: '/static/img/cards/loot/loot_DarkStoneRock.png'
-          },
-          {
-            drawn: false,
-            title: 'Dark Stone Shard',
-            src: '/static/img/cards/loot/loot_DarkStoneShard.png'
-          },
-          {
-            drawn: false,
-            title: 'Gold Bars',
-            src: '/static/img/cards/loot/loot_goldBars.png'
-          },
-          {
-            drawn: false,
-            title: 'Gold Dust',
-            src: '/static/img/cards/loot/loot_goldDust.png'
-          },
-          {
-            drawn: false,
-            title: 'Gold Nuggets',
-            src: '/static/img/cards/loot/loot_goldNuggets.png'
-          },
-          {
-            drawn: false,
-            title: 'Handy',
-            src: '/static/img/cards/loot/loot_handy.png'
-          },
-          {
-            drawn: false,
-            title: 'What\'s This',
-            src: '/static/img/cards/loot/loot_whatsThis.png'
-          },
-          {
-            drawn: false,
-            title: 'Handy',
-            src: '/static/img/cards/loot/loot_handy.png'
-          },
-          {
-            drawn: false,
-            title: 'Dark Stone Shard',
-            src: '/static/img/cards/loot/loot_DarkStoneShard.png'
-          }
-        ]
+        Deck: LOOT_CARDS
       }
     }
   }

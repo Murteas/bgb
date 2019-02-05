@@ -40,10 +40,6 @@
             <town-panel/>
           </v-expansion-panel-content>
           <v-expansion-panel-content>
-            <span slot="header">Mine Panel</span>
-            <mine-panel/>
-          </v-expansion-panel-content>
-          <v-expansion-panel-content>
             <span slot="header">Campaign Panel</span>
             <campaign-panel/>
           </v-expansion-panel-content>
@@ -66,12 +62,9 @@
   import ScavengeDeck from './sob/ScavengeDeck'
   import EncounterDeck from './sob/EncounterDeck'
   import DiceRoller from './general/DiceRoller'
-  import TownBuildings from './sob/TownBuildings'
   import TownDailyEvents from './sob/TownDailyEvents'
-  import TownType from './sob/TownType'
   import DarknessRoll from './sob/DarknessRoll'
   import TownPanel from './sob/TownPanel'
-  import MinePanel from './sob/MinePanel'
   import CampaignPanel from './sob/CampaignPanel'
 
   export default {
@@ -86,18 +79,12 @@
       'scavenge-deck': ScavengeDeck,
       EncounterDeck,
       'encounter-deck': EncounterDeck,
-      TownBuildings,
-      'town-buildings': TownBuildings,
       TownDailyEvents,
       'town-daily-events': TownDailyEvents,
-      TownType,
-      'town-type': TownType,
       DarknessRoll,
       'darkness-roll': DarknessRoll,
       TownPanel,
       'town-panel': TownPanel,
-      MinePanel,
-      'mine-panel': MinePanel,
       CampaignPanel,
       'campaign-panel': CampaignPanel
     },
@@ -107,8 +94,6 @@
         lootDialog: false,
         scavengeDialog: false,
         encounterDialog: false,
-        townBuildingsDialog: false,
-        townDailyEventsDialog: false,
         townTypeDialog: false,
         darknessRollDialog: false
       }

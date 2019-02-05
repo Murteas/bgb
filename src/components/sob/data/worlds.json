@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Mines",
+    "color": "blue-grey darken-4"
+  },
+  {
+    "name": "Targa",
+    "color": "light-blue"
+  },
+  {
+    "name": "Jargono",
+    "color": "light-green darken-2"
+  },
+  {
+    "name": "Cynder",
+    "color": "deep-orange darken-3"
+  },
+  {
+    "name": "DerelictShip",
+    "color": "deep-purple accent-2"
+  },
+  {
+    "name": "Trederra",
+    "color": "lime darken-3"
+  },
+  {
+    "name": "Town",
+    "color": "brown lighten-2"
+  },
+  {
+    "name": "BlastedWastes",
+    "color": "brown darken-3"
+  },
+  {
+    "name": "Canyon",
+    "color": "brown accent-3"
+  }
+]

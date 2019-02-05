@@ -1,0 +1,90 @@
+[
+  {
+    "name": "Sslither, the World Eater",
+    "type": "Grand Shaman",
+    "otherworld": "Jargono",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Frost Bite",
+    "type": "Grand Shaman",
+    "otherworld": "Targa Plateau",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Master of the Sands",
+    "type": "Grand Shaman",
+    "otherworld": "Blasted Wastes",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Master Replica",
+    "type": "Flesh Stalker",
+    "otherworld": "Derelict Ship",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "The Perfector",
+    "type": "Flesh Stalker",
+    "otherworld": "Trederra",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "The Burning Cosmos",
+    "type": "Void Magus",
+    "otherworld": "Cynder",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "The Undying",
+    "type": "Void Magus",
+    "otherworld": "Derelict Ship",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Marshal Malaise",
+    "type": "Field Marshal",
+    "otherworld": "Trederra",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Forsook",
+    "type": "Harbinger",
+    "otherworld": "Jargono",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Monstro",
+    "type": "Goliath",
+    "otherworld": "Targa Plateau",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Sand Behemoth",
+    "type": "Goliath",
+    "otherworld": "Blasted Wastes",
+    "revealed": false,
+    "successfulMissions": 0,
+    "failedMissions": 0
+  }
+]

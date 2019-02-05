@@ -1,0 +1,110 @@
+[
+  {
+    "name": "Lt Bile",
+    "type": "Trederran Lt",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Lt Drift",
+    "type": "Trederran Lt",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Darkfang",
+    "type": "Serpent Shaman",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Plague Tongue",
+    "type": "Serpent Shaman",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Master Corruptor",
+    "type": "Void Sorceror",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Void Echo",
+    "type": "Void Sorceror",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "TombStone",
+    "type": "Undead Outlaw",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Mass Grave",
+    "type": "Undead Outlaw",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "The Beast",
+    "type": "Goliath",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Dark Guardian",
+    "type": "Harbinger",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "DeathMaw",
+    "type": "Goliath",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Dymond",
+    "type": "Harbinger",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  }
+]
