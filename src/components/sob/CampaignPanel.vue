@@ -73,7 +73,7 @@
   </v-container>
 </template>
 <script>
-  import OTHERWORLDS from './data/otherworlds.json'
+  import OTHERWORLDS from './data/worlds.json'
   import MISSIONS_BY_WORLD from './data/missions.json'
   import OVERLORDS from './data/overlords.json'
   import LIEUTENANTS from './data/lieutenants'
@@ -144,13 +144,14 @@
       generateMissions: function (type) {
         let customizedMissions = [];
         this.shuffle(this.missions.mineMissions);
+        this.shuffle(this.missions.fortressMissions);
         switch (type) {
           case 'Cynder':
             this.shuffle(this.missions.cynderMissions);
             customizedMissions = this.missions.cynderMissions.slice(0, 2);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
-          case 'Targa Plateau':
+          case 'Targa':
             this.shuffle(this.missions.targaMissions);
             customizedMissions = this.missions.targaMissions.slice(0, 2);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
@@ -165,16 +166,34 @@
             customizedMissions = this.missions.trederraMissions.slice(0, 2);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
-          case 'Derelict Ship':
+          case 'DerelictShip':
             this.shuffle(this.missions.derelictMissions);
             customizedMissions = this.missions.derelictMissions.slice(0, 2);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
-          case 'Blasted Wastes':
+          case 'BlastedWastes':
             this.shuffle(this.missions.blastedMissions);
             customizedMissions = this.missions.blastedMissions.slice(0, 2);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
+          case 'Belly':
+            this.shuffle(this.missions.bellyMissions);
+            customizedMissions = this.missions.bellyMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 2));
+            break;
+          case 'Forest':
+            this.shuffle(this.missions.forestMissions);
+            customizedMissions = this.missions.forestMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 2));
+            break;
+          case 'Haunted':
+            this.shuffle(this.missions.hauntedMissions);
+            customizedMissions = this.missions.hauntedMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 2));
+            break;
+          case 'Fortress':
+            customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 4));
+            break
           default:
             customizedMissions = this.missions.mineMissions.slice(0, 4);
             break;

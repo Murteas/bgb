@@ -5,15 +5,15 @@
   },
   {
     "name": "Targa",
-    "color": "light-blue"
+    "color": "light-blue lighten-4"
   },
   {
     "name": "Jargono",
-    "color": "light-green darken-2"
+    "color": "light-green darken-3"
   },
   {
     "name": "Cynder",
-    "color": "deep-orange darken-3"
+    "color": "deep-orange accent-3"
   },
   {
     "name": "DerelictShip",
@@ -21,7 +21,7 @@
   },
   {
     "name": "Trederra",
-    "color": "lime darken-3"
+    "color": "lime darken-4"
   },
   {
     "name": "Town",
@@ -34,5 +34,21 @@
   {
     "name": "Canyon",
     "color": "brown accent-3"
+  },
+  {
+    "name": "Belly",
+    "color": "lime"
+  },
+  {
+    "name": "Forest",
+    "color": "green"
+  },
+  {
+    "name": "Fortress",
+    "color": "grey"
+  },
+  {
+    "name": "Haunted",
+    "color": "purple"
   }
 ]
