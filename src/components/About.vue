@@ -14,14 +14,6 @@
         <v-flex sm6 md6>
           <list-randomizer/>
         </v-flex>
-        <v-flex sm8 md8>
-          <v-layout row wrap>
-            <random-die/>
-            <random-die/>
-            <random-die/>
-            <random-die/>
-          </v-layout>
-        </v-flex>
       </v-layout>
     </v-container>
   </div>
@@ -40,7 +32,7 @@
     },
     name: 'about',
     mounted() {
-      this.appVersion = '1.0.6o';
+      this.appVersion = '1.0.7a';
     },
     data: () => ({
       appVersion: '0.0.0',
