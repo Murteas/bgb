@@ -12,9 +12,12 @@
       <v-flex md6 sm6>
         <v-expansion-panel expand>
           <v-expansion-panel-content>
-            <div slot="header">Market Randomizer Web site</div>
+            <div slot="header">Market & Mage Randomizers</div>
             <a href="https://www.actionphasegames.com/pages/aerandomizer" target="_blank">
-              <h1>Aeon's End Randomizer</h1>
+              <h1>Official Randomizer</h1>
+            </a>
+            <a href="https://on3iro.github.io/aeons-end-randomizer/" target="_blank">
+              <h1>New Fan Made Randomizer</h1>
             </a>
           </v-expansion-panel-content>
         </v-expansion-panel>
