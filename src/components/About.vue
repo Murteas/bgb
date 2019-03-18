@@ -15,6 +15,10 @@
           <list-randomizer/>
         </v-flex>
       </v-layout>
+      <div>Warhammer Quest web helper</div>
+      <a href="https://mcchew.github.io/blackstone" target="_blank">
+        <h1>Warhammer Quest Hostile Card Helper</h1>
+      </a>
     </v-container>
   </div>
 </template>
