@@ -131,7 +131,9 @@
           lieutenant.otherworld = ow.name;
           lieutenant.color = ow.color;
         }
-        lieutenant.missions = this.generateMissions(lieutenant.otherworld);
+        if (lieutenant.missions.length === 0) {
+          lieutenant.missions = this.generateMissions(lieutenant.otherworld);
+        }
         return lieutenant;
       },
       createOverlord: function () {
@@ -148,47 +150,47 @@
         switch (type) {
           case 'Cynder':
             this.shuffle(this.missions.cynderMissions);
-            customizedMissions = this.missions.cynderMissions.slice(0, 2);
+            customizedMissions = this.missions.cynderMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Targa':
             this.shuffle(this.missions.targaMissions);
-            customizedMissions = this.missions.targaMissions.slice(0, 2);
+            customizedMissions = this.missions.targaMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Jargono':
             this.shuffle(this.missions.jargonoMissions);
-            customizedMissions = this.missions.jargonoMissions.slice(0, 2);
+            customizedMissions = this.missions.jargonoMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Trederra':
             this.shuffle(this.missions.trederraMissions);
-            customizedMissions = this.missions.trederraMissions.slice(0, 2);
+            customizedMissions = this.missions.trederraMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'DerelictShip':
             this.shuffle(this.missions.derelictMissions);
-            customizedMissions = this.missions.derelictMissions.slice(0, 2);
+            customizedMissions = this.missions.derelictMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'BlastedWastes':
             this.shuffle(this.missions.blastedMissions);
-            customizedMissions = this.missions.blastedMissions.slice(0, 2);
+            customizedMissions = this.missions.blastedMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
             break;
           case 'Belly':
             this.shuffle(this.missions.bellyMissions);
-            customizedMissions = this.missions.bellyMissions.slice(0, 2);
+            customizedMissions = this.missions.bellyMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 2));
             break;
           case 'Forest':
             this.shuffle(this.missions.forestMissions);
-            customizedMissions = this.missions.forestMissions.slice(0, 2);
+            customizedMissions = this.missions.forestMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 2));
             break;
           case 'Haunted':
             this.shuffle(this.missions.hauntedMissions);
-            customizedMissions = this.missions.hauntedMissions.slice(0, 2);
+            customizedMissions = this.missions.hauntedMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 2));
             break;
           case 'Fortress':

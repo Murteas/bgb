@@ -6,12 +6,6 @@
     "Seal the Gate",
     "Blow the Mine",
     "Escape",
-    "VM Hunted",
-    "VM Call of the Void",
-    "UO Wanted: Undead or Alive",
-    "UO Revenge of the Dead",
-    "FS Experimentation",
-    "FS Out of Time",
     "Canyon Missing Patrol",
     "Canyon Ghosts in the Dark"
   ],
@@ -37,9 +31,7 @@
     "The Lost Journal",
     "Cursed Idol",
     "Swamps of Death",
-    "Temple of Dread",
-    "SM Human Sacrifice",
-    "SM Warring Tribes"
+    "Temple of Dread"
   ],
   "derelictMissions": [
     "Time's Echo",
@@ -64,43 +56,38 @@
     "Warmaster's Fury"
   ],
   "townMissions": [
-    "Mission 1",
-    "Mission 2",
-    "Mission 3",
-    "Mission 4",
-    "Mission 5",
-    "Mission 6"
+    "Shootout in the Streets",
+    "Hanging High",
+    "Bank Robbery",
+    "Jail Break",
+    "Town Overrun",
+    "High Noon Duel"
   ],
   "bellyMissions": [
-    "Mission 1",
-    "Mission 2",
-    "Mission 3",
-    "Mission 4",
-    "Mission 5",
-    "Mission 6"
+    "A Living World",
+    "Devoured by the Beast",
+    "If it Bleeds",
+    "Beast Beneath the World"
   ],
   "fortressMissions": [
-    "Mission 1",
-    "Mission 2",
-    "Mission 3",
-    "Mission 4",
-    "Mission 5",
-    "Mission 6"
+    "Hunt for Dark Stone",
+    "Exploration",
+    "Seal the Void Gate",
+    "Search Party",
+    "Escape",
+    "Bring Down the Fortress"
   ],
   "forestMissions": [
-    "Mission 1",
-    "Mission 2",
-    "Mission 3",
-    "Mission 4",
-    "Mission 5",
-    "Mission 6"
+    "A Haunting",
+    "Overgrown",
+    "Into the Shadow Realm",
+    "Specters of the Past",
+    "Broken Amulet",
+    "Once a Hero"
   ],
   "hauntedMissions": [
-    "Mission 1",
-    "Mission 2",
-    "Mission 3",
-    "Mission 4",
-    "Mission 5",
-    "Mission 6"
+    "Castle of the Dead",
+    "The Sorcerer’s Library",
+    "Lost Explorer"
   ]
 }

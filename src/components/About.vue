@@ -36,7 +36,7 @@
     },
     name: 'about',
     mounted() {
-      this.appVersion = "100.0.1a";
+      this.appVersion = '0.23.1b';
     },
     data: () => ({
       appVersion: '0.0.0',

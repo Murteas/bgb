@@ -1,89 +1,235 @@
 [
   {
-    "name": "Sslither, the World Eater",
-    "type": "Grand Shaman",
-    "otherworld": "Jargono",
-    "revealed": false,
+    "name": "Abyss",
+    "type": "Goliath",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Frost Bite",
-    "type": "Grand Shaman",
-    "otherworld": "Targa Plateau",
-    "revealed": false,
+    "name": "Marshal Terror",
+    "type": "Trederran Field Marshal",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Master of the Sands",
-    "type": "Grand Shaman",
-    "otherworld": "Blasted Wastes",
-    "revealed": false,
+    "name": "Ssslither",
+    "type": "Grand Serpent Shaman",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Master Replica",
-    "type": "Flesh Stalker",
-    "otherworld": "Derelict Ship",
-    "revealed": false,
+    "name": "Mind Flayer",
+    "type": "Void Magus",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Grave Master",
+    "type": "Undead Gunslinger",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Apocalypse",
+    "type": "Harbinger",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "General Waste",
+    "type": "Wasteland Warmaster",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
     "name": "The Perfector",
     "type": "Flesh Stalker",
-    "otherworld": "Trederra",
-    "revealed": false,
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "The Burning Cosmos",
-    "type": "Void Magus",
-    "otherworld": "Cynder",
-    "revealed": false,
+    "name": "Illusio",
+    "type": "Harionago Apparition",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "The Undying",
-    "type": "Void Magus",
-    "otherworld": "Derelict Ship",
-    "revealed": false,
+    "name": "Mountain",
+    "type": "Living Statue",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Marshal Malaise",
-    "type": "Field Marshal",
-    "otherworld": "Trederra",
-    "revealed": false,
+    "name": "Betrayed One",
+    "type": "The Fallen Shogun",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Forsook",
-    "type": "Harbinger",
-    "otherworld": "Jargono",
-    "revealed": false,
+    "name": "Phantasm",
+    "type": "Legendary Spectre",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Monstro",
-    "type": "Goliath",
-    "otherworld": "Targa Plateau",
-    "revealed": false,
+    "name": "The Master",
+    "type": "Vampire Brood",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Sand Behemoth",
-    "type": "Goliath",
-    "otherworld": "Blasted Wastes",
-    "revealed": false,
+    "name": "World Eater",
+    "type": "Gastral Tyrant",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Cyclone",
+    "type": "Storm Lord",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Mother of Monsters",
+    "type": "Jorogumo",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Vengeance",
+    "type": "Elemental Dragon",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Sho-Riu",
+    "type": "Dragon King",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Dying Flame",
+    "type": "Onmorake",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Eternal Blade",
+    "type": "Ninja Master",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "The Red Ronin",
+    "type": "Red Ronin",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "The Taskmaster",
+    "type": "Nobu Taskmaster",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "General",
+    "type": "Undead Daimyo",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Void Sight",
+    "type": "Tengu Blind Master",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Emperor",
+    "type": "Master of the Court",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Hades",
+    "type": "Spirit Warden",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   }
