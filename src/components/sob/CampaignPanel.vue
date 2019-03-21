@@ -8,7 +8,7 @@
       <v-btn small fab color="green" @click.stop="warning=!warning">
         <v-icon>mdi-recycle</v-icon>
       </v-btn>
-      <v-btn small fab color="grey" @click.stop="campaign.Overlord.revealed=!campaign.Overlord.revealed">
+      <v-btn small fab color="grey" @click.stop="showBoss=!showBoss">
         <v-icon>mdi-eye-off</v-icon>
       </v-btn>
     </v-speed-dial>
@@ -18,21 +18,21 @@
     </v-alert>
     <v-layout column>
       <v-flex sm12 >
-        <v-layout row justify-center >
-          <h1> {{campaign.Overlord.name}}</h1>
-          <v-chip outline color="black" :v-model=campaign.Overlord.revealed>{{campaign.Overlord.type}}</v-chip>
-          <v-chip color="green" @click.native="addSuccess(campaign.Overlord)">{{campaign.Overlord.successfulMissions}}
-          </v-chip>
-          <v-chip color="red" @click.native="addFailure(campaign.Overlord)">{{campaign.Overlord.failedMissions}}
-          </v-chip>
-          <v-chip outline color="white">{{campaign.Overlord.otherworld}}</v-chip>
-        </v-layout>
+        <!--<v-layout row justify-center >-->
+          <!--<h1> {{campaign.Overlord.name}}</h1>-->
+          <!--<v-chip outline color="black" :v-model=campaign.Overlord.revealed>{{campaign.Overlord.type}}</v-chip>-->
+          <!--<v-chip color="green" @click.native="addSuccess(campaign.Overlord)">{{campaign.Overlord.successfulMissions}}-->
+          <!--</v-chip>-->
+          <!--<v-chip color="red" @click.native="addFailure(campaign.Overlord)">{{campaign.Overlord.failedMissions}}-->
+          <!--</v-chip>-->
+          <!--<v-chip outline color="white">{{campaign.Overlord.otherworld}}</v-chip>-->
+        <!--</v-layout>-->
       </v-flex>
       <v-layout row wrap>
-        <v-flex sm4 md4 v-for="lt in campaign.Lieutenants" :key="lt.name">
-          <v-card color="black" height="100%">
+        <v-flex sm7 md7 v-for="lt in campaign.Lieutenants" :key="lt.name">
+          <v-card color="black" height="100%" v-if="showBoss">
             <v-toolbar :color="lt.color">
-              <v-toolbar-title>
+              <v-toolbar-title >
                 <v-menu offset-y>
                   <span slot="activator">{{lt.name}}</span>
                   <v-list>
@@ -114,11 +114,11 @@
         localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
       },
       createCampaign: function () {
-        this.shuffle(this.overlords);
+        //this.shuffle(this.overlords);
         this.shuffle(this.lieutenants);
-        this.campaign.Overlord = this.createOverlord();
+        //this.campaign.Overlord = this.createLt(0);
         this.campaign.Lieutenants = [];
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 1; i++) {
           this.campaign.Lieutenants.push(this.createLt(i));
         }
         localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
@@ -220,6 +220,7 @@
       return {
         fab: false,
         warning: false,
+        showBoss: false,
         otherworldTypes: OTHERWORLDS,
         missions: MISSIONS_BY_WORLD,
         campaign: {
