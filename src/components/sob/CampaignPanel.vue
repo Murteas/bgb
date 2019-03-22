@@ -17,22 +17,22 @@
       <v-btn color="deep-orange accent-3" @click.native="createCampaign()">YES</v-btn>
     </v-alert>
     <v-layout column>
-      <v-flex sm12 >
+      <v-flex sm12>
         <!--<v-layout row justify-center >-->
-          <!--<h1> {{campaign.Overlord.name}}</h1>-->
-          <!--<v-chip outline color="black" :v-model=campaign.Overlord.revealed>{{campaign.Overlord.type}}</v-chip>-->
-          <!--<v-chip color="green" @click.native="addSuccess(campaign.Overlord)">{{campaign.Overlord.successfulMissions}}-->
-          <!--</v-chip>-->
-          <!--<v-chip color="red" @click.native="addFailure(campaign.Overlord)">{{campaign.Overlord.failedMissions}}-->
-          <!--</v-chip>-->
-          <!--<v-chip outline color="white">{{campaign.Overlord.otherworld}}</v-chip>-->
+        <!--<h1> {{campaign.Overlord.name}}</h1>-->
+        <!--<v-chip outline color="black" :v-model=campaign.Overlord.revealed>{{campaign.Overlord.type}}</v-chip>-->
+        <!--<v-chip color="green" @click.native="addSuccess(campaign.Overlord)">{{campaign.Overlord.successfulMissions}}-->
+        <!--</v-chip>-->
+        <!--<v-chip color="red" @click.native="addFailure(campaign.Overlord)">{{campaign.Overlord.failedMissions}}-->
+        <!--</v-chip>-->
+        <!--<v-chip outline color="white">{{campaign.Overlord.otherworld}}</v-chip>-->
         <!--</v-layout>-->
       </v-flex>
       <v-layout row wrap>
         <v-flex sm7 md7 v-for="lt in campaign.Lieutenants" :key="lt.name">
           <v-card color="black" height="100%" v-if="showBoss">
             <v-toolbar :color="lt.color">
-              <v-toolbar-title >
+              <v-toolbar-title>
                 <v-menu offset-y>
                   <span slot="activator">{{lt.name}}</span>
                   <v-list>
@@ -77,6 +77,7 @@
   import MISSIONS_BY_WORLD from './data/missions.json'
   import OVERLORDS from './data/overlords.json'
   import LIEUTENANTS from './data/lieutenants'
+
   export default {
     name: 'campaign-panel',
     mounted() {
@@ -114,9 +115,9 @@
         localStorage.setItem('campaignPanel', JSON.stringify(this.campaign));
       },
       createCampaign: function () {
-        //this.shuffle(this.overlords);
+        // this.shuffle(this.overlords);
         this.shuffle(this.lieutenants);
-        //this.campaign.Overlord = this.createLt(0);
+        // this.campaign.Overlord = this.createLt(0);
         this.campaign.Lieutenants = [];
         for (let i = 0; i < 1; i++) {
           this.campaign.Lieutenants.push(this.createLt(i));
@@ -131,9 +132,7 @@
           lieutenant.otherworld = ow.name;
           lieutenant.color = ow.color;
         }
-        if (lieutenant.missions.length === 0) {
-          lieutenant.missions = this.generateMissions(lieutenant.otherworld);
-        }
+        lieutenant.missions = lieutenant.missions.concat(this.generateMissions(lieutenant.otherworld));
         return lieutenant;
       },
       createOverlord: function () {

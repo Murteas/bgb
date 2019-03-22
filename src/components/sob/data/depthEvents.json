@@ -232,5 +232,109 @@
       "roll": "6",
       "description": "6 Stubborn Resolve – This place is horrible and unforgiving, but you’re not about to give up without a fight! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
     }
+  ],
+  "Belly": [
+    {
+      "roll": "1",
+      "description": "1 Ambush Attack - There are fiendish creatures and demons in the dark places of the world! Ambush Attack! Draw a threat to immediately Ambush the Heroes."
+    },
+    {
+      "roll": "2",
+      "description": "2 Dark Dread – Things are looking more and more bleak by the moment! Draw a Growing Dread card to add to the stack."
+    },
+    {
+      "roll": "3",
+      "description": "3 Creeping Darkness – The Darkness is always searching for a way out! Move the Darkness 2 steps forward on the Depth Track."
+    },
+    {
+      "roll": "4",
+      "description": "4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
+    },
+    {
+      "roll": "5",
+      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card."
+    },
+    {
+      "roll": "6",
+      "description": "6 Stubborn Resolve – This place is horrible and unforgiving, but you’re not about to give up without a fight! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
+    }
+  ],
+  "Forest": [
+    {
+      "roll": "1",
+      "description": "1 Ambush Attack - There are fiendish creatures and demons in the dark places of the world! Ambush Attack! Draw a threat to immediately Ambush the Heroes."
+    },
+    {
+      "roll": "2",
+      "description": "2 Dark Dread – Things are looking more and more bleak by the moment! Draw a Growing Dread card to add to the stack."
+    },
+    {
+      "roll": "3",
+      "description": "3 Creeping Darkness – The Darkness is always searching for a way out! Move the Darkness 2 steps forward on the Depth Track."
+    },
+    {
+      "roll": "4",
+      "description": "4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
+    },
+    {
+      "roll": "5",
+      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card."
+    },
+    {
+      "roll": "6",
+      "description": "6 Stubborn Resolve – This place is horrible and unforgiving, but you’re not about to give up without a fight! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
+    }
+  ],
+  "Fortress": [
+    {
+      "roll": "1",
+      "description": "1 Ambush Attack - There are fiendish creatures and demons in the dark places of the world! Ambush Attack! Draw a threat to immediately Ambush the Heroes."
+    },
+    {
+      "roll": "2",
+      "description": "2 Dark Dread – Things are looking more and more bleak by the moment! Draw a Growing Dread card to add to the stack."
+    },
+    {
+      "roll": "3",
+      "description": "3 Creeping Darkness – The Darkness is always searching for a way out! Move the Darkness 2 steps forward on the Depth Track."
+    },
+    {
+      "roll": "4",
+      "description": "4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
+    },
+    {
+      "roll": "5",
+      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card."
+    },
+    {
+      "roll": "6",
+      "description": "6 Stubborn Resolve – This place is horrible and unforgiving, but you’re not about to give up without a fight! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
+    }
+  ],
+  "Haunted": [
+    {
+      "roll": "1",
+      "description": "1 Ambush Attack - There are fiendish creatures and demons in the dark places of the world! Ambush Attack! Draw a threat to immediately Ambush the Heroes."
+    },
+    {
+      "roll": "2",
+      "description": "2 Dark Dread – Things are looking more and more bleak by the moment! Draw a Growing Dread card to add to the stack."
+    },
+    {
+      "roll": "3",
+      "description": "3 Creeping Darkness – The Darkness is always searching for a way out! Move the Darkness 2 steps forward on the Depth Track."
+    },
+    {
+      "roll": "4",
+      "description": "4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
+    },
+    {
+      "roll": "5",
+      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card."
+    },
+    {
+      "roll": "6",
+      "description": "6 Stubborn Resolve – This place is horrible and unforgiving, but you’re not about to give up without a fight! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
+    }
   ]
 }

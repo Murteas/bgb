@@ -67,7 +67,8 @@
     "A Living World",
     "Devoured by the Beast",
     "If it Bleeds",
-    "Beast Beneath the World"
+    "Beast Beneath the World",
+    "Ancient Hunger"
   ],
   "fortressMissions": [
     "Hunt for Dark Stone",
@@ -75,7 +76,11 @@
     "Seal the Void Gate",
     "Search Party",
     "Escape",
-    "Bring Down the Fortress"
+    "Bring Down the Fortress",
+    "Cursed Temple",
+    "Sacred Relic",
+    "Enemy at the Gates",
+    "Power of the Shogun"
   ],
   "forestMissions": [
     "A Haunting",

@@ -59,6 +59,18 @@
             case 'Canyon':
               this.currentEffect = 'Canyon: ' + this.depthEvents.Canyon[dieRoll].description;
               break;
+            case 'Belly':
+              this.currentEffect = 'Belly: ' + this.depthEvents.Belly[dieRoll].description;
+              break;
+            case 'Forest':
+              this.currentEffect = 'Forest: ' + this.depthEvents.Forest[dieRoll].description;
+              break;
+            case 'Fortress':
+              this.currentEffect = 'Fortress: ' + this.depthEvents.Fortress[dieRoll].description;
+              break;
+            case 'Haunted':
+              this.currentEffect = 'Haunted: ' + this.depthEvents.Haunted[dieRoll].description;
+              break;
           }
         }
       },
