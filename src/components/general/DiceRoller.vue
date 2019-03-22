@@ -1,23 +1,9 @@
 <template>
   <v-container fluid grid-list-sm secondary>
-    <v-layout row>
-      <v-flex sm3 md3>
+    <v-layout row wrap>
+      <v-flex sm3 md2>
         <v-layout column wrap>
           <v-flex>
-            <v-layout row wrap>
-              <v-btn fab color="green accent-4" @click.native="rollDice()">
-                <v-icon>mdi-dice-multiple</v-icon>
-              </v-btn>
-              <v-layout column>
-                <v-btn flat icon color="white" @click.native.stop="dialog = true">
-                  <v-icon>mdi-table</v-icon>
-                </v-btn>
-                <v-btn flat icon :color="select.color"
-                       @click.native="selectDieType()">
-                  <span>{{select.dieType}} </span>
-                </v-btn>
-              </v-layout>
-            </v-layout>
             <v-layout row>
               <v-btn flat icon color="blue darken-2" @click.native="changeNumDice(-1)">
                 <v-icon>mdi-minus</v-icon>
@@ -28,9 +14,20 @@
               </v-btn>
             </v-layout>
           </v-flex>
+          <v-flex>
+            <v-layout row>
+              <v-btn flat icon :color="select.color"
+                     @click.native="selectDieType()">
+                <span>{{select.dieType}} </span>
+              </v-btn>
+              <v-btn icon large color="green accent-4" @click.native="rollDice()">
+                <v-icon>mdi-dice-multiple</v-icon>
+              </v-btn>
+            </v-layout>
+          </v-flex>
         </v-layout>
       </v-flex>
-      <v-flex sm9 md9>
+      <v-flex sm9 md10>
         <v-layout row wrap grid-list-sm
                   v-touch="{left: () => changeNumDice(-1),
                   right: () => changeNumDice(1)}"
