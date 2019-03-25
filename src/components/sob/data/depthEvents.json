@@ -222,11 +222,11 @@
     },
     {
       "roll": "4",
-      "description": "4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
+      "description": "4 Rockslide – The Canyon cliffs are unstable and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
     },
     {
       "roll": "5",
-      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card."
+      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is already the case immediate ambush attack. Draw a Threat card."
     },
     {
       "roll": "6",
@@ -248,15 +248,15 @@
     },
     {
       "roll": "4",
-      "description": "4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
+      "description": "4 Bursting Pustules – Polyps and pustules lining the walls begin to expand and burst showering you in burning and sizzling fluids. Every hero must roll a D6.  On a roll of 1-3, gain a Bleeding marker."
     },
     {
       "roll": "5",
-      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card."
+      "description": "5 Raining Mucus – The heavy and humid air within the massive chambers of the beast begins to condense creating a rainfall of sticky, itching mucus. Weather - While in the Belly of the Beast, a Hero takes 1 automatic Horror Hit at the start of each turn (stacks if rolled multiple times)."
     },
     {
       "roll": "6",
-      "description": "6 Stubborn Resolve – This place is horrible and unforgiving, but you’re not about to give up without a fight! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
+      "description": "6 Fight for Survival – Every step you take in the living world is a struggle for survival as you fend off the nightmarish creatures and burning acids that inhabit the belly of this massive beast! Each Hero may Recover Grit up to their Max.. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
     }
   ],
   "Forest": [
@@ -300,11 +300,11 @@
     },
     {
       "roll": "4",
-      "description": "4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
+      "description": "4 Splintered Collapse – the broken and splintered ceiling of the fortress is unstable and prone to collapse. Each Hero in the Fortress immediately takes 3 Hits that do 2 Wounds each."
     },
     {
       "roll": "5",
-      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card."
+      "description": "5 Echoing Laughter – A sinister and booming laughter echoes through the fortress, chilling you to the bone. Each Hero in the Fortress immediately takes 3 Horror Hits that do 2 Sanity Damage each."
     },
     {
       "roll": "6",
