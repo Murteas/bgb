@@ -262,7 +262,7 @@
   "Forest": [
     {
       "roll": "1",
-      "description": "1 Ambush Attack - There are fiendish creatures and demons in the dark places of the world! Ambush Attack! Draw a threat to immediately Ambush the Heroes."
+      "description": "1 Ambush Attack - Among the decayed and twisted trees, terrible things lurk, waiting to pounce. Draw a threat to immediately Ambush the Heroes."
     },
     {
       "roll": "2",
@@ -274,15 +274,15 @@
     },
     {
       "roll": "4",
-      "description": "4 Rockslide – The Canyon cliffs are unstabe and prone to rockslides. Each Hero in the Canyons takes D3 Hits for 3 Dmg each"
+      "description": "4 Dark Influence – The evil of the dark forest can be felt with every step in the moist earth, and every breath of fetid air.  Each Hero takes 1 Corruption Hit."
     },
     {
       "roll": "5",
-      "description": "5 Being Watched – You can't shake the feeling that you are being watched. The next Attack in the Canyons is an Ambush.  If that is alredy the case immediate ambush attack. Draw a Threat card."
+      "description": "5 Malign Spirits – Scratching and clawing at you with their icy fingers, the dark spirits of the wood tear at your body and mind! Each Hero immediately takes 2 Hits and 2 Horror Hits each do Dmg/Sanity Damage equal to your level."
     },
     {
       "roll": "6",
-      "description": "6 Stubborn Resolve – This place is horrible and unforgiving, but you’re not about to give up without a fight! Each Hero may immediately Heal D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, rolling for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
+      "description": "6 Not All Has Fallen to Shadow – A bright spirit emerges from the fog, a Hero of old to aid you in your passage through this terrifying realm. Each Hero may immediately remove any Status effect markers, as weall as Heal 2D6 Wounds/Sanity (any mix) or Recover 1 Grit. KO’d Heroes may immediately Recover, do not roll for their Injury/Madness and Healing 2D6 Wounds/Sanity (any mix) as normal for Recovering."
     }
   ],
   "Fortress": [

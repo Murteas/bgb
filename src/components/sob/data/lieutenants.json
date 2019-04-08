@@ -121,7 +121,7 @@
   },
   {
     "name": "LightBane",
-    "type": "Vampire Brood",
+    "type": "BloodMistress",
     "otherworld": "RANDOM",
     "color": "white",
     "revealed": false,
@@ -381,7 +381,7 @@
   },
   {
     "name": "The Master",
-    "type": "Vampire Brood",
+    "type": "BloodMistress",
     "otherworld": "RANDOM",
     "color": "white",
     "revealed": false,
