@@ -192,14 +192,14 @@
             this.shuffle(this.missions.canyonMissions);
             customizedMissions = this.missions.canyonMissions.slice(0, 2);
             customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
-            customizedMissions = customizedMissions.concat(this.missions.townMissions.slice(0,2));
+            customizedMissions = customizedMissions.concat(this.missions.townMissions.slice(0, 2));
             break;
           case 'Fortress':
             customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 6));
             break
           default:
             customizedMissions = this.missions.mineMissions.slice(0, 4);
-            customizedMissions = customizedMissions.concat(this.missions.townMissions.slice(0,2));
+            customizedMissions = customizedMissions.concat(this.missions.townMissions.slice(0, 2));
             break;
         }
         return customizedMissions;
