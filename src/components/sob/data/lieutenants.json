@@ -12,8 +12,8 @@
   {
     "name": "Marshal Bile",
     "type": "Trederran Field Marshal",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "otherworld": "Trederra",
+    "color": "lime darken-4",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
@@ -22,8 +22,8 @@
   {
     "name": "Plague Tongue",
     "type": "Grand Serpent Shaman",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "otherworld": "Jargono",
+    "color": "light-green darken-3",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
@@ -62,6 +62,16 @@
   {
     "name": "SandMaster",
     "type": "Wasteland Warmaster",
+    "otherworld": "BlastedWastes",
+    "color": "brown darken-3",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Dr. Rot",
+    "type": "Flesh Stalker",
     "otherworld": "RANDOM",
     "color": "white",
     "revealed": false,
@@ -70,7 +80,7 @@
     "failedMissions": 0
   },
   {
-    "name": "Dr. Rot",
+    "name": "The Surgeon",
     "type": "Flesh Stalker",
     "otherworld": "RANDOM",
     "color": "white",
@@ -91,29 +101,19 @@
   },
   {
     "name": "The Guard",
-    "type": "Living Statue",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "type": "Metal Living Statue",
+    "otherworld": "Fortress",
+    "color": "grey",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Dark Mask",
+    "name": "Master Cthul",
     "type": "The Fallen Shogun",
-    "otherworld": "RANDOM",
-    "color": "white",
-    "revealed": false,
-    "missions": [],
-    "successfulMissions": 0,
-    "failedMissions": 0
-  },
-  {
-    "name": "Death Rattle",
-    "type": "Legendary Spectre",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "otherworld": "Fortress",
+    "color": "grey",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
@@ -130,10 +130,10 @@
     "failedMissions": 0
   },
   {
-    "name": "Disingrator",
+    "name": "Vacuum Tyrant",
     "type": "Gastral Tyrant",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "otherworld": "DerelictShip",
+    "color": "deep-purple accent-2",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
@@ -161,7 +161,37 @@
   },
   {
     "name": "Malfeasance",
-    "type": "Elemental Dragon",
+    "type": "Earth Elemental Dragon",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Mistral",
+    "type": "Wind Elemental Dragon",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Inferno",
+    "type": "Fire Elemental Dragon",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Tsunami",
+    "type": "Water Elemental Dragon",
     "otherworld": "RANDOM",
     "color": "white",
     "revealed": false,
@@ -200,27 +230,7 @@
     "failedMissions": 0
   },
   {
-    "name": "The Red Ronin",
-    "type": "Red Ronin",
-    "otherworld": "RANDOM",
-    "color": "white",
-    "revealed": false,
-    "missions": [],
-    "successfulMissions": 0,
-    "failedMissions": 0
-  },
-  {
-    "name": "The Taskmaster",
-    "type": "Nobu Taskmaster",
-    "otherworld": "RANDOM",
-    "color": "white",
-    "revealed": false,
-    "missions": [],
-    "successfulMissions": 0,
-    "failedMissions": 0
-  },
-  {
-    "name": "General",
+    "name": "General Skull",
     "type": "Undead Daimyo",
     "otherworld": "RANDOM",
     "color": "white",
@@ -360,20 +370,60 @@
     "failedMissions": 0
   },
   {
-    "name": "Betrayed One",
-    "type": "The Fallen Shogun",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "name": "Shenmo Tanaka",
+    "type": "Legendary Spectre",
+    "otherworld": "Forest",
+    "color": "green",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
     "failedMissions": 0
   },
   {
-    "name": "Phantasm",
+    "name": "Hoki Anno",
     "type": "Legendary Spectre",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "otherworld": "Cynder",
+    "color": "orange",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Rami Ka",
+    "type": "Legendary Spectre",
+    "otherworld": "BlastedWastes",
+    "color": "brown darken-3",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Irasmus Bane",
+    "type": "Legendary Spectre",
+    "otherworld": "Canyon",
+    "color": "brown accent-3",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Constable Ludlow",
+    "type": "Legendary Spectre",
+    "otherworld": "Targa",
+    "color": "light-blue lighten-4",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Valentina De la Rosa",
+    "type": "Legendary Spectre",
+    "otherworld": "Belly",
+    "color": "lime",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
@@ -382,8 +432,8 @@
   {
     "name": "The Master",
     "type": "BloodMistress",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "otherworld": "Forest",
+    "color": "green",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
@@ -392,8 +442,8 @@
   {
     "name": "World Eater",
     "type": "Gastral Tyrant",
-    "otherworld": "RANDOM",
-    "color": "white",
+    "otherworld": "Belly",
+    "color": "lime",
     "revealed": false,
     "missions": [],
     "successfulMissions": 0,
@@ -412,26 +462,6 @@
   {
     "name": "Mother of Monsters",
     "type": "Jorogumo",
-    "otherworld": "RANDOM",
-    "color": "white",
-    "revealed": false,
-    "missions": [],
-    "successfulMissions": 0,
-    "failedMissions": 0
-  },
-  {
-    "name": "Vengeance",
-    "type": "Elemental Dragon",
-    "otherworld": "RANDOM",
-    "color": "white",
-    "revealed": false,
-    "missions": [],
-    "successfulMissions": 0,
-    "failedMissions": 0
-  },
-  {
-    "name": "Sho-Riu",
-    "type": "Dragon King",
     "otherworld": "RANDOM",
     "color": "white",
     "revealed": false,
@@ -472,26 +502,6 @@
   {
     "name": "The Taskmaster",
     "type": "Nobu Taskmaster",
-    "otherworld": "RANDOM",
-    "color": "white",
-    "revealed": false,
-    "missions": [],
-    "successfulMissions": 0,
-    "failedMissions": 0
-  },
-  {
-    "name": "General",
-    "type": "Undead Daimyo",
-    "otherworld": "RANDOM",
-    "color": "white",
-    "revealed": false,
-    "missions": [],
-    "successfulMissions": 0,
-    "failedMissions": 0
-  },
-  {
-    "name": "Void Sight",
-    "type": "Tengu Blind Master",
     "otherworld": "RANDOM",
     "color": "white",
     "revealed": false,
