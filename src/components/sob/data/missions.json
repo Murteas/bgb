@@ -5,7 +5,9 @@
     "Rescue Party",
     "Seal the Gate",
     "Blow the Mine",
-    "Escape",
+    "Escape"
+  ],
+  "canyonMissions": [
     "Canyon Missing Patrol",
     "Canyon Ghosts in the Dark"
   ],
@@ -80,7 +82,10 @@
     "Cursed Temple",
     "Sacred Relic",
     "Enemy at the Gates",
-    "Power of the Shogun"
+    "Power of the Shogun",
+    "Castle of the Dead",
+    "The Sorcerer’s Library",
+    "Lost Explorer"
   ],
   "forestMissions": [
     "A Haunting",
@@ -89,10 +94,5 @@
     "Specters of the Past",
     "Broken Amulet",
     "Once a Hero"
-  ],
-  "hauntedMissions": [
-    "Castle of the Dead",
-    "The Sorcerer’s Library",
-    "Lost Explorer"
   ]
 }

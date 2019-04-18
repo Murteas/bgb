@@ -146,6 +146,7 @@
         let customizedMissions = [];
         this.shuffle(this.missions.mineMissions);
         this.shuffle(this.missions.fortressMissions);
+        this.shuffle(this.missions.townMissions);
         switch (type) {
           case 'Cynder':
             this.shuffle(this.missions.cynderMissions);
@@ -187,16 +188,18 @@
             customizedMissions = this.missions.forestMissions.slice(0, 4);
             customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 2));
             break;
-          case 'Haunted':
-            this.shuffle(this.missions.hauntedMissions);
-            customizedMissions = this.missions.hauntedMissions.slice(0, 4);
-            customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 2));
+          case 'Canyon':
+            this.shuffle(this.missions.canyonMissions);
+            customizedMissions = this.missions.canyonMissions.slice(0, 2);
+            customizedMissions = customizedMissions.concat(this.missions.mineMissions.slice(0, 2));
+            customizedMissions = customizedMissions.concat(this.missions.townMissions.slice(0,2));
             break;
           case 'Fortress':
-            customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 4));
+            customizedMissions = customizedMissions.concat(this.missions.fortressMissions.slice(0, 6));
             break
           default:
             customizedMissions = this.missions.mineMissions.slice(0, 4);
+            customizedMissions = customizedMissions.concat(this.missions.townMissions.slice(0,2));
             break;
         }
         return customizedMissions;

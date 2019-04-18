@@ -68,9 +68,6 @@
             case 'Fortress':
               this.currentEffect = 'Fortress: ' + this.depthEvents.Fortress[dieRoll].description;
               break;
-            case 'Haunted':
-              this.currentEffect = 'Haunted: ' + this.depthEvents.Haunted[dieRoll].description;
-              break;
           }
         }
       },

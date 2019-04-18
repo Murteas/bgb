@@ -4,7 +4,7 @@
       <v-layout align-center column>
         <v-flex text-xs-center>
           <h1>Board Game Buddy</h1>
-          <h5>{{appVersion}}</h5>
+          <v-badge color="green">{{appVersion}}</v-badge>
         </v-flex>
         <v-btn color="red" dark v-if="!warning" @click="warning = true">Clear all Saved Data</v-btn>
         <v-alert type="warning" dismissible v-model="warning">
@@ -15,9 +15,9 @@
           <list-randomizer/>
         </v-flex>
       </v-layout>
-      <div>Warhammer Quest web helper</div>
+      <div>Blackstone Fortress Warhammer Quest web helper</div>
       <a href="https://mcchew.github.io/blackstone" target="_blank">
-        <h1>Warhammer Quest Hostile Card Helper</h1>
+        <h1>Blackstone Fortress Hostile Card Helper</h1>
       </a>
     </v-container>
   </div>
@@ -36,7 +36,7 @@
     },
     name: 'about',
     mounted() {
-      this.appVersion = '0.25.3d';
+      this.appVersion = '0.26.0';
     },
     data: () => ({
       appVersion: '0.0.0',
