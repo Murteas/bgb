@@ -141,7 +141,7 @@
   },
   {
     "name": "Fury",
-    "type": "Storm Lord",
+    "type": "Rain Storm Lord",
     "otherworld": "RANDOM",
     "color": "white",
     "revealed": false,
@@ -451,7 +451,27 @@
   },
   {
     "name": "Cyclone",
-    "type": "Storm Lord",
+    "type": "Wind Storm Lord",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "SkyFire",
+    "type": "Lightning Storm Lord",
+    "otherworld": "RANDOM",
+    "color": "white",
+    "revealed": false,
+    "missions": [],
+    "successfulMissions": 0,
+    "failedMissions": 0
+  },
+  {
+    "name": "Devastator",
+    "type": "Thunder Storm Lord",
     "otherworld": "RANDOM",
     "color": "white",
     "revealed": false,
