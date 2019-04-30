@@ -14,7 +14,7 @@
       <v-layout row wrap>
         <v-flex sm4 md4 v-for="(value, i) in numDrawn" :key="i">
           <img class="image" :src="Deck[i].src" :alt="Deck[i].title"
-               width="85%">
+               width="100%">
         </v-flex>
       </v-layout>
     </v-layout>

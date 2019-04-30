@@ -1,104 +1,81 @@
 <template>
   <v-container fluid grid-list-sm>
-    <v-layout row wrap>
-      <v-btn @click.native="DarknessRoll()">
-        <v-icon>mdi-dice-multiple</v-icon>
-        <b>Roll</b>
-      </v-btn>
-      <v-btn :color="locationColor" @click.native="nextWorld()">{{currentLocation}}</v-btn>
-      <h1>{{die1}} + {{die2}} = {{rollSum}} </h1>
-      <v-flex xs12>{{currentEffect}}</v-flex>
+    <v-layout row>
+      <v-layout column>
+        <v-btn color="green" @click.native="addThreat('low')">
+          <h3>Low</h3>
+        </v-btn>
+        <v-btn color="yellow" @click.native="addThreat('med')">
+          <h3>Med</h3>
+        </v-btn>
+        <v-btn color="red" @click.native="addThreat('high')">
+          <h3>High</h3>
+        </v-btn>
+        <v-btn color="blue" @click.native="addThreat('epic')">
+          <h3>Epic</h3>
+        </v-btn>
+        <v-btn @click.native="rebuildThreats()">
+          <v-icon>mdi-cards</v-icon>
+          <span>Reshuffle</span>
+        </v-btn>
+      </v-layout>
+      <v-layout column>
+        <ul id="threats">
+          <li v-for="threat in currentThreats">
+            <h3>{{ threat }}</h3>
+          </li>
+        </ul>
+      </v-layout>
     </v-layout>
   </v-container>
 </template>
 <script>
-  import EPIC_THREAT from './data/mineEpicThreat.json'
-  import HIGH_THREAT from './data/mineHighThreat.json'
-  import MED_THREAT from './data/mineMedThreat.json'
-  import LOW_THREAT from './data/mineLowThreat.json'
+  import MINE_THREAT from './data/mineThreat.json'
+
   export default {
     name: 'threat-decks',
     mounted() {
-      if (localStorage.getItem('lowThreatDeck')) {
-        this.Deck = JSON.parse(localStorage.getItem('lootDeck'));
-        this.numDrawn = parseInt(localStorage.getItem('lootNumDrawn'));
+      if (localStorage.getItem("mineThreats")) {
+        this.mineThreats = JSON.parse(localStorage.getItem("mineThreats"));
+        this.currentThreats = JSON.parse(localStorage.getItem("currentThreats"));
       } else {
-        this.shuffleDeck();
+        this.rebuildThreats();
       }
     },
     methods: {
-      DarknessRoll() {
-        this.die1 = this.rollDice(1, 6);
-        this.die2 = this.rollDice(1, 6);
-        this.rollSum = this.die1 + this.die2;
-        this.UpdateEventText();
-      },
-      UpdateEventText() {
-        if (this.die1 !== this.die2) {
-          this.currentEffect = 'No event'
-        } else {
-          let dieRoll = this.die1 - 1;
-          switch (this.currentLocation) {
-            case 'Mines':
-              this.currentEffect = 'Mines: ' + this.depthEvents.Mines[dieRoll].description;
-              break;
-            case 'Targa':
-              this.currentEffect = 'Targa: ' + this.depthEvents.Targa[dieRoll].description;
-              break;
-            case 'Jargono':
-              this.currentEffect = 'Jargono: ' + this.depthEvents.Jargono[dieRoll].description;
-              break;
-            case 'Cynder':
-              this.currentEffect = 'Cynder: ' + this.depthEvents.Cynder[dieRoll].description;
-              break;
-            case 'Trederra':
-              this.currentEffect = 'Trederra: ' + this.depthEvents.Trederra[dieRoll].description;
-              break;
-            case 'DerelictShip':
-              this.currentEffect = 'Derelict Ship: ' + this.depthEvents.DerelictShip[dieRoll].description;
-              break;
-            case 'Town':
-              this.currentEffect = 'Town: ' + this.depthEvents.Town[dieRoll].description;
-              break;
-            case 'BlastedWastes':
-              this.currentEffect = 'Blasted Wastes: ' + this.depthEvents.BlastedWastes[dieRoll].description;
-              break;
-            case 'Canyon':
-              this.currentEffect = 'Canyon: ' + this.depthEvents.Canyon[dieRoll].description;
-              break;
-            case 'Belly':
-              this.currentEffect = 'Belly: ' + this.depthEvents.Belly[dieRoll].description;
-              break;
-            case 'Forest':
-              this.currentEffect = 'Forest: ' + this.depthEvents.Forest[dieRoll].description;
-              break;
-            case 'Fortress':
-              this.currentEffect = 'Fortress: ' + this.depthEvents.Fortress[dieRoll].description;
-              break;
-          }
+      addThreat(type) {
+        switch (type) {
+          case 'low':
+            this.currentThreats.push(this.mineThreats.low.splice(0, 1)[0]);
+            break;
+          case 'med':
+            this.currentThreats.push(this.mineThreats.med.splice(0, 1)[0]);
+            break;
+          case 'high':
+            this.currentThreats.push(this.mineThreats.high.splice(0, 1)[0]);
+            break;
+          case 'epic':
+            this.currentThreats.push(this.mineThreats.epic.splice(0, 1)[0]);
+            break;
         }
+        localStorage.setItem("mineThreats", JSON.stringify(this.mineThreats));
+        localStorage.setItem("currentThreats", JSON.stringify(this.currentThreats));
       },
-      nextWorld() {
-        this.locationIndex += 1;
-        if (this.locationIndex >= this.Worlds.length) {
-          this.locationIndex = 0;
-        }
-        this.currentLocation = this.Worlds[this.locationIndex].name;
-        this.locationColor = this.Worlds[this.locationIndex].color;
-        this.UpdateEventText();
+      rebuildThreats() {
+        this.mineThreats = MINE_THREAT;
+        this.shuffle(this.mineThreats.epic);
+        this.shuffle(this.mineThreats.high);
+        this.shuffle(this.mineThreats.med);
+        this.shuffle(this.mineThreats.low);
+        localStorage.setItem("mineThreats", JSON.stringify(this.mineThreats));
+        this.currentThreats = [];
+        localStorage.setItem("currentThreats", JSON.stringify(this.currentThreats));
       }
     },
     data() {
       return {
-        die1: 0,
-        die2: 0,
-        rollSum: 0,
-        currentEffect: '',
-        currentLocation: 'Mines',
-        locationColor: 'blue-grey darken-4',
-        locationIndex: 0,
-        Worlds: WORLDS_INFO,
-        depthEvents: DEPTH_EVENTS
+        mineThreats: MINE_THREAT,
+        currentThreats: []
       }
     }
   }

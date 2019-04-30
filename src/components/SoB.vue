@@ -7,6 +7,7 @@
             <div slot="header">Hold Back the Darkness</div>
             <darkness-roll/>
           </v-expansion-panel-content>
+
           <v-expansion-panel-content>
             <div slot="header">Encounter Deck</div>
             <encounter-deck/>
@@ -30,6 +31,10 @@
           <v-expansion-panel-content>
             <div slot="header">Town Daily Events Deck</div>
             <town-daily-events/>
+          </v-expansion-panel-content>
+          <v-expansion-panel-content>
+            <div slot="header">Threat Decks</div>
+            <threat-decks/>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
@@ -66,6 +71,7 @@
   import DarknessRoll from './sob/DarknessRoll'
   import TownPanel from './sob/TownPanel'
   import CampaignPanel from './sob/CampaignPanel'
+  import ThreatDecks from './sob/ThreatDecks'
 
   export default {
     components: {
@@ -83,6 +89,8 @@
       'town-daily-events': TownDailyEvents,
       DarknessRoll,
       'darkness-roll': DarknessRoll,
+      ThreatDecks,
+      'threat-decks': ThreatDecks,
       TownPanel,
       'town-panel': TownPanel,
       CampaignPanel,
@@ -95,7 +103,8 @@
         scavengeDialog: false,
         encounterDialog: false,
         townTypeDialog: false,
-        darknessRollDialog: false
+        darknessRollDialog: false,
+        threatDecksDialog: false,
       }
     }
 
