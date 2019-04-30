@@ -35,9 +35,9 @@
   export default {
     name: 'threat-decks',
     mounted() {
-      if (localStorage.getItem("mineThreats")) {
-        this.mineThreats = JSON.parse(localStorage.getItem("mineThreats"));
-        this.currentThreats = JSON.parse(localStorage.getItem("currentThreats"));
+      if (localStorage.getItem('mineThreats')) {
+        this.mineThreats = JSON.parse(localStorage.getItem('mineThreats'));
+        this.currentThreats = JSON.parse(localStorage.getItem('currentThreats'));
       } else {
         this.rebuildThreats();
       }
@@ -58,8 +58,8 @@
             this.currentThreats.push(this.mineThreats.epic.splice(0, 1)[0]);
             break;
         }
-        localStorage.setItem("mineThreats", JSON.stringify(this.mineThreats));
-        localStorage.setItem("currentThreats", JSON.stringify(this.currentThreats));
+        localStorage.setItem('mineThreats', JSON.stringify(this.mineThreats));
+        localStorage.setItem('currentThreats', JSON.stringify(this.currentThreats));
       },
       rebuildThreats() {
         this.mineThreats = MINE_THREAT;
@@ -67,9 +67,9 @@
         this.shuffle(this.mineThreats.high);
         this.shuffle(this.mineThreats.med);
         this.shuffle(this.mineThreats.low);
-        localStorage.setItem("mineThreats", JSON.stringify(this.mineThreats));
+        localStorage.setItem('mineThreats', JSON.stringify(this.mineThreats));
         this.currentThreats = [];
-        localStorage.setItem("currentThreats", JSON.stringify(this.currentThreats));
+        localStorage.setItem('currentThreats', JSON.stringify(this.currentThreats));
       }
     },
     data() {

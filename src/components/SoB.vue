@@ -104,7 +104,7 @@
         encounterDialog: false,
         townTypeDialog: false,
         darknessRollDialog: false,
-        threatDecksDialog: false,
+        threatDecksDialog: false
       }
     }
 
