@@ -1,20 +1,23 @@
 <template>
   <v-container fluid grid-list-sm>
     <v-layout row wrap>
-      <v-flex md4 sm4>
+      <v-flex md6 sm6>
         <v-expansion-panel expand>
           <v-expansion-panel-content>
             <div slot="header">Hold Back the Darkness</div>
             <darkness-roll/>
           </v-expansion-panel-content>
-
           <v-expansion-panel-content>
-            <div slot="header">Encounter Deck</div>
+            <div slot="header">Explore Deck</div>
             <encounter-deck/>
+          </v-expansion-panel-content>
+          <v-expansion-panel-content>
+            <div slot="header">Threat Decks</div>
+            <threat-decks/>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
-      <v-flex md4 sm4>
+      <v-flex md6 sm6>
         <v-expansion-panel expand>
           <v-expansion-panel-content>
             <div slot="header">Scavenge Deck</div>
@@ -24,17 +27,9 @@
             <div slot="header">Loot Deck</div>
             <loot-deck/>
           </v-expansion-panel-content>
-        </v-expansion-panel>
-      </v-flex>
-      <v-flex md4 sm4>
-        <v-expansion-panel expand>
           <v-expansion-panel-content>
             <div slot="header">Town Daily Events Deck</div>
             <town-daily-events/>
-          </v-expansion-panel-content>
-          <v-expansion-panel-content>
-            <div slot="header">Threat Decks</div>
-            <threat-decks/>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
