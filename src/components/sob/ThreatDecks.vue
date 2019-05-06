@@ -22,7 +22,9 @@
       <v-layout column>
         <ul id="threats">
           <li v-for="threat in currentThreats">
-            <h3>{{ threat }}</h3>
+            <v-chip :color="threat.color">
+              <h3>{{threat.description }}</h3>
+            </v-chip>
           </li>
         </ul>
       </v-layout>
@@ -44,18 +46,28 @@
     },
     methods: {
       addThreat(type) {
+        let addedThreat = {};
+
         switch (type) {
           case 'low':
-            this.currentThreats.push(this.mineThreats.low.splice(0, 1)[0]);
+            addedThreat.color = 'green';
+            addedThreat.description = this.mineThreats.low.splice(0, 1)[0];
+            this.currentThreats.push(addedThreat);
             break;
           case 'med':
-            this.currentThreats.push(this.mineThreats.med.splice(0, 1)[0]);
+            addedThreat.color = 'yellow';
+            addedThreat.description = this.mineThreats.med.splice(0, 1)[0];
+            this.currentThreats.push(addedThreat);
             break;
           case 'high':
-            this.currentThreats.push(this.mineThreats.high.splice(0, 1)[0]);
+            addedThreat.color = 'red';
+            addedThreat.description = this.mineThreats.high.splice(0, 1)[0];
+            this.currentThreats.push(addedThreat);
             break;
           case 'epic':
-            this.currentThreats.push(this.mineThreats.epic.splice(0, 1)[0]);
+            addedThreat.color = 'blue';
+            addedThreat.description = this.mineThreats.epic.splice(0, 1)[0];
+            this.currentThreats.push(addedThreat);
             break;
         }
         localStorage.setItem('mineThreats', JSON.stringify(this.mineThreats));
