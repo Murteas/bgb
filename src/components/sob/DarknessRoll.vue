@@ -1,10 +1,13 @@
 <template>
   <v-container fluid grid-list-sm>
     <v-layout row wrap>
-      <v-btn @click.native="DarknessRoll()">
-        <v-icon>mdi-dice-multiple</v-icon>
-        <b>Roll</b>
-      </v-btn>
+      <v-badge overlap left :color="blue">
+        <span slot="badge">{{this.rollCount}}</span>
+        <v-btn @click.native="DarknessRoll()">
+          <v-icon>mdi-dice-multiple</v-icon>
+          <b>Roll</b>
+        </v-btn>
+      </v-badge>
       <v-btn :color="locationColor" @click.native="nextWorld()">{{currentLocation}}</v-btn>
       <h1>{{die1}} + {{die2}} = {{rollSum}} </h1>
       <v-flex xs12>{{currentEffect}}</v-flex>
@@ -24,6 +27,7 @@
         this.die1 = this.rollDice(1, 6);
         this.die2 = this.rollDice(1, 6);
         this.rollSum = this.die1 + this.die2;
+        this.rollCount += 1;
         this.UpdateEventText();
       },
       UpdateEventText() {
@@ -83,6 +87,7 @@
     },
     data() {
       return {
+        rollCount: 0,
         die1: 0,
         die2: 0,
         rollSum: 0,
