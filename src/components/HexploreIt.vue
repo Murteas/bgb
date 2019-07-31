@@ -1,7 +1,7 @@
 <template>
   <v-container fluid grid-list-sm>
     <v-layout column>
-      <v-flex>
+<!--      <v-flex>-->
 <!--        <v-expansion-panel expand>-->
 <!--          <v-expansion-panel-content>-->
 <!--            <div slot="header">Random Characters</div>-->

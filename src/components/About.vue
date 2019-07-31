@@ -4,7 +4,7 @@
       <v-layout align-center column>
         <v-flex text-xs-center>
           <h1>Board Game Buddy</h1>
-          <v-card color="yellow accent-2">{{appVersion}}</v-card>
+          <v-card color="brown accent-1">{{appVersion}}</v-card>
         </v-flex>
         <v-btn color="red" dark v-if="!warning" @click="warning = true">Clear all Saved Data</v-btn>
         <v-alert type="warning" dismissible v-model="warning">
@@ -36,7 +36,7 @@
     },
     name: 'about',
     mounted() {
-      this.appVersion = '0.26.9';
+      this.appVersion = '0.27.134b';
     },
     data: () => ({
       appVersion: '0.0.0',
