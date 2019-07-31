@@ -2,10 +2,20 @@
   <v-container fluid grid-list-sm>
     <v-layout column>
       <v-flex>
+<!--        <v-expansion-panel expand>-->
+<!--          <v-expansion-panel-content>-->
+<!--            <div slot="header">Random Characters</div>-->
+<!--            <random-chars/>-->
+<!--          </v-expansion-panel-content>-->
+<!--        </v-expansion-panel>-->
+<!--      </v-flex>-->
+      <v-flex>
         <v-expansion-panel expand>
           <v-expansion-panel-content>
-            <div slot="header">Random Characters</div>
-            <random-chars/>
+            <div slot="header">Official Random Hero</div>
+            <a href="https://www.hexploreit.com/heroes/" target="_blank">
+              <h1>Official Randomizer</h1>
+            </a>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-flex>
