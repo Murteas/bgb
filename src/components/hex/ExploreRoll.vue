@@ -54,13 +54,13 @@
             navigateDie: 0,
             exploreDie: 0,
             survivalDie: 0
+          },
+          {
+            name: 'P3',
+            navigateDie: 0,
+            exploreDie: 0,
+            survivalDie: 0
           }
-          // {
-          //   name: 'P3',
-          //   navigateDie: 0,
-          //   exploreDie: 0,
-          //   survivalDie: 0
-          // },
           // {
           //   name: 'P4',
           //   navigateDie: 0,
