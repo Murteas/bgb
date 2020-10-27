@@ -4,7 +4,7 @@
       <v-layout align-center column>
         <v-flex text-xs-center>
           <h1>Board Game Buddy</h1>
-          <v-card color="green accent-3">{{appVersion}}</v-card>
+          <v-card color="green">{{appVersion}}</v-card>
         </v-flex>
         <v-btn color="red" dark v-if="!warning" @click="warning = true">Clear all Saved Data</v-btn>
         <v-alert type="warning" dismissible v-model="warning">
@@ -13,8 +13,6 @@
         </v-alert>
         <v-flex sm6 md6>
           <list-randomizer/>
-        </v-flex>
-        <v-flex sm6 md6>
           <list-randomizer/>
         </v-flex>
       </v-layout>
@@ -35,7 +33,7 @@
     },
     name: 'about',
     mounted() {
-      this.appVersion = '0.29.1Bag';
+      this.appVersion = '0.30.0 SoB rev1';
     },
     data: () => ({
       appVersion: '0.0.0',
