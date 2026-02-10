@@ -379,12 +379,21 @@ tests/
 
 Target: 80%+ coverage on game logic
 
+**Documentation:**
+- Update CLAUDE.md to reflect new architecture:
+  - Vue 3 + Vite + TypeScript commands
+  - Pinia stores instead of localStorage patterns
+  - Composables instead of global mixins
+  - YAML content structure
+  - Story engine architecture
+  - New component patterns with Composition API
+
 **Deployment:**
 - GitHub Actions workflow (optional)
 - Automated tests before deploy
 - Content schema validation
 
-**Deliverable:** Production-ready modernized app
+**Deliverable:** Production-ready modernized app with updated documentation
 
 ## Architecture Principles
 
@@ -589,7 +598,7 @@ npm test  # Run Vitest
 | Foundation | 2 weeks | Vue 3 setup, core utils, 2 components |
 | Core Migration | 3 weeks | All SoB decks, Pinia stores, YAML content |
 | Story System | 3 weeks | Story engine, testing, optimization |
-| Polish | 1 week | Documentation, deploy |
+| Polish | 1 week | Update CLAUDE.md, final documentation, deploy |
 
 **Total:** ~9 weeks for solo developer (evenings/weekends)
 
