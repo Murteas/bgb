@@ -2,13 +2,15 @@
 
 ## Context
 
-Board Game Buddy is a Vue 2.5 web application that provides digital helper tools for multiple board games. The star feature is **Shadows of Brimstone (SoB)**, which includes:
+Board Game Buddy is a Vue 2.5 web application that provides digital helper tools for **Shadows of Brimstone (SoB)**, including:
 
 - **6+ card deck managers** with localStorage persistence (loot, encounters, scavenge, town events, threats)
 - **Campaign system** tracking lieutenants, missions, success/failure counts
 - **Procedural town generator** creating 12 towns with type-specific buildings
 - **Darkness roll system** with 11 locations × 6 events each
 - **Threat escalation** across 4 difficulty levels
+
+The old codebase also contains modules for Aeon's End, HexploreIt, and Arkham Horror — but these are not actively used and will not be ported. The V2 architecture supports adding game modules later if desired.
 
 **Why modernize?**
 - Current tech stack is critically outdated (Vue 2.5 reached EOL January 2025, Webpack 3 is 6 years old, Babel 6 is deprecated)
@@ -21,10 +23,19 @@ Board Game Buddy is a Vue 2.5 web application that provides digital helper tools
 1. Update to modern, free/open-source technology
 2. Preserve all existing SoB functionality (fresh start, no campaign migration needed)
 3. Enable adding new content (cards, encounters, locations) WITHOUT code changes
-4. Architecture for storytelling/automated campaign features (higher priority)
-5. Flexible deployment (not tied to Firebase or current infrastructure)
+4. Architecture for storytelling/automated campaign features (later — see `STORY_ENGINE_SPEC.md`)
+5. Flexible deployment (not tied to Firebase)
 
-## Technology Stack Selection
+## What We're NOT Doing (Scope Boundaries)
+
+- No localStorage data migration — users start fresh
+- No backend or server-side logic
+- No YAML conversion — JSON stays JSON
+- No story engine in v1 — that's a separate future effort (see `STORY_ENGINE_SPEC.md`)
+- No campaign export/import in v1
+- No non-SoB game modules — old codebase kept as reference if they're ever wanted back
+
+## Technology Stack
 
 ### Core Framework: Vue 3 + Vite + TypeScript
 
@@ -42,20 +53,21 @@ Board Game Buddy is a Vue 2.5 web application that provides digital helper tools
 
 **TypeScript:**
 - Type safety for complex game state (campaigns, lieutenants, missions)
-- Catches localStorage serialization errors at compile time
-- Auto-generated types from content schemas
+- TypeScript interfaces replace the need for runtime schema validation
+- Catches errors at compile time
 
 ### UI Framework: Vuetify 3
 
 - Maintains current Material Design aesthetic
-- Similar component APIs to Vuetify 1
+- Similar component APIs to Vuetify 1 (with breaking changes — see migration reference below)
 - Users expect the familiar look/feel
 
 ### State Management: Pinia
 
-**Current problem:** 14+ localStorage keys managed independently across components:
-- `C:\djs.projects\bgb\src\components\sob\LootDeck.vue:28-30` - Each deck manually loads localStorage
-- `C:\djs.projects\bgb\src\components\sob\CampaignPanel.vue:84-88` - Campaign loads separately
+**Current problem:** 10 localStorage keys managed independently across SoB components:
+- Each deck manually loads/saves localStorage (`LootDeck.vue`, `ScavengeDeck.vue`, etc.)
+- Campaign state loads separately (`CampaignPanel.vue`)
+- Non-namespaced keys risk collisions (`lootDeck`, `campaignPanel`, etc.)
 
 **Solution:** Centralize with Pinia stores:
 ```typescript
@@ -69,343 +81,98 @@ Benefits:
 - Single source of truth for all game state
 - DevTools for debugging
 - Easy localStorage persistence via pinia-plugin-persistedstate
+- Namespaced persistence keys (no global key collisions)
 - Testable state mutations
 
 ### Testing: Vitest + Vue Test Utils
 
 **Priority test coverage:**
-1. Deck shuffling logic (Fisher-Yates algorithm in `C:\djs.projects\bgb\src\main.js:16-27`)
-2. Town generation algorithms (`C:\djs.projects\bgb\src\components\sob\TownPanel.vue`)
-3. Campaign mission assignment (`C:\djs.projects\bgb\src\components\sob\CampaignPanel.vue`)
+1. Deck shuffling logic (Fisher-Yates in `src/main.js`)
+2. Town generation algorithms (`TownPanel.vue`)
+3. Campaign mission assignment (`CampaignPanel.vue`)
 4. localStorage persistence/hydration
 
 Target: 80%+ coverage on game logic
 
-## Content Management System
+## Content Management
 
-### Problem Statement
+### Current Problem
 
 Adding new content currently requires:
-- **New location:** Edit 3 files + modify switch statement in DarknessRoll.vue
+- **New location:** Edit 3 files + modify switch statement in `DarknessRoll.vue`
 - **New card:** Edit JSON + place image + restart app
-- **New town type:** Edit 2 functions in TownPanel.vue
+- **New town type:** Edit 2 functions in `TownPanel.vue`
 
-All changes require code knowledge and risk breaking the app.
+### Solution: TypeScript Interfaces + JSON Data Files
 
-### Solution: File-Based YAML + Schema Validation
+Keep JSON as the data format (it's already human-readable and natively supported). Add TypeScript interfaces for type safety:
 
-**New structure:**
+```typescript
+// types/cards.ts
+interface Card {
+  title: string
+  type?: string         // e.g. "Loot", "Gear", "Artifact"
+  description?: string  // ability text / flavor text
+  xp?: number
+  gold?: number
+  keywords?: string[]   // e.g. ["Dark Stone", "Consumable"]
+}
 ```
-content/
-├── sob/
-│   ├── cards/
-│   │   ├── loot.yaml          # Human-friendly YAML
-│   │   ├── encounter.yaml
-│   │   └── scavenge.yaml
-│   ├── locations/
-│   │   ├── mines.yaml
-│   │   └── targa.yaml
-│   ├── towns/
-│   │   ├── buildings.yaml
-│   │   └── names.yaml
-│   └── campaigns/
-│       ├── missions.yaml
-│       └── lieutenants.yaml
-└── images/
+
+**Data file structure:**
+```
+src/
+└── data/
     └── sob/
-        └── cards/              # Optimized WebP images
+        ├── cards/
+        │   ├── loot.json
+        │   ├── encounter.json
+        │   └── scavenge.json
+        ├── locations/
+        │   └── depth-events.json
+        ├── towns/
+        │   ├── buildings.json
+        │   └── names.json
+        └── campaigns/
+            ├── missions.json
+            └── lieutenants.json
 ```
 
-**YAML Example (replacing `C:\djs.projects\bgb\src\components\sob\data\lootCards.json`):**
-```yaml
-cards:
-  - title: "Blood Money"
-    src: "/images/sob/cards/loot/blood-money.webp"
-    xp_value: 30
+### Card Images → Text Conversion
 
-  - title: "Dark Stone Rock"
-    src: "/images/sob/cards/loot/darkstone-rock.webp"
-    xp_value: 50
-```
+The existing card images (PNGs) contain all the real card data — XP values, gold, descriptions, keywords, etc. — but the current JSON only stores title and image path. V2 eliminates the images entirely and stores all card content as JSON text.
 
-**Schema Validation with Zod:**
-```typescript
-// schemas/card.schema.ts
-import { z } from 'zod'
+**One-time conversion:** A pipeline script (`scripts/extract-cards.ts`) uses Claude's vision API to read each card image and extract structured data. Run it once during migration to generate the new JSON data files. See "Card Extraction Pipeline" section below for usage.
 
-export const CardSchema = z.object({
-  title: z.string(),
-  src: z.string().startsWith('/images/'),
-  xp_value: z.number().optional()
-})
-
-// Build fails if YAML doesn't match schema
-```
-
-**Benefits:**
-- Build-time validation catches typos
-- Non-developers can edit YAML easily
-- TypeScript gets auto-generated types
-- No runtime validation overhead
-- Vite hot-reloads on content changes
-
-### Image Optimization Pipeline
-
-**Problem:** 76 images @ 13MB total (200-540KB PNGs in `C:\djs.projects\bgb\static\img\cards\`)
-
-**Solution:** Vite imagetools plugin
-- Automatic PNG → WebP conversion (70% size reduction)
-- Result: 13MB → ~4MB
-- Lazy loading for off-screen images
-
-## Storytelling & Automated Campaign System
-
-### Vision
-
-Enhance the current campaign system with narrative generation and automated story progression. This goes beyond the current lieutenant/mission tracking to create dynamic, procedurally-generated campaign narratives.
-
-### Architecture: Modular Story Engine
-
-**Design principles:**
-- **Event-driven:** Game actions (mission completion, town visits, darkness rolls) trigger story beats
-- **State-aware:** Story adapts to campaign state (failed missions, hero deaths, locations visited)
-- **Extensible:** Plugin architecture allows adding new story generators
-- **Data-driven:** Stories defined in YAML, not hardcoded
-
-### Story System Components
-
-**1. Story Node Structure**
-```yaml
-# content/sob/stories/chapter1.yaml
-story_nodes:
-  - id: "campaign_start"
-    trigger: "new_campaign"
-    prompt: "The darkness stirs in the mines of {town_name}..."
-    choices:
-      - text: "Investigate the mines"
-        next_node: "mines_entrance"
-      - text: "Gather supplies first"
-        next_node: "town_preparation"
-
-  - id: "mines_entrance"
-    trigger: "location_entered"
-    conditions:
-      location: "mines"
-    prompt: "You descend into the cold darkness..."
-    auto_events:
-      - draw_encounter: true
-      - add_threat: "low"
-```
-
-**2. Campaign State Tracker**
-```typescript
-// stores/campaign-story.ts
-interface CampaignState {
-  currentNode: string
-  visitedLocations: string[]
-  completedMissions: string[]
-  activeThreats: Threat[]
-  heroStates: HeroState[]
-  narrative: StoryBeat[]  // Timeline of story events
+**New card format (example):**
+```json
+{
+  "title": "Blood Money",
+  "type": "Loot",
+  "xp": 30,
+  "gold": null,
+  "description": "Gain 30 XP when you draw this card."
 }
 ```
 
-**3. Story Generator Service**
-```typescript
-// services/story-engine.ts
-class StoryEngine {
-  // Evaluate story triggers after game actions
-  evaluateTriggers(gameAction: GameAction): StoryNode | null
+**Benefits over image approach:**
+- Zero asset size vs ~10MB of PNGs
+- Adding new cards = edit JSON only (no image files ever)
+- Card text is searchable and readable at any screen size
+- No Vite imagetools plugin or WebP conversion pipeline needed
 
-  // Progress story based on player choice
-  progressStory(choice: StoryChoice): StoryNode
-
-  // Generate dynamic encounter descriptions
-  generateEncounterText(context: EncounterContext): string
-
-  // Track campaign timeline
-  recordStoryBeat(event: GameEvent): void
-}
-```
-
-**4. Optional AI Enhancement (Future)**
-If desired later, the system can integrate AI for dynamic text generation:
-- Use local LLM (Ollama) for procedural narrative variation
-- Story nodes provide structured prompts
-- AI adds flavor text, not core logic
-- Fully optional - system works without AI
-
-### Integration with Existing Systems
-
-**Campaign Panel Enhancement:**
-- Add "Story Log" tab showing narrative timeline
-- Display current story node and choices
-- Track story progress alongside mission tracking
-
-**Event System Hooks:**
-```typescript
-// When darkness roll triggers event
-onDarknessEvent((event) => {
-  storyEngine.recordStoryBeat({
-    type: 'darkness_event',
-    location: currentLocation,
-    result: event.description
-  })
-
-  // Check if event triggers story progression
-  const storyNode = storyEngine.evaluateTriggers({
-    type: 'darkness_event',
-    location: currentLocation
-  })
-
-  if (storyNode) {
-    showStoryDialog(storyNode)
-  }
-})
-```
-
-**Mission Completion Flow:**
-```typescript
-// When mission completed
-onMissionComplete((mission) => {
-  // Existing: Update success count
-  campaign.successfulMissions++
-
-  // New: Progress story
-  const nextNode = storyEngine.progressStory({
-    mission_completed: mission.id
-  })
-
-  // Show branching narrative
-  if (nextNode.choices) {
-    showStoryChoiceDialog(nextNode)
-  }
-})
-```
-
-### Implementation Phases
-
-**Phase 1: Story Data Structure**
-- Define YAML schema for story nodes
-- Create 2-3 example story arcs
-- Build StoryEngine service (basic logic)
-
-**Phase 2: UI Integration**
-- Add Story Log component
-- Story choice dialogs
-- Timeline visualization
-
-**Phase 3: Dynamic Generation**
-- Template system for varied text
-- Random event insertion
-- Difficulty scaling based on hero states
-
-**Phase 4: Optional AI (Future Work)**
-- Integrate local LLM if desired
-- Generate flavor text variations
-- Create emergent narratives
-
-## Migration Strategy
-
-**Note:** This is a clean rebuild, not a migration. No localStorage data preservation needed.
-
-### Phase 1: Foundation (Week 1-2)
-
-**Setup new project:**
-```bash
-npm create vite@latest bgb-v2 -- --template vue-ts
-npm install vuetify@3 pinia @vueuse/core zod js-yaml
-```
-
-**Convert core utilities:**
-- Global mixins → Composables (`C:\djs.projects\bgb\src\main.js:13-40`)
-  - `shuffle(array)` → `composables/useShuffle.ts`
-  - `rollDie(sides)` → `composables/useDice.ts`
-
-**Build 2-3 simple components from scratch:**
-- DiceRoller.vue (general component)
-- LootDeck.vue (simplest deck, template for others)
-- Use as reference, not direct port
-
-**Deliverable:** Runnable Vue 3 app with basic functionality
-
-### Phase 2: Core Migration (Week 3-5)
-
-**Migrate all SoB deck components (priority order):**
-1. `C:\djs.projects\bgb\src\components\sob\LootDeck.vue`
-2. `C:\djs.projects\bgb\src\components\sob\EncounterDeck.vue`
-3. `C:\djs.projects\bgb\src\components\sob\ScavengeDeck.vue`
-4. `C:\djs.projects\bgb\src\components\sob\ThreatDecks.vue` (4 threat levels)
-5. `C:\djs.projects\bgb\src\components\sob\TownPanel.vue` (procedural generation)
-6. `C:\djs.projects\bgb\src\components\sob\CampaignPanel.vue` (mission logic)
-7. `C:\djs.projects\bgb\src\components\sob\DarknessRoll.vue` (refactor switch statement)
-
-**Convert all JSON to YAML:**
-- 14 data files in `C:\djs.projects\bgb\src\components\sob\data\`
-- Create Zod schemas for each
-- Build-time validation
-
-**Implement Pinia stores:**
-```typescript
-stores/
-├── decks.ts        // Centralize all deck state
-├── campaign.ts     // Lieutenants, missions, tracking
-└── towns.ts        // Procedural town generation
-```
-
-**Image optimization:**
-- Setup Vite imagetools
-- Convert 76 images: PNG → WebP
-- Add lazy loading
-
-**Deliverable:** Full SoB feature parity with V1
-
-### Phase 3: Storytelling System (Week 6-8)
-
-**Story Engine:**
-- Define story node YAML schema
-- Create 2-3 example story arcs
-- Build StoryEngine service
-- Add Story Log UI component
-- Integrate with campaign/mission events
-
-**Testing infrastructure:**
-```typescript
-tests/
-├── stores/decks.test.ts       // Shuffle, draw, reset
-├── services/town-generator.test.ts  // Procedural generation
-└── services/campaign-engine.test.ts // Mission assignment
-```
-
-Target: 80%+ coverage on game logic
-
-**Documentation:**
-- Update CLAUDE.md to reflect new architecture:
-  - Vue 3 + Vite + TypeScript commands
-  - Pinia stores instead of localStorage patterns
-  - Composables instead of global mixins
-  - YAML content structure
-  - Story engine architecture
-  - New component patterns with Composition API
-
-**Deployment:**
-- GitHub Actions workflow (optional)
-- Automated tests before deploy
-- Content schema validation
-
-**Deliverable:** Production-ready modernized app with updated documentation
-
-## Architecture Principles
+## Architecture
 
 ### Separation of Concerns
 
 ```
 src/
 ├── components/          # UI only, no business logic
-│   └── SoB/
-│       ├── DeckDisplay.vue
-│       ├── TownCard.vue
-│       └── CampaignPanel.vue
+│   ├── sob/
+│   │   ├── DeckDisplay.vue
+│   │   ├── TownCard.vue
+│   │   └── CampaignPanel.vue
+│   └── general/         # DiceRoller, ListRandomizer
 │
 ├── stores/             # State management (Pinia)
 │   ├── decks.ts
@@ -417,128 +184,206 @@ src/
 │   ├── town-generator.ts    # procedural generation
 │   └── campaign-engine.ts   # mission assignment
 │
-├── composables/        # Reusable Vue logic
-│   ├── useDice.ts
-│   └── useShuffle.ts
+├── utils/              # Pure utility functions (no Vue)
+│   ├── shuffle.ts      # Fisher-Yates shuffle
+│   └── dice.ts         # rollDie, rollDice
 │
-├── content/            # Data (YAML)
+├── composables/        # Reusable Vue logic
+│   └── useDeck.ts      # Deck state + draw/shuffle reactivity
+│
+├── data/               # JSON data files
 │   └── sob/
 │       ├── cards/
 │       └── locations/
 │
-└── schemas/            # Zod validation
-    └── card.schema.ts
+└── types/              # TypeScript interfaces
+    ├── cards.ts
+    ├── campaign.ts
+    └── towns.ts
 ```
 
 **Key principle:** Pure functions for game logic → easily testable without Vue
 
-### Plugin Architecture for Future Storytelling Engine
+## Vuetify 1→3 Migration Reference
 
-```typescript
-// types/game-system.ts
-interface GameSystem {
-  id: string
-  name: string
-  components: Component[]
-  stores: StoreDefinition[]
-  routes: RouteRecordRaw[]
-}
+This is the **highest-risk item** in the entire migration. Every component uses Vuetify 1.x APIs (`^1.1.9`). Key breaking changes:
 
-// Future: systems/storytelling/engine.ts
-class StoryEngine {
-  async generateNextNode(userChoice: string): Promise<StoryNode> {
-    // Use local LLM to generate dynamic story
-  }
-}
+| Vuetify 1 | Vuetify 3 | Notes |
+|-----------|-----------|-------|
+| `v-list-tile` | `v-list-item` | Renamed |
+| `v-list-tile-content` | `v-list-item-title` / `v-list-item-subtitle` | Split into specific slots |
+| `slot="activator"` | `#activator` | Scoped slots syntax |
+| `slot="header"` | Expansion panel rewritten | Check Vuetify 3 docs |
+| `@click.native` | `@click` | Native modifier removed in Vue 3 |
+| `v-layout` + `v-flex` | `v-row` + `v-col` | Grid system renamed |
+| `mdi` package | `@mdi/font` | Package renamed |
+| Elevation classes | Different class names | Check Vuetify 3 theming docs |
+| `v-toolbar` slots | Restructured | Check migration guide |
+
+**Strategy:** Migrate one component at a time, starting with the simplest SoB deck (LootDeck) to get familiar with Vuetify 3 before tackling complex components like CampaignPanel.
+
+## Migration Scope
+
+**In scope: Shadows of Brimstone only**
+
+| Component Group | Count | localStorage Keys | Notes |
+|----------------|-------|-------------------|-------|
+| SoB deck managers | 6 | 8 keys | LootDeck, EncounterDeck, ScavengeDeck, TownDailyEvents, ThreatDecks + numDrawn pairs |
+| SoB campaign/world | 3 | 2 keys | CampaignPanel, TownPanel, DarknessRoll |
+| General utilities | 2 | 2 keys | DiceRoller (stateless), ListRandomizer (2 keys) |
+
+**Not in scope:** Aeon's End, HexploreIt, Arkham Horror. Old code kept at `C:\djs.projects\bgb\` as reference.
+
+**HeroPanel.vue note:** Exists in old codebase but is commented out. Decide at implementation time whether to revive it.
+
+## Migration Strategy
+
+This is a **clean rebuild**, not a migration. No localStorage data preservation needed.
+
+### Phase 1: Foundation (Week 1-2)
+
+**Setup new project:**
+```bash
+npm create vite@latest bgb-v2 -- --template vue-ts
+npm install vuetify@3 pinia pinia-plugin-persistedstate @vueuse/core
+npm install -D vitest @vue/test-utils vite-plugin-vuetify
+# For the one-time card extraction script only:
+npm install -D @anthropic-ai/sdk zod tsx
 ```
 
-Modular design allows adding storytelling as a plugin without touching SoB code.
+**Convert core utilities:**
+- Global mixins → `utils/shuffle.ts` + `utils/dice.ts` (pure functions)
+- Remove unused `shuffle-array` npm package
 
-## Critical Files to Modify
+**Build first SoB component as proof of concept:**
+- `LootDeck.vue` — simplest deck, establishes the Vuetify 3 + Pinia pattern for all other decks
 
-### Migration Priority
+**Deliverable:** Runnable Vue 3 app with LootDeck working end-to-end
 
-1. **`C:\djs.projects\bgb\src\main.js`**
-   - Convert global mixins to composables
-   - Entry point sets architecture tone
+### Phase 2: Core SoB Migration (Week 3-6)
 
-2. **`C:\djs.projects\bgb\src\components\sob\LootDeck.vue`**
-   - Simplest deck, template for 5 others
-   - Pattern: localStorage → Pinia store
+**Migrate all SoB deck components (priority order):**
+1. `LootDeck.vue` — simplest deck, template for others
+2. `EncounterDeck.vue`
+3. `ScavengeDeck.vue`
+4. `TownDailyEvents.vue`
+5. `ThreatDecks.vue` (4 threat levels)
+6. `TownPanel.vue` (procedural generation)
+7. `CampaignPanel.vue` (most complex state)
+8. `DarknessRoll.vue` (refactor hardcoded switch statement to data-driven lookup)
+9. `HeroPanel.vue` — revive or drop
 
-3. **`C:\djs.projects\bgb\src\components\sob\CampaignPanel.vue`**
-   - Most complex state (lieutenants, missions, tracking)
-   - Break into smaller components
+**Implement Pinia stores:**
+```typescript
+stores/
+├── decks.ts        // Centralize all deck state
+├── campaign.ts     // Lieutenants, missions, tracking
+└── towns.ts        // Procedural town generation
+```
 
-4. **`C:\djs.projects\bgb\src\components\sob\data\depthEvents.json`**
-   - Representative data structure
-   - Converting to YAML + schema is template for 14 JSON files
+**Run card extraction pipeline:**
+- `npx tsx scripts/extract-cards.ts` against old codebase images
+- Review and clean up generated JSON files
+- Verify card data matches physical cards
 
-5. **`C:\djs.projects\bgb\src\components\sob\DarknessRoll.vue`**
-   - Hard-coded switch statement for 11 locations
-   - Refactor to data-driven lookup
+**Deliverable:** Full SoB feature parity with V1
 
-6. **`C:\djs.projects\bgb\static\img\cards\` (directory)**
-   - 13MB images, biggest bottleneck
-   - Optimization pipeline starts here
+### Phase 3: Testing & Deploy (Week 7-8)
+
+**Testing:**
+```
+tests/
+├── utils/shuffle.test.ts           // Fisher-Yates correctness
+├── stores/decks.test.ts            // Shuffle, draw, reset
+├── services/town-generator.test.ts // Procedural generation
+└── services/campaign-engine.test.ts // Mission assignment
+```
+
+Target: 80%+ coverage on `utils/`, `stores/`, `services/`
+
+**Update CLAUDE.md** to reflect new architecture:
+- Vue 3 + Vite + TypeScript commands
+- Pinia stores instead of localStorage patterns
+- `utils/` for pure functions, `composables/` for Vue logic
+- JSON data structure
+- Component patterns with Composition API
+
+**Deploy** to any static host (Vercel, Cloudflare Pages, Netlify, or keep Firebase — all work with `npm run build` + `dist/`).
+
+**Deliverable:** Production-ready modernized app
+
+### Phase 4: Story Engine (Future)
+
+See `STORY_ENGINE_SPEC.md`. Begin only after Phase 3 is complete and stable.
+
+## Card Extraction Pipeline
+
+The script `scripts/extract-cards.ts` reads each card image with Claude's vision API and outputs structured JSON. Run it once during Phase 2 migration.
+
+### Setup
+
+```bash
+# From the old codebase root (C:\djs.projects\bgb)
+# Requires ANTHROPIC_API_KEY in your environment
+set ANTHROPIC_API_KEY=sk-ant-...
+npx tsx scripts/extract-cards.ts
+```
+
+### What it does
+
+1. Scans all 4 card image directories (`static/img/cards/loot/`, `encounter/`, `scavenge/`, `townDailyEvents/`)
+2. Sends each image to Claude with vision to extract: title, type, XP, gold, description, keywords
+3. Writes `data/sob/cards/loot.json`, `encounter.json`, `scavenge.json`, `daily-events.json`
+
+### After running
+
+Review the output JSON manually — Claude reads card images accurately but:
+- Unusual fonts or worn card artwork may need correction
+- Card back images (e.g., blank loot back) will be flagged as `"is_card_back": true` and should be removed
+- Duplicate cards (loot has 2x Handy, 2x Dark Stone Shard) are intentional — keep them
+
+### Adding new card sets
+
+For future card sets without images, just add entries directly to the JSON files. No script needed.
+
+---
+
+## Key Reference Files (Old Codebase)
+
+These are the important files from the old codebase to study during the clean rebuild:
+
+1. **`src/main.js`** — Global mixins to convert to `utils/`
+2. **`src/components/sob/LootDeck.vue`** — Simplest deck, template for the pattern
+3. **`src/components/sob/CampaignPanel.vue`** — Most complex state to redesign
+4. **`src/components/sob/TownPanel.vue`** — Procedural generation logic
+5. **`src/components/sob/DarknessRoll.vue`** — Hard-coded switch statement to replace with data-driven lookup
+6. **`src/components/sob/data/`** — 14 JSON files to port to new `data/sob/` structure
+7. **`static/img/cards/`** — 49 card images, source for the one-time extraction pipeline
 
 ## Risk Mitigation
 
-| Risk | Mitigation |
-|------|------------|
-| **Vuetify 3 API differences** | Reference Vuetify 3 migration guide, test components |
-| **Story engine complexity** | Start with simple YAML-based stories, add AI later if needed |
-| **Image optimization breaks layouts** | Set explicit dimensions, test on multiple devices |
-| **YAML syntax errors** | Build-time schema validation catches issues early |
-| **Build complexity** | Start simple, add features incrementally |
+| Risk | Severity | Mitigation |
+|------|----------|------------|
+| **Vuetify 3 API differences** | **High** | Migrate simple components first; use Vuetify 3 migration guide; test each component before moving on |
+| **Composition API learning curve** | Medium | Start with simple stateless components; Vue 3 docs are excellent |
+| **Image optimization breaks layouts** | Low | Set explicit dimensions, test on multiple devices |
+| **Build complexity** | Low | Vite is zero-config; start simple, add features incrementally |
 
 ## Infrastructure & Deployment
 
-### Hosting Options (Choose Based on Preference)
+Any static host works — just run `npm run build` and deploy the `dist/` folder:
 
-| Option | Pros | Cons | Best For |
-|--------|------|------|----------|
-| **Vercel** | Zero config, great DX, auto-deploy from Git | 100GB bandwidth limit | Recommended for ease |
-| **Netlify** | Similar to Vercel, good free tier | Slightly slower builds | Alternative to Vercel |
-| **GitHub Pages** | Completely free, simple | No backend functions | Static-only approach |
-| **Firebase Hosting** | Current setup, generous free tier | Google dependency | If keeping existing |
-| **Cloudflare Pages** | Unlimited bandwidth on free tier | Newer platform | Best free bandwidth |
+| Option | Free Tier | Notes |
+|--------|-----------|-------|
+| **Vercel** | 100GB bandwidth | Zero config, auto-deploy from Git |
+| **Cloudflare Pages** | Unlimited bandwidth | Best free bandwidth |
+| **Netlify** | 100GB bandwidth | Similar to Vercel |
+| **GitHub Pages** | Unlimited | Simple; configure SPA fallback routing |
+| **Firebase Hosting** | Generous free tier | Current setup; keep if preferred |
 
-**Recommendation:** Vercel or Cloudflare Pages for new deployment (both offer generous free tiers and zero-config Vue support)
+Pick whichever is easiest when deployment time comes.
 
-### Build Pipeline (Example for Vercel)
-
-```yaml
-# vercel.json (auto-detected, optional)
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist"
-}
-```
-
-For GitHub Actions (optional):
-```yaml
-# .github/workflows/test.yml
-on: push
-jobs:
-  test:
-    - npm test                  # Must pass
-    - npm run validate-content  # Schema validation
-```
-
-### Cost Analysis
-
-| Item | Old | New | Savings |
-|------|-----|-----|---------|
-| Hosting | Firebase (~$0) | Vercel/Cloudflare/etc (free) | $0 |
-| Build time | ~60s | ~5s | Time savings |
-| Bundle size | ~2MB | ~800KB | 60% reduction |
-
-**Total monthly cost:** $0 (all free options)
-
-## Verification & Testing
-
-### End-to-End Testing Checklist
+## Verification Checklist
 
 **Deck Management:**
 - [ ] Shuffle loot deck, draw 3 cards, cards persist after reload
@@ -560,62 +405,43 @@ jobs:
 **Darkness Roll:**
 - [ ] Roll 2d6, if doubles trigger location event
 - [ ] Cycle through 11 locations
-- [ ] Events pull correct text from database
+- [ ] Events pull correct text from JSON data
 - [ ] Roll count badge increments
 
-**Storytelling System:**
-- [ ] Start campaign, see opening story node
-- [ ] Make story choice, narrative progresses
-- [ ] Complete mission, triggers story event
-- [ ] Story Log shows timeline of events
-- [ ] Story state persists after reload
-
 **Data Persistence:**
-- [ ] Create campaign, close browser, reopen
-- [ ] Campaign data persists correctly
-- [ ] Multiple campaigns can be saved
-- [ ] Export/import campaigns as JSON (optional feature)
+- [ ] Create campaign, close browser, reopen — data persists
+- [ ] About page "Clear Data" button resets all stored state
 
 ### Automated Tests
 
 ```bash
 npm test  # Run Vitest
-# Expected: 80%+ coverage on stores/, services/
+# Expected: 80%+ coverage on utils/, stores/, services/
 ```
-
-**Critical test cases:**
-1. Shuffle produces random order (statistical test)
-2. Town generation respects size/type rules
-3. Mission assignment follows world type logic
-4. localStorage serialization/deserialization
-5. Story engine evaluates triggers correctly
-6. Story choices progress to correct next nodes
 
 ## Timeline
 
 | Phase | Duration | Deliverables |
 |-------|----------|--------------|
-| Foundation | 2 weeks | Vue 3 setup, core utils, 2 components |
-| Core Migration | 3 weeks | All SoB decks, Pinia stores, YAML content |
-| Story System | 3 weeks | Story engine, testing, optimization |
-| Polish | 1 week | Update CLAUDE.md, final documentation, deploy |
+| Foundation | 2 weeks | Vue 3 + Vite + TS setup, utils, LootDeck proof of concept |
+| Core SoB | 4 weeks | All SoB decks, Pinia stores, Vuetify 3 migration, images |
+| Testing & Deploy | 2 weeks | 80%+ test coverage, update CLAUDE.md, deploy |
+| Story Engine | Future | See STORY_ENGINE_SPEC.md |
 
-**Total:** ~9 weeks for solo developer (evenings/weekends)
+**Total:** ~8 weeks for solo developer (evenings/weekends)
 
 ## Success Criteria
 
 1. **Feature parity:** All SoB functionality works identically to V1 (clean reimplementation)
 2. **Performance:** <2s initial load, <500ms deck operations
-3. **Content velocity:** Non-developer adds new card in <5 minutes (edit YAML + place image)
-4. **Story system:** Story nodes trigger properly, choices affect narrative
-5. **Testing:** >80% coverage on game logic
-6. **Maintainability:** Modern, well-documented codebase
+3. **Content velocity:** Non-developer adds new card in <5 minutes (edit JSON + place image)
+4. **Testing:** >80% coverage on game logic
+5. **Maintainability:** Modern, well-documented codebase with TypeScript types
 
 ## Next Steps
 
-After approval, implementation will begin with Phase 1 (Foundation). This is a clean rebuild using the old codebase as reference, allowing freedom to improve architecture without compatibility constraints. Both versions can run side-by-side for feature comparison.
+Implementation begins with Phase 1. This is a clean rebuild — the old codebase at `C:\djs.projects\bgb\` serves as reference only.
 
-**To resume work later:**
-1. Review this plan file: `C:\Users\dsaetrum\.claude\plans\humble-seeking-puzzle.md`
-2. Reference old codebase: `C:\djs.projects\bgb\`
-3. Start new project: `npm create vite@latest bgb-v2 -- --template vue-ts`
+```bash
+npm create vite@latest bgb-v2 -- --template vue-ts
+```
